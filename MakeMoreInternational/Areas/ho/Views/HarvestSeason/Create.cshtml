@@ -1,0 +1,95 @@
+﻿@model HarvestSeasonMultiVM
+@{
+    ViewData["Title"] = "Add Harvest‑Season Months";
+    Layout = "~/Areas/ho/Views/Shared/_Layout.cshtml";
+
+    /* Month <option>s ---------------------------------------------------- */
+    string[] monthNames = System.Globalization.CultureInfo
+                          .CurrentCulture.DateTimeFormat.MonthNames.Take(12).ToArray();
+
+    var monthItems = monthNames
+        .Select((t, i) => new SelectListItem { Value = (i + 1).ToString(), Text = t })
+        .ToList();
+}
+
+
+<link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css">
+<link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@@ttskch/select2-bootstrap4-theme@1.6.2/dist/select2-bootstrap4.min.css">
+
+<style>
+    /* nice green pills to match brand */
+    .select2-selection__choice {
+        background: #34c851 !important;
+        border-color: #34c851 !important;
+        color: #fff !important;
+        border-radius: 1rem;
+        padding-inline: .55rem;
+        font-size: .8rem;
+    }
+
+    .select2-selection__choice__remove {
+        color: #fff !important;
+        margin-right: .35rem;
+    }
+</style>
+
+<div class="container-fluid p-0">
+    <h1 class="h3 mb-3 fw-bold">Add Harvest‑Season Months</h1>
+
+    <form asp-action="Create" asp-controller="HarvestSeason" asp-area="ho" method="post" class="form-box">
+        @Html.AntiForgeryToken()
+
+        <!-- Harvest product -->
+        <div class="mb-3">
+            <label class="form-label">Harvest Product</label>
+            <select asp-for="ProductId"
+                    asp-items="ViewBag.ProductList"
+                    class="form-control"></select>
+            <span asp-validation-for="ProductId" class="text-danger"></span>
+        </div>
+
+        <!-- Months multi‑select -->
+        <div class="mb-3">
+            <label class="form-label">Months in Season</label>
+            <select asp-for="Months"
+                    asp-items="monthItems"
+                    multiple
+                    class="form-select js-months"
+                    data-placeholder="Select months..."></select>
+            <span asp-validation-for="Months" class="text-danger"></span>
+        </div>
+
+        <!-- Status -->
+        <div class="mb-3">
+            <label asp-for="Status" class="form-label"></label>
+            <select asp-for="Status" class="form-select">
+                <option value="true">Active</option>
+                <option value="false">Inactive</option>
+            </select>
+        </div>
+
+        <button class="btn btn-success">Save</button>
+        <a asp-action="Index" class="btn btn-secondary ms-2">Cancel</a>
+    </form>
+</div>
+
+<!-- JS (jQuery first, then Select2) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        $(function () {
+            $('.js-months').select2({
+                theme: 'bootstrap4',
+                width: '100%',
+                placeholder: $('.js-months').data('placeholder'),
+                closeOnSelect: false
+            });
+        });
+    </script>
+}

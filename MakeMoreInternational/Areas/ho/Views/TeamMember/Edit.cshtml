@@ -1,0 +1,60 @@
+﻿@model MakeMoreInternational.Models.TeamMemberMaster
+@{
+    ViewData["Title"] = string.IsNullOrEmpty(Model.Id) ? "Add Team Member" : "Edit Team Member";
+    Layout = "~/Areas/ho/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="h3 mb-3 fw-bold">@ViewData["Title"]</h1>
+
+<form asp-action="@(Model.Id == null ? "Create" : "Edit")"
+      asp-route-id="@Model.Id"
+      enctype="multipart/form-data"
+      method="post"
+      class="form-box">
+    @Html.AntiForgeryToken()
+
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Position" class="form-label"></label>
+        <input asp-for="Position" class="form-control" />
+        <span asp-validation-for="Position" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Contact" class="form-label"></label>
+        <input asp-for="Contact" class="form-control" />
+        <span asp-validation-for="Contact" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Team Member Photo</label>
+        <input type="file" name="PhotoFile" class="form-control" />
+        @if (!string.IsNullOrEmpty(Model.Photo))
+        {
+            <img src="@Model.Photo" class="mt-2" style="max-height: 100px;" />
+        }
+    </div>
+
+    <div class="mb-3 form-check">
+        <input asp-for="ShowOnTopRow" class="form-check-input" />
+        <label asp-for="ShowOnTopRow" class="form-check-label"></label>
+    </div>
+
+    <button type="submit" class="btn btn-success">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

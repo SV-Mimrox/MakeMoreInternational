@@ -1,0 +1,200 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    -font-family: "Rubik", sans-serif;
+    -font-family: "Roboto Slab", serif;
+    -cursor: none;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+.cursor {
+    width: 55px;
+    height: 55px;
+    -border: 1px solid var(--secondary-color);
+    position: fixed;
+    -border-radius: 50%;
+    -mix-blend-mode: multiply;
+    z-index: 1111;
+    background-image: url(Images/chilli___-removebg-preview.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+
+.head .navbar-nav .nav-item {
+    position: relative;
+    padding-block: 15px;
+    -border: 1px solid red;
+}
+
+.head .navbar-nav .nav-item .sub-menu {
+    position: absolute;
+    top: 66px;
+    left: -100px;
+    line-height: 40px;
+    background: #10715e;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 2;
+    width: 250px;
+    -border-radius: 0 0 10px 10px;
+}
+
+.head .navbar-nav .nav-item:hover .htmlCss-sub-menu,
+.head .navbar-nav .nav-item:hover .js-sub-menu {
+    display: block;
+}
+
+.head .navbar-nav .nav-item .sub-menu li {
+
+    border-bottom: 1px solid rgba(255,255,255, 0.1);
+}
+
+.head .navbar-nav .nav-item .sub-menu a {
+    color: rgba(255,255,255, 0.9);
+    padding-block: 2px;
+    font-size: 14px;
+    font-weight: 400;
+    -display: block;
+}
+
+.head .navbar-nav .nav-item .sub-menu .more-arrow {
+    line-height: 40px;
+}
+
+.more span a {
+    -border: 1px solid red;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* .head .navbar-nav .nav-item .htmlCss-more-sub-menu {
+    line-height: 40px;
+} */
+
+.head .navbar-nav .nav-item .sub-menu .more-sub-menu {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    -border-radius: 0 0 10px 10px;
+    z-index: 1;
+    background-color: #c4e9c4;
+    display: none;
+    -border: 1px solid red;
+}
+    .head .navbar-nav .nav-item .sub-menu .more-sub-menu li {
+        -border-bottom: 1px solid #10715e30;
+        border-bottom: 0;
+    }
+.head .navbar-nav .nav-item .sub-menu .more-sub-menu li:last-child{
+    border-bottom: 0;
+}
+.head .navbar-nav .nav-item .sub-menu .more-sub-menu a{
+    color: #10715e;font-size: 15px;
+    display: block;
+    padding: 2px 15px;
+   
+}
+
+.head .navbar-nav .nav-item .sub-menu .more:hover .more-sub-menu {
+    display: block;
+    width: 300px;
+    -padding: 15px;
+}
+
+.nav-link:hover {
+    color: #ffc107 !important;
+}
+
+.carousel-item,
+.carousel-item img {
+    height: 500px;
+    object-fit: cover;
+}
+
+.products .card p {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+}
+
+.excellence .imgs {
+    background-color: #ffc107;
+}
+
+.ficon {
+    position: fixed;
+    bottom: 20px;
+    right: 10px;
+    z-index: 11;
+}
+
+.category .card img {
+    transition: 1s;
+    height: 120% 100%;
+    width: 100%;
+}
+
+.category .card:hover img {
+    transform: scale(1.1);
+}
+
+.category .card{
+    -border-radius: 50% 50%;
+    -height: 250px;
+    -width: 250px;
+}
+
+
+.excellence .item {
+    box-shadow: 0 0rem 0.5rem rgba(0, 0, 0, 0.15);
+    margin-block: 10px;   
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+.excellence .item img {
+    width: 150px;
+    height: 150px;
+    margin:auto;
+    object-fit: contain;
+}
+
+.excellence .owl-carousel .owl-nav button.owl-next, 
+.excellence .owl-carousel .owl-nav button.owl-prev {
+  -border: 1px solid red;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 21px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #008a45;
+  color: #fff;
+}
+
+.excellence .owl-carousel .owl-nav button.owl-prev {
+  left: -15px;
+}
+.excellence .owl-carousel .owl-nav button.owl-next {
+  right: -15px;
+}
+
+
+

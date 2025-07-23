@@ -1,0 +1,53 @@
+﻿@model List<MakeMoreInternational.Models.HarvestSeasonMaster>
+
+@{
+    ViewData["Title"] = "Harvest Seasons";
+    Layout = "~/Areas/ho/Views/Shared/_Layout.cshtml";
+
+    var pNames = (Dictionary<string, string>)ViewBag.ProductDict;
+}
+
+
+<div class="d-flex justify-content-between flex-wrap">
+    <h1 class="h3 mb-3"><strong>Harvest‑Season</strong> Products</h1>
+    <a asp-action="Create" class="btn btn-success mb-3">+ Add Season</a>
+</div>
+<div class="container-fluid p-0">
+    
+
+    @if (TempData["msg"] != null)
+    {
+        <div class="alert alert-success">@TempData["msg"]</div>
+    }
+
+  
+    <div class="form-box">
+    <table class="table align-middle">
+        <thead class="table-light">
+            <tr>
+                <th style="min-width:200px">Product</th>
+                <th style="width:140px">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var group in Model.GroupBy(x => x.hprdId).OrderBy(g => pNames[g.Key]))
+            {
+                var productId = group.Key;
+                var productName = pNames.ContainsKey(productId) ? pNames[productId] : "[Unknown]";
+                <tr>
+                    <td>@productName</td>
+                    <td>
+                        <a asp-action="Edit"
+                           asp-route-productId="@productId"
+                           class="btn btn-sm btn-primary me-1">Edit Set</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

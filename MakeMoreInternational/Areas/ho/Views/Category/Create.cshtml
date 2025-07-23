@@ -1,0 +1,69 @@
+﻿@model MakeMoreInternational.Models.CategoryMaster
+@{
+    ViewData["Title"] = "Create Category";
+    var mainCats = ViewBag.MainCategories as IEnumerable<MakeMoreInternational.Models.CategoryMaster>;
+}
+
+<h2 class="mb-3 fw-bold">Create Category</h2>
+
+<div class="form-box">
+<form asp-action="Create" enctype="multipart/form-data" novalidate>
+    <div class="row mb-3">
+        <div class="col-md-6">
+            @Html.LabelFor(m => m.catName, new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.catName,
+                     new { @class = "form-control", placeholder = "Category name" })
+            @Html.ValidationMessageFor(m => m.catName, "", new { @class = "text-danger" })
+        </div>
+        <!-- Slug field removed -->
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label asp-for="catParentId" class="form-label">Parent Category</label>
+            <select asp-for="catParentId" class="form-control"
+                    asp-items="@(new SelectList(mainCats, "catId", "catName", ""))">
+                <option value="">-- Main Category --</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            @Html.LabelFor(m => m.seqNo, new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.seqNo,
+                     new { @class = "form-control", type = "number", min = "1", step = "1" })
+            @Html.ValidationMessageFor(m => m.seqNo, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-3 d-flex align-items-end">
+            <div class="form-check">
+                @Html.CheckBoxFor(m => m.isHome, new { @class = "form-check-input" })
+                @Html.LabelFor(m => m.isHome, new { @class = "form-check-label" })
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        @Html.LabelFor(m => m.catDescription, new { @class = "form-label" })
+        @Html.TextAreaFor(m => m.catDescription, 4, 0,
+                 new { @class = "form-control", placeholder = "Description" })
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-md-6">
+            
+            <label class="form-label">Category Image</label>
+            <input type="file" name="catImageFile" class="form-control" accept="image/*" />
+        </div>
+        <div class="col-md-6 d-flex align-items-end">
+            <div class="form-check">
+                @Html.CheckBoxFor(m => m.catStatus, new { @class = "form-check-input" })
+                @Html.LabelFor(m => m.catStatus, new { @class = "form-check-label" })
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success">Save</button>
+    <a asp-action="Index" class="btn btn-secondary ms-2">Cancel</a>
+</form>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

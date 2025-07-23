@@ -1,0 +1,333 @@
+﻿@model MakeMoreInternational.Models.ProductMaster
+@{
+    ViewData["Title"] = "Edit Product";
+    Layout = "~/Areas/ho/Views/Shared/_Layout.cshtml";
+}
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<div class="container-fluid p-0">
+    <h1 class="h3 mb-3"><strong>Edit</strong> Product</h1>
+
+    <form asp-action="Edit" asp-controller="Product" asp-area="ho" asp-route-id="@Model.prdId" method="post" enctype="multipart/form-data" class="form-box">
+
+        
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="prdId" />
+        <div class="row">
+            <!-- ==== LEFT COLUMN ====================================================== -->
+            <div class="col-md-4">
+                <!-- Category -->
+                <div class="mb-3">
+                    <label asp-for="catId" class="form-label"></label>
+                    <select asp-for="catId"
+                            asp-items="ViewBag.CategoryList"
+                            class="form-control"></select>
+                    <span asp-validation-for="catId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <!-- Product name -->
+                <div class="mb-3">
+                    <label asp-for="prdName" class="form-label"></label>
+                    <input asp-for="prdName" class="form-control" />
+                    <span asp-validation-for="prdName" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <!-- Banner -->
+                <div class="mb-3">
+                    <label class="form-label">Product Banner</label>
+                    <div class="d-flex gap-1">
+                    <input name="prdBannerFile" type="file" class="form-control" />
+                    @if (!string.IsNullOrEmpty(Model.prdBannerImage))
+                    {
+                        <img src="~/images/products/@Model.prdBannerImage" style="width:40px;height:40px;object-fit:cover;" />
+                    }
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+            <!-- Image -->
+            <div class="mb-3">
+                <label class="form-label">Product Image</label>
+                    <div class="d-flex gap-1">
+                    <input name="prdImageFile" type="file" class="form-control" />
+                    @if (!string.IsNullOrEmpty(Model.prdImage))
+                    {
+                            <img src="~/images/products/@Model.prdImage" style="width:40px;height:40px;object-fit:cover;" />
+                    }
+                </div>
+            </div>
+            </div>
+
+            <div class="col-md-6">
+            <!-- Icon -->
+            <div class="mb-3">
+                <label class="form-label">Product Icon</label>
+                    <div class="d-flex gap-1">
+                <input name="prdIconFile" type="file" class="form-control" />
+                @if (!string.IsNullOrEmpty(Model.prdIcon))
+                {
+                            <img src="~/images/products/@Model.prdIcon" style="width:40px;height:40px;object-fit:cover;" />
+                }
+                </div>
+            </div>
+            </div>
+
+            <div class="col-md-12">
+                <!-- Description -->
+                <div class="mb-3">
+                    <label asp-for="prdDescription" class="form-label"></label>
+                    <textarea asp-for="prdDescription" class="form-control" rows="3"></textarea>
+                </div>
+            </div>
+
+            <div class="col-md-12">              
+
+                <!-- ===== Product Details (dictionary) ================================ -->
+                <div class="mb-3">
+                    <label class="form-label">Product Details</label>
+                    <div id="productDetails">
+                        @if (Model.ProductDetails != null)
+                        {
+                            var idx = 0;
+                            foreach (var kv in Model.ProductDetails)
+                            {
+                                <div class="input-group mb-2">
+                                    <input name="ProductDetails[@idx].Key"
+                                           value="@kv.Key"
+                                           class="form-control" placeholder="Key" />
+                                    <input name="ProductDetails[@idx].Value"
+                                           value="@kv.Value"
+                                           class="form-control" placeholder="Value" />
+                                    <button type="button"
+                                            class="btn btn-danger"
+                                            onclick="this.parentElement.remove()">
+                                        X
+                                    </button>
+                                </div>
+                                idx++;
+                            }
+                        }
+                    </div>
+                    <button type="button"
+                            class="btn btn-sm btn-secondary"
+                            onclick="addDetailRow()">
+                        + Add Detail
+                    </button>
+                </div>
+
+                <!-- ===== Varieties (dictionary) ====================================== -->
+                <div class="mb-3">
+                    <label class="form-label">Varieties</label>
+                    <div id="varietyList">
+                        @if (Model.Varieties != null)
+                        {
+                            var idx = 0;
+                            foreach (var kv in Model.Varieties)
+                            {
+                                <div class="input-group mb-2">
+                                    <input name="Varieties[@idx].Key"
+                                           value="@kv.Key"
+                                           class="form-control" placeholder="Variety" />
+                                    <input name="Varieties[@idx].Value"
+                                           value="@kv.Value"
+                                           class="form-control" placeholder="Value" />
+                                    <button type="button"
+                                            class="btn btn-danger"
+                                            onclick="this.parentElement.remove()">
+                                        X
+                                    </button>
+                                </div>
+                                idx++;
+                            }
+                        }
+                    </div>
+                    <button type="button"
+                            class="btn btn-sm btn-secondary"
+                            onclick="addVarietyRow()">
+                        + Add Variety
+                    </button>
+                </div>
+
+                <!-- ===== Specification (dictionary) ================================== -->
+                <div class="mb-3">
+                    <label class="form-label">Specification</label>
+                    <div id="physicalSpecs">
+                        @if (Model.PhysicalSpecification != null)
+                        {
+                            var idx = 0;
+                            foreach (var kv in Model.PhysicalSpecification)
+                            {
+                                <div class="input-group mb-2">
+                                    <input name="PhysicalSpecification[@idx].Key"
+                                           value="@kv.Key"
+                                           class="form-control" placeholder="Key" />
+                                    <input name="PhysicalSpecification[@idx].Value"
+                                           value="@kv.Value"
+                                           class="form-control" placeholder="Value" />
+                                    <button type="button"
+                                            class="btn btn-danger"
+                                            onclick="this.parentElement.remove()">
+                                        X
+                                    </button>
+                                </div>
+                                idx++;
+                            }
+                        }
+                    </div>
+                    <button type="button"
+                            class="btn btn-sm btn-secondary"
+                            onclick="addPhysicalSpecRow()">
+                        + Add Spec
+                    </button>
+                </div>
+
+                <!-- ===== Grades (dictionary) ========================================= -->
+                <div class="mb-3">
+                    <label class="form-label">Grades</label>
+                    <div id="gradesList">
+                        @if (Model.Grades != null)
+                        {
+                            var idx = 0;
+                            foreach (var kv in Model.Grades)
+                            {
+                                <div class="input-group mb-2">
+                                    <input name="Grades[@idx].Key"
+                                           value="@kv.Key"
+                                           class="form-control" placeholder="Grade" />
+                                    <input name="Grades[@idx].Value"
+                                           value="@kv.Value"
+                                           class="form-control" placeholder="Description" />
+                                    <button type="button"
+                                            class="btn btn-danger"
+                                            onclick="this.parentElement.remove()">
+                                        X
+                                    </button>
+                                </div>
+                                idx++;
+                            }
+                        }
+                    </div>
+                    <button type="button"
+                            class="btn btn-sm btn-secondary"
+                            onclick="addGradeRow()">
+                        + Add Grade
+                    </button>
+                </div>
+
+                <!-- ===== Other Details (HTML uses) =================================== -->
+                <div class="mb-3">
+                    <label class="form-label">Other Details (Uses)</label>
+                    <input type="hidden" name="OtherDetails[0].Key" value="Uses" />
+                    <textarea class="form-control"
+                              id="OtherDetailsEditor"
+                              name="OtherDetails[0].Value">@((Model.OtherDetails != null && Model.OtherDetails.ContainsKey("Uses")) ? Model.OtherDetails["Uses"] : "")</textarea>
+                </div>
+
+                <!-- ===== prdUses CKEditor =========================================== -->
+                <div class="mb-3">
+                    <label asp-for="prdUses" class="control-label"></label>
+                    <textarea asp-for="prdUses" class="form-control" id="UsesEditor">@Model.prdUses</textarea>
+                    <span asp-validation-for="prdUses" class="text-danger"></span>
+                </div>
+
+            </div>
+
+            <!-- ==== RIGHT COLUMN ===================================================== -->
+            <div class="col-md-4">                
+                <!-- Seq No -->
+                <div class="mb-3">
+                    <label class="form-label">Sequence No</label>
+                    <input asp-for="prdSeqNo" type="number" min="1" class="form-control" />
+                    <span asp-validation-for="prdSeqNo" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <!-- Status -->
+                <div class="mb-3">
+                    <label asp-for="prdStatus" class="form-label"></label>
+                    <select asp-for="prdStatus" class="form-control">
+                        <option value="true">Active</option>
+                        <option value="false">Inactive</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+
+                <!-- Home toggle -->
+                <div class="form-check mt-3">
+                    <input asp-for="prdIsHome" class="form-check-input" />
+                    <label asp-for="prdIsHome" class="form-check-label"></label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Buttons -->
+        <button type="submit" class="btn btn-success">Update</button>
+        <a asp-action="Index" class="btn btn-secondary ms-2">Cancel</a>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('OtherDetailsEditor');
+        CKEDITOR.replace('UsesEditor');
+
+        // existing counts for JS add‑row helpers
+        let detailIndex = @((Model.ProductDetails?.Count ?? 0));
+        let varietyIndex = @((Model.Varieties?.Count ?? 0));
+        let specIndex = @((Model.PhysicalSpecification?.Count ?? 0));
+        let gradeIndex = @((Model.Grades?.Count ?? 0));
+
+        function addRow(containerId, tmpl) {
+            document.getElementById(containerId).insertAdjacentHTML('beforeend', tmpl);
+        }
+
+        function addDetailRow() {
+            addRow('productDetails', `
+                        <div class="input-group mb-2">
+                            <input name="ProductDetails[${detailIndex}].Key" class="form-control" placeholder="Key">
+                            <input name="ProductDetails[${detailIndex}].Value" class="form-control" placeholder="Value">
+                            <button type="button" class="btn btn-danger" onclick="this.parentElement.remove()">X</button>
+                        </div>`);
+            detailIndex++;
+        }
+
+        function addVarietyRow() {
+            addRow('varietyList', `
+                        <div class="input-group mb-2">
+                            <input name="Varieties[${varietyIndex}].Key" class="form-control" placeholder="Variety">
+                            <input name="Varieties[${varietyIndex}].Value" class="form-control" placeholder="Value">
+                            <button type="button" class="btn btn-danger" onclick="this.parentElement.remove()">X</button>
+                        </div>`);
+            varietyIndex++;
+        }
+
+        function addPhysicalSpecRow() {
+            addRow('physicalSpecs', `
+                        <div class="input-group mb-2">
+                            <input name="PhysicalSpecification[${specIndex}].Key" class="form-control" placeholder="Key">
+                            <input name="PhysicalSpecification[${specIndex}].Value" class="form-control" placeholder="Value">
+                            <button type="button" class="btn btn-danger" onclick="this.parentElement.remove()">X</button>
+                        </div>`);
+            specIndex++;
+        }
+
+        function addGradeRow() {
+            addRow('gradesList', `
+                        <div class="input-group mb-2">
+                            <input name="Grades[${gradeIndex}].Key" class="form-control" placeholder="Grade">
+                            <input name="Grades[${gradeIndex}].Value" class="form-control" placeholder="Description">
+                            <button type="button" class="btn btn-danger" onclick="this.parentElement.remove()">X</button>
+                        </div>`);
+            gradeIndex++;
+        }
+    </script>
+}

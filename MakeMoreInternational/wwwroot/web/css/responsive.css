@@ -1,0 +1,164 @@
+@media(max-width:767px){
+    *{
+        -border: 1px solid red;
+    }
+
+    .mobile-menu {
+        background-color: #0B5345;
+    }
+        .mobile-menu ul li a {
+            padding: 10px 0;
+            margin: 0;
+            color: rgba(255,255,255,0.85);
+            font-size: 16px;
+            border-bottom: 1px dashed #0c967a;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .mobile-menu ul li a i{
+            font-size:12px;
+        }
+    header {
+        position: static !important;
+    }
+    .header{
+        display: none;
+    }
+    .head{
+        border-radius: 0 !important;        
+        padding-block: 5px;
+    }
+    .head .navbar-brand img{
+        width: 65px !important;
+    }
+    .navbar-toggler{
+        border: 0;    
+        position: absolute;
+        right: 15px;
+    }
+    .navbar-toggler:focus{
+        box-shadow: none;border: none;
+    }
+
+
+    /****Swiper Slider****/
+    .spices-img img{
+        width: 24% !important;
+        height: 80px !important;
+        -border: 1px solid red;
+    }
+    .swiper{
+        height: calc(100vh - 57px) !important;
+    }
+    .text-overlay{
+        padding:15px;
+    }
+    .related-products .owl-carousel .owl-nav button.owl-prev {
+        left: 10px;
+    }
+    .related-products .owl-carousel .owl-nav button.owl-next{
+        right:10px;
+    }
+    /****About Block****/
+    .about .row {
+        flex-direction: column-reverse;
+    }
+    .bowl-chilli{
+        display: none;
+    }
+
+    /*****Breadcrumb*****/
+    .product-banner{
+        height:160px;background-size:cover;
+    }
+    .product-title {
+        background-color: #052e2699;        
+        height: 100%;padding:15px;flex-direction:row;
+    }
+    .product-category-banner span{
+        display:none;
+    }
+    .product-banner .category-title,
+    .product-banner .category-desc {
+        width: max-content;
+    }
+
+    /****Product Details****/
+    .packing-cont-data table tr td {
+        width: 100%;
+        display: block;
+    }
+    .specifications table tr td:first-child,
+    .specifications table tr td {
+        font-weight: 400;
+        font-size: 14px;
+    }
+    .specifications table tr th {
+        font-weight: 400;
+        font-size: 15px;
+    }
+
+    /******inquiry******/
+    .inquiry .row{
+        flex-direction:column-reverse;
+    }
+
+    /******Contact******/
+    .contact-section .row.f-row {
+        flex-direction: column-reverse;
+    }
+    .contact-section .info-box,
+    .contact-section .contact-box {
+        padding: 20px;
+    }
+
+    /****Products Block****/
+    .products .card, .category .card {
+        margin-bottom: 15px;
+    }
+    .product-category ul li{
+        display:initial;font-size:14px;
+    }
+
+    /****Excellence Block****/
+    .excellence .owl-carousel .owl-nav button.owl-prev{
+        left: 15px;
+    }
+    .excellence .owl-carousel .owl-nav button.owl-next{
+        right: 15px;
+    }
+
+
+    /****Chioce Block****/
+    .choice-mtxt{
+        height:auto;
+    }
+    .choice-block {
+        gap: 10px;
+    }
+    .choice-content{
+        flex-wrap: wrap;justify-content: center;text-align: center;
+        gap: 10px;background-color: #fff;padding: 20px 10px;border-radius: 10px;
+    }
+    .choice .card{
+        margin-bottom: 15px;
+    }
+    .choice-img{
+        margin-right: 0px !important;margin-bottom: 0px;
+    }
+    .choice-txt h5{
+        font-size: 15px;margin-bottom: 0;
+    }
+
+
+    /*****category*****/
+    .category .card .card-img-overlay h5 {
+        font-size: 16px !important;text-align:center;
+    }
+
+    /*****Map*****/
+    #map{
+        height:300px;
+    }
+}

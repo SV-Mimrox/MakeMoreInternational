@@ -1,0 +1,533 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<style>
+    .leaflet-control-attribution{
+        display:none;
+    }
+</style>
+<!-- Swiper Slider -->
+<div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide">
+            <img src="~/web/Images/sld1.jpg" alt="">
+            <div class="text-overlay">
+                <h2 class="display-5 fw-bold mb-md-4 mb-3 text-white-85" id="s-tagline"></h2>
+                <!-- Crafted by <span class="text-theme2">Nature</span> Perfected by Innovation ! -->
+                <a href="#" class="btn btn-theme2 rounded-pill px-4 py-2 text-white">Explore more</a>
+                <div class="spices-img">
+                    <img src="~/web/Images/spices/almonds.png" class="animate__animated animate__bounceInUp" alt="">
+                    <img src="~/web/Images/spices/kaju.png" class="animate__animated animate__bounceInUp" alt="">
+                    <img src="~/web/Images/spices/blackpaper.png" class="animate__animated animate__bounceInUp" alt="">
+                    <img src="~/web/Images/spices/mix.png" class="animate__animated animate__bounceInUp" alt="">
+                    <img src="~/web/Images/spices/chilli.png" class="animate__animated animate__bounceInUp" alt="">
+                    <img src="~/web/Images/spices/turmeric.png" class="animate__animated animate__bounceInUp" alt="">
+                    <img src="~/web/Images/spices/ginjer.png" class="animate__animated animate__bounceInUp" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="swiper-slide">
+            <img src="~/web/Images/sld2.jpg" alt="">
+            <div class="text-overlay">
+                <h2 class="display-5 fw-bold mb-md-4 mb-3 text-white-85" id="f-tagline"></h2>
+                <!-- Spicing the <span
+                        class="text-theme2">World</span> with Legacy and Vision ! -->
+                <a href="#" class="btn btn-theme2 rounded-pill px-4 py-2 text-white">Explore more</a>
+                <div class="spices-img">
+                    <img src="~/web/Images/Veg/potato.png" class="animate__animated animate__bounceInUp" alt="">
+                    <img src="~/web/Images/Veg/onion.png" class="animate__animated animate__bounceInUp" alt="">
+                    <img src="~/web/Images/Veg/karrot.png" class="animate__animated animate__bounceInUp" alt="">
+                    <img src="~/web/Images/Veg/tomato.png" class="animate__animated animate__bounceInUp" alt="">
+                    <img src="~/web/Images/Veg/Cabege.png" class="animate__animated animate__bounceInUp" alt="">
+                    <img src="~/web/Images/Veg/brokaly.png" class="animate__animated animate__bounceInUp" alt="">
+                    <img src="~/web/Images/Veg/peas.png" class="animate__animated animate__bounceInUp" alt="">
+                </div>
+
+            </div>
+        </div>
+        <div class="swiper-slide">
+            <img src="~/web/Images/sld3.jpg" alt="">
+            <div class="text-overlay">
+                <h2 class="display-5 fw-bold mb-md-4 mb-3 text-white-85" id="t-tagline"></h2>
+                <!-- Spicing the <span
+                        class="text-theme2">World</span> with Legacy and Vision ! -->
+                <a href="#" class="btn btn-theme2 rounded-pill px-4 py-2 text-white">Explore more</a>
+                <div class="spices-img">
+                    <img src="~/web/Images/Veg/potato.png" class="animate__animated animate__bounceInUp" alt="">
+                    <img src="~/web/Images/Veg/onion.png" class="animate__animated animate__bounceInUp" alt="">
+                    <img src="~/web/Images/Veg/karrot.png" class="animate__animated animate__bounceInUp" alt="">
+                    <img src="~/web/Images/Veg/tomato.png" class="animate__animated animate__bounceInUp" alt="">
+                    <img src="~/web/Images/Veg/Cabege.png" class="animate__animated animate__bounceInUp" alt="">
+                    <img src="~/web/Images/Veg/brokaly.png" class="animate__animated animate__bounceInUp" alt="">
+                    <img src="~/web/Images/Veg/peas.png" class="animate__animated animate__bounceInUp" alt="">
+                </div>
+
+            </div>
+        </div>
+        <!-- <div class="swiper-slide"><img src="~/web/Images/S1.jpg" alt=""></div> -->
+    </div>
+    <!-- <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-pagination"></div> -->
+</div>
+
+<!----About Start----->
+<div class="about py-5">
+    <div class="container">
+        <!-- <div class="title-section mb-md-5 mb-3">
+            <h2 class="text-center">About us</h2>
+            <span class="animate-border"></span>
+        </div> -->
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h3 class="fw-bold mt-4">Hi, We Are Make More Agro !</h3>
+                <p class="mt-4" style="line-height: 2;font-size: 16px;">
+                    Since 2015,
+                    we've
+                    been exporting and importing spices, oilseeds and herbs worldwide. Currently, we export
+                    to over
+                    81 countries and import from more than 9 countries. Our rapid growth over these 9 years
+                    is a
+                    testament to our commitment to quality. As our tagline says,
+                </p>
+                <h5 class="mt-4 fw-bold text-theme">"We grow Quality, We harvest Trust."</h5>
+                <a href="#" class="btn btn-theme text-white rounded-pill mt-4 py-2 px-4">View more</a>
+            </div>
+            <div class="col-md-6">
+                <div class="position-relative">
+                    <img src="~/web/Images/about.png" class="img-fluid rounded-4" alt="">
+                    <img src="~/web/Images/spices/chilli.png" class="bowl-chilli" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-----Products------>
+<div class="products py-5">
+    <div class="container">
+        <div class="title-section mb-md-5 mb-3">
+            <img src="~/web/Images/values1.png" width="65" class="d-block mx-auto" alt="">
+            <h2 class="text-center">Our Products</h2>
+            <span class="animate-border"></span>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card border-0">
+                    <img src="~/web/Images/download.jpg" class="rounded img-fluid" alt="">
+                    <div class="card-title">
+                        Whole chilli
+                    </div>
+                    <a href="#" class="stretched-link"></a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-0">
+                    <img src="~/web/Images/images.jpg" class="rounded img-fluid" alt="">
+                    <div class="card-title">
+                        Cumin Seeds
+                    </div>
+                    <a href="#" class="stretched-link"></a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card order-0">
+                    <img src="~/web/Images/download (2).jpg" class="rounded img-fluid" alt="">
+                    <div class="card-title">
+                        Nutmeg Whole
+                    </div>
+                    <a href="#" class="stretched-link"></a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-0">
+                    <img src="~/web/Images/90855769.jpg" class="rounded img-fluid" alt="">
+                    <div class="card-title">
+                        Turmeric finger
+                    </div>
+                    <a href="#" class="stretched-link"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-----Category Start----->
+<div class="category py-5">
+    <div class="container">
+        <div class="title-section mb-md-5 mb-3">
+            <img src="~/web/Images/values1.png" width="65" class="d-block mx-auto" alt="">
+            <h2 class="text-center">Category</h2>
+            <span class="animate-border ml-auto mr-auto mb-4"></span>
+        </div>
+
+        <!-- <ul class="list-unstyled">
+            <li>
+                <img src="~/web/Images/spices.jpg" alt="">
+                <h5>Spices</h5>
+                <a href="#" class="stretched-link"></a>
+            </li>
+            <li>
+                <img src="~/web/Images/herbs.jpg" alt="">
+                <h5>Herbs & Leaves</h5>
+                <a href="#" class="stretched-link"></a>
+            </li>
+            <li>
+                <img src="~/web/Images/seeds.jpg" alt="">
+                <h5>Seeds</h5>
+                <a href="#" class="stretched-link"></a>
+            </li>
+            <li>
+                <img src="~/web/Images/grains.jpg" alt="">
+                <h5>Millets & Grains</h5>
+                <a href="#" class="stretched-link"></a>
+            </li>
+            <li>
+                <img src="~/web/Images/nuts.jpg" alt="">
+                <h5>Dried Fruits & Nuts</h5>
+                <a href="#" class="stretched-link"></a>
+            </li>
+            <li>
+                <img src="~/web/Images/dehydratedproducts.jpg" alt="">
+                <h5>Dehydrated Products</h5>
+                <a href="#" class="stretched-link"></a>
+            </li> -->
+        <!-- <li>
+                <img src="~/web/Images/coconutproducts.jpg" alt="">
+                <h5>Coconut Products</h5>
+            </li> -->
+        <!-- </ul> -->
+        <div class="row row-gap-3">
+            @foreach(var cat in  ViewBag.categories as IEnumerable<CategoryMaster>)
+            {
+                <div class="col-6 col-sm-6 col-md-4 col-lg-3">
+                    <div class="card border-0 overflow-hidden">
+                        <img src="~/images/categories/@cat.catImage" class="img-fluid rounded mx-auto d-block" alt="">
+                        <div class="card-img-overlay d-flex justify-content-center align-items-center"
+                             style="background-color: rgba(0,0,0,0.5);">
+                            <h5 class="mb-0 text-white fs-4">@cat.catName</h5>
+                            <div class="overlay-btn">
+                                <a href="#" class="btn btn-theme2 rounded-pill px-3 text-white">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            
+            @* <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="card border-0 overflow-hidden">
+                    <img src="~/web/Images/herbs.jpg" class="img-fluid rounded mx-auto d-block" alt="">
+                    <div class="card-img-overlay d-flex justify-content-center align-items-center"
+                         style="background-color: rgba(0,0,0,0.5);">
+                        <h5 class="mt-2 text-white fs-4">Herbs & Leaves</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="card border-0 overflow-hidden">
+                    <img src="~/web/Images/seeds.jpg" class="img-fluid rounded mx-auto d-block" alt="">
+                    <div class="card-img-overlay d-flex justify-content-center align-items-center"
+                         style="background-color: rgba(0,0,0,0.5);">
+                        <h5 class="mt-2 text-white fs-4">Seeds</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="card border-0 overflow-hidden">
+                    <img src="~/web/Images/grains.jpg" class="img-fluid rounded mx-auto d-block" alt="">
+                    <div class="card-img-overlay d-flex justify-content-center align-items-center"
+                         style="background-color: rgba(0,0,0,0.5);">
+                        <h5 class="mt-2 text-white fs-4">Millets & Grains</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-3">
+                <div class="card border-0 overflow-hidden">
+                    <img src="~/web/Images/nuts.jpg" class="img-fluid rounded mx-auto d-block" alt="">
+                    <div class="card-img-overlay d-flex justify-content-center align-items-center"
+                         style="background-color: rgba(0,0,0,0.5);">
+                        <h5 class="mt-2 text-white fs-4">Dried fruits & Nuts</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-3">
+                <div class="card border-0 overflow-hidden">
+                    <img src="~/web/Images/dehydratedproducts.jpg" class="img-fluid rounded mx-auto d-block" alt="">
+                    <div class="card-img-overlay d-flex justify-content-center align-items-center"
+                         style="background-color: rgba(0,0,0,0.5);">
+                        <h5 class="mt-2 text-white fs-4">Dehydrated Products</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-3">
+                <div class="card border-0 overflow-hidden">
+                    <img src="~/web/Images/coconutproducts.jpg" class="img-fluid rounded mx-auto d-block" alt="">
+                    <div class="card-img-overlay d-flex justify-content-center align-items-center"
+                         style="background-color: rgba(0,0,0,0.5);">
+                        <h5 class="mt-2 text-white fs-4">Coconut Products</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-3">
+                <div class="card border-0 overflow-hidden">
+                    <img src="~/web/Images/coffeebeans.jpg" class="img-fluid rounded mx-auto d-block" alt="">
+                    <div class="card-img-overlay d-flex justify-content-center align-items-center"
+                         style="background-color: rgba(0,0,0,0.5);">
+                        <h5 class="mt-2 text-white fs-4">Coffee</h5>
+                    </div>
+                </div>
+            </div> *@
+        </div>
+    </div>
+</div>
+
+<!----excellence----->
+<div class="excellence py-5">
+    <div class="title-section mb-md-5 mb-3">
+        <img src="~/web/Images/values1.png" width="65" class="d-block mx-auto" alt="">
+        <h2 class="text-center">Excellence</h2>
+        <span class="animate-border ml-auto mr-auto mb-4"></span>
+    </div>
+    <div class="container">
+        <div class="owl-carousel owl-theme">
+            <div class="item">
+                <a href="#item1" data-bs-toggle="modal">
+                    <img src="~/web/Images/aeoL.webp" alt="" style="width: 200px;">
+                </a>
+            </div>
+            <div class="item">
+                <a href="#item2" data-bs-toggle="modal">
+                    <img src="~/web/Images/apeda.png" alt="">
+                </a>
+            </div>
+            <div class="item">
+                <a href="#item3">
+                    <img src="~/web/Images/fdaL.webp" alt="">
+                </a>
+            </div>
+            <div class="item">
+                <a href="#item4">
+                    <img src="~/web/Images/fssai.png" alt="">
+                </a>
+            </div>
+            <div class="item">
+                <a href="#item5">
+                    <img src="~/web/Images/iso9001L.webp" alt="">
+                </a>
+            </div>
+            <div class="item">
+                <a href="#item6">
+                    <img src="~/web/Images/fdaL.webp" alt="">
+                </a>
+            </div>
+
+        </div>
+
+        <div class="modal fade" id="item1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <img src="~/web/Images/90855769.avif" alt="Image" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="item2">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <img src="~/web/Images/90855769.avif" alt="Image" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="modal fade" id="item3">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <img src="~/web/Images/90855769.avif" alt="Image" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="item4">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <img src="~/web/Images/90855769.avif" alt="Image" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="item5">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <img src="~/web/Images/90855769.avif" alt="Image" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="item6">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <img src="~/web/Images/90855769.avif" alt="Image" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </div>
+</div>
+
+<div class="choice py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="card">
+                    <img src="~/web/Images/chilli-harvesting.jpg" class="rounded-3" alt="">
+                    <div class="card-img-overlay choice-mtxt">
+                        <h2>Why We're Your <br> Perfect Choice</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7 choice-left">
+                <div class="choice-block d-flex">
+                    <div>
+                        <div class="choice-content mt-0">
+                            <div class="choice-img rounded-4">
+                                <img src="~/web/Images/Choice/qualityw.png" class="img-fluid" width="" alt="">
+                            </div>
+                            <div class="choice-txt">
+                                <h5>Top Quality At Competitive Prices</h5>
+                            </div>
+                        </div>
+                        <div class="choice-content">
+                            <div class="choice-img rounded-4">
+                                <img src="~/web/Images/Choice/organicw.png" class="img-fluid" width="" alt="">
+                            </div>
+                            <div class="choice-txt">
+                                <h5>No Artificial Colors and Pesticides</h5>
+                            </div>
+                        </div>
+                        <div class="choice-content">
+                            <div class="choice-img rounded-4">
+                                <img src="~/web/Images/Choice/deliveryw.png" class="img-fluid" width="" alt="">
+                            </div>
+                            <div class="choice-txt">
+                                <h5>Just-In-Time Delivery</h5>
+                            </div>
+                        </div>
+                        <div class="choice-content">
+                            <div class="choice-img rounded-4">
+                                <img src="~/web/Images/Choice/happy-customer.png" class="img-fluid" width="" alt="">
+                            </div>
+                            <div class="choice-txt">
+                                <h5>Morethan 1500+ happy customers</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="choice-content mt-0">
+                            <div class="choice-img rounded-4">
+                                <img src="~/web/Images/Choice/staffw.png" class="img-fluid" width="" alt="">
+                            </div>
+                            <div class="choice-txt">
+                                <h5>Experienced, Knowledgeable Staff</h5>
+                            </div>
+                        </div>
+                        <div class="choice-content">
+                            <div class="choice-img rounded-4">
+                                <img src="~/web/Images/Choice/packagew.png" class="img-fluid" width="" alt="">
+                            </div>
+                            <div class="choice-txt">
+                                <h5>Moisture Free Packaging</h5>
+                            </div>
+                        </div>
+                        <div class="choice-content">
+                            <div class="choice-img rounded-4">
+                                <img src="~/web/Images/Choice/worldmarketw.png" class="img-fluid" width="" alt="">
+                            </div>
+                            <div class="choice-txt">
+                                <h5>Widespread Market</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-----Blog start------>
+<section class="blogs py-5">
+    <div class="container">
+        <div class="title-section mb-md-5 mb-3">
+            <img src="~/web/Images/values1.png" width="65" class="d-block mx-auto" alt="">
+            <h2 class="text-center">Latest Blogs</h2>
+            <span class="animate-border ml-auto mr-auto mb-4"></span>
+        </div>
+
+        <div class="row g-4">
+
+            <!-- Blog Card 1 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow border-0">
+                    <img src="~/web/Images/about.png" class="card-img-top" alt="Blog Image">
+                    <div class="card-body">
+                        <h5 class="card-title">How to Grow Organic Spices</h5>
+                        <p class="card-text text-secondary">
+                            Learn the techniques and benefits of cultivating organic
+                            spices at home
+                            or commercially.
+                        </p>
+                        <a href="#" class="btn btn-theme text-white rounded-pill px-3">Read More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Blog Card 2 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow border-0">
+                    <img src="~/web/Images/allhearbs.jpg" class="card-img-top" alt="Blog Image">
+                    <div class="card-body">
+                        <h5 class="card-title">Exporting Spices Globally</h5>
+                        <p class="card-text text-secondary">
+                            Tips and legal requirements for exporting Indian spices
+                            to
+                            international markets.
+                        </p>
+                        <a href="#" class="btn btn-theme text-white rounded-pill px-3">Read More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Blog Card 3 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow border-0">
+                    <img src="~/web/Images/vage.jpg" class="card-img-top" alt="Blog Image">
+                    <div class="card-body">
+                        <h5 class="card-title">Top 5 Healthy Spices</h5>
+                        <p class="card-text text-secondary">
+                            Discover the health benefits of turmeric, black pepper,
+                            cumin, and
+                            other powerful spices.
+                        </p>
+                        <a href="#" class="btn btn-theme text-white rounded-pill px-3">Read More</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<div class="custom-map py-5">
+    <div class="container">
+        <div id="map"></div>
+    </div>
+</div>
+

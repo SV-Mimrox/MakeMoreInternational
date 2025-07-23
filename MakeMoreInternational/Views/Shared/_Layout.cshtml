@@ -1,0 +1,676 @@
+﻿@{
+    var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+    var siteInfo = ViewBag.WebSetting as WebSettingMaster;
+    
+
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make More International - Home</title>
+    <link rel="stylesheet" href="~/web/css/web.css">
+    <link href="~/web/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/web/css/all.min.css">
+    <link rel="stylesheet" href="~/web/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/web/css/owl.theme.default.css">
+    <link rel="stylesheet" href="~/web/css/animate.min.css" />
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="~/web/css/swiper-bundle.min.css" />
+    <!-- <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="~/web/css/index.css">
+    <link href="~/web//css/responsive.css" rel="stylesheet" />
+    <link rel="icon" href="~/web/Images/fav.png">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    @if (!string.Equals(currentController, "Home", StringComparison.OrdinalIgnoreCase))
+    {
+        <style>
+            header {
+                position: static !important;
+            }
+
+            .header {
+                background-color: #34C851;
+            }
+
+            .head {
+                border-radius: 0;
+            }
+        </style>
+    }
+</head>
+
+<body class="custom-cursor">
+    <button class="btn btn-theme2 text-uppercase border-0 px-3" id="inq">Inquiry Now</button>
+    <div class="inqury-form p-3 rounded-3 shadow-lg">
+        <div class="d-flex mb-3 justify-content-between">
+            <h3 class="fw-bold">Inquiry Form</h3>
+            <button class="btn-close"></button>
+        </div>
+        <div class="row row-gap-2">
+            <div class="col-md-6">
+                <div>
+                    <label class="form-label">First Name</label>
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div>
+                    <label class="form-label">Last Name</label>
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div>
+                    <label class="form-label">Email Id</label>
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div>
+                    <label class="form-label">Contact</label>
+                    <input type="number" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div>
+                    <label class="form-label">Message</label>
+                    <textarea class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div>
+                    <button class="btn btn-theme rounded-pill border-0 px-4 text-white">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="cursor"></div> -->
+
+    <a href="#" id="back-to-top">
+        <img src="~/web/Images/chilli-top.webp" alt="">
+    </a>
+
+    <!-----Whatsapp Icon----->
+    <div class="w-icon">
+        <ul class="list-unstyled">
+            <li><a href="#" target="_blank"><i class="fab fa-whatsapp fs-4"></i></a></li>
+        </ul>
+    </div>
+    <!-- <div class="ficon">
+        <a href="#"><img src="Images/social.png" height="50px" alt=""></a>
+    </div> -->
+
+
+    <!-----Header Start---->
+    <header>
+        <div class="header py-2">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-4">
+                        <a href="#" class="text-white-85 small">
+                             @siteInfo.wsmContact
+                        </a>&nbsp;<span class="text-light">|</span>&nbsp;
+                        <a class="text-decoration-none text-white-85 small" href="#">
+                            
+                            @siteInfo.wsmEmail
+                        </a>
+                    </div>
+                    <div class="col-md-4 text-center py-1">
+                        <h6 class="mb-0 text-light">@siteInfo.wsmSlogan</h6>
+                    </div>
+                    <div class="col-md-4 d-flex align-items-center gap-3 justify-content-md-end">
+
+                        <ul class="d-flex gap-1 social-icons list-unstyled m-0">
+                            @foreach(var s in siteInfo.wsmSocialMedia)
+                            {
+                                <li><a href="@s.Link"><i class="@s.Icon small"></i></a></li>
+                            }
+                            
+                            @* <li><a href="#"><i class="fa-brands fa-square-instagram small"></i></a></li>
+                            <li><a href="#"><i class="fa-brands fa-linkedin-in small"></i></a></li> *@
+                        </ul>
+                        <div class="language-select-wrapper">
+                            <select class="language-select" onchange="translateLanguage(this.value)">
+                            <option value="en">Language</option>
+                            <option value="en">🇺🇸 English</option>
+                            <option value="hi">🇮🇳 Hindi</option>
+                            <option value="fr">🇫🇷 French</option>
+                            <option value="de">🇩🇪 German</option>
+                            <option value="ja">🇯🇵 Japanese</option>
+                                <option value="ur">Urdu</option>
+                        </select>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="head shadow-sm">
+            <div class="container">
+                <div class="row">
+                    <nav class="navbar navbar-expand-lg navbar-light py-0 justify-content-between">
+                        <!-- <a class="navbar-brand align-items-center text-white fw-bold fs-4" href="#">Make More
+                            <span class="d-block fs-6 text-center" style="line-height: 5px;">INTERNATIONAL</span>
+                        </a> -->
+                        <!-- <a href="#" class="navbar-brand p-0">
+                            <img src="Images/newlogo.png" width="" alt="">
+                        </a> -->
+                        <button class="navbar-toggler" data-bs-target="#menu" data-bs-toggle="offcanvas">
+                            @* <span class="navbar-toggler-icon"></span> *@
+                            <i class="fa-solid fa-bars-staggered bar-icon"></i>
+                        </button>
+                        <div class="col-md-5">
+                            <div class="navbar-collapse collapse" id="">
+                                <ul class="navbar-nav align-items-center">
+                                    <li class="nav-item">
+                                        <a class="nav-link me-3 active" href="/">HOME</a>
+                                    </li>
+
+                                    @await Component.InvokeAsync("ProductMenu")
+
+                                    @if(siteInfo.wsmIsAbout==true || siteInfo.wsmIsInfrastructure==true || siteInfo.wsmIsTeam==true)
+                                    {
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link me-3 dropdown-toggle" href="#" data-bs-toggle="dropdown">ABOUT</a>
+                                            <ul class="dropdown-menu">
+                                                @if(siteInfo.wsmIsAbout==true)
+                                                {
+                                                    <li><a href="about" class="dropdown-item">About Company</a></li>
+                                                }
+                                                @if (siteInfo.wsmIsTeam == true)
+                                                {
+                                                    <li><a href="teams" class="dropdown-item">Our Team</a></li>
+                                                }
+                                                @if (siteInfo.wsmIsInfrastructure == true)
+                                                {
+                                                    <li><a href="#" class="dropdown-item">Infrastructure</a></li>
+                                                }
+                                                
+                                                
+                                            </ul>
+                                        </li>
+                                    }
+                                    
+                                   
+                                    @await Component.InvokeAsync("HarvestChartMenu")
+                                    @* <li class="nav-item">
+                                        <a class="nav-link me-1" href="/harvestchart">HARVEST CHART</a>
+                                    </li> *@
+                                </ul>
+                            </div>
+                        </div>
+                       
+                        <div class="col-md-2">
+                            <a href="/" class="navbar-brand p-0 d-flex align-items-center gap-2"
+                               style="color: #4FCB51;">
+                                <span class="display-2 fw-bold" style="color: #51A22C;">
+                                    @if(siteInfo.wsmLogo!=null && siteInfo.wsmLogo != "")
+                                    {
+                                        <img src="~/images/logo/@siteInfo.wsmLogo" class="mt-0 mx-auto d-block" alt="">
+                                    }
+                                    else
+                                    {
+                                        <img src="~/web/Images/fav.png" class="mt-0 mx-auto d-block" alt="">
+                                    }
+
+                                </span>
+                                <!-- <img src="Images/fav.png" class="" width="70" alt="">--->
+                                <span class="pt-2">
+                                    <h4 class="mb-0 fw-bold" style="font-size: 27px;line-height: 0.7;-color: white;">
+                                        @(siteInfo.wstTitle!=null ? siteInfo.wstTitle : "Makemore")
+                                    </h4>
+                                    <span style="letter-spacing: 0.8px;font-size: 16px;-color: white;">
+                                        @(siteInfo.wsmSubtitle != null ? siteInfo.wsmSubtitle : "International LLP")
+                                    </span>
+                                </span>
+                                <!-- <img src="Images/fav.png" height="80px" alt=""> -->
+                                <!-- <img src="Images/newlogo.png" class="img-fluid" width="" alt=""> -->
+                            </a>
+                        </div>
+                        
+                        <div class="col-md-5">
+                            <div class="navbar-collapse collapse">
+                                <ul class="navbar-nav ms-auto align-items-center justify-content-end">
+                                    <li class="nav-item">
+                                        <a class="nav-link me-3" href="/inquiry">INQUIRY</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link me-3" href="/blogs">BLOG</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link me-3" href="/contact">CONTACT</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="btn btn-theme2 rounded-pill text-white nav-link px-3" href="#">
+                                            @* <img src="~/web/Images/brochure.png" width="25" class="me-2" alt=""> *@
+                                         BROCHURE</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-----Mobile Sidebar------>
+    <div class="offcanvas offcanvas-start mobile-menu" id="menu">
+        <div class="offcanvas-header border-bottom border-success">
+            <h5 class="offcanvas-title text-white" id="offcanvasExampleLabel">Menu</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="nav flex-column">
+                <li class="nav-item"><a href="/" class="nav-link">Home <i class="fa-solid fa-chevron-right"></i></a></li>
+                <li class="nav-item"><a href="/products" class="nav-link">Products <i class="fa-solid fa-chevron-right"></i></a></li>
+                <li class="nav-item"><a href="/about" class="nav-link">About us <i class="fa-solid fa-chevron-right"></i></a></li>
+                <li class="nav-item"><a href="/harvestchart" class="nav-link">Harvest Chart <i class="fa-solid fa-chevron-right"></i></a></li>
+                <li class="nav-item"><a href="/inquiry" class="nav-link">Inquiry <i class="fa-solid fa-chevron-right"></i></a></li>
+                <li class="nav-item"><a href="/blogs" class="nav-link">Blogs <i class="fa-solid fa-chevron-right"></i></a></li>
+                <li class="nav-item"><a href="/contact" class="nav-link">Contact us <i class="fa-solid fa-chevron-right"></i></a></li>
+            </ul>
+        </div>
+    </div>
+
+   @RenderBody()
+
+    <!-----Footer----->
+    <footer class="footer">
+        <div class="container">
+            <!-- <div class="row border-bottom mb-5 pb-4 align-items-center">
+                <div class="col-md-6 mb-md-0 mb-4">
+                    
+                </div>
+                <div class="col-md-6 mb-md-0 mb-4 text-md-end">
+                    <ul class="ftco-footer-social p-0 mb-0 nav gap-1 justify-content-end">
+                        <li class="ftco-animate nav-item p-1"><a href="#" data-toggle="tooltip" data-placement="top"
+                                title="" data-original-title="Twitter"><span class="ion-logo-twitter"><i
+                                        class="fa-brands fa-twitter " style="font-size: 18px;"></i></span></a></li>
+                        <li class="ftco-animate nav-item p-1"><a href="#" class="" data-toggle="tooltip"
+                                data-placement="top" title="" data-original-title="Facebook"><span
+                                    class="ion-logo-facebook"><i class="fa-brands fa-facebook-f "
+                                        style="font-size: 18px;"></i></span></a></li>
+                        <li class="ftco-animate nav-item p-1"><a href="#" class="" data-toggle="tooltip"
+                                data-placement="top" title="" data-original-title="Instagram"><span
+                                    class="ion-logo-instagram"><i class="fa-brands fa-instagram "
+                                        style="font-size: 18px;"></i></span></a></li>
+                    </ul>
+                </div>
+            </div> -->
+
+            <div class="row">
+                <div class="col-md-6 col-lg-4 mb-md-0 mb-a">
+                    <!-- <h2 class="footer-heading">Location</h2> -->
+                    <div class="mb-4">
+                        <a href="/" class="navbar-brand p-0 d-flex align-items-center gap-2" style="color: #4FCB51;">
+                            <!-- <span class="display-2 fw-bold" style="color: #51A22C;">
+                                    <img src="Images/fav.png" class="mt-0 mx-auto d-block" alt="">
+                                </span> -->
+                            <img src="~/web/Images/fav.png" class="" width="70" alt="">
+                            <span class="pt-2">
+                                <h4 class="mb-0 fw-bold" style="font-size: 27px;line-height: 0.7;-color: white;">
+                                    @* <span class="m-char">M</span>akemore *@
+                                    @(siteInfo.wstTitle != null ? siteInfo.wstTitle : "Makemore")
+                                    </h4>
+                                <span style="letter-spacing: 0.8px;font-size: 16px;-color: white;">@(siteInfo.wsmSubtitle != null ? siteInfo.wsmSubtitle : "International LLP")</span>
+                            </span>
+                            <!-- <img src="Images/fav.png" height="80px" alt=""> -->
+                            <!-- <img src="Images/newlogo.png" class="img-fluid" width="" alt=""> -->
+                        </a>
+                        <!-- <a href="#" class="">
+                            <img src="Images/newlogo.png" class="footer-logo" width="200" alt="">
+                        </a> -->
+                        <p class="text mt-3 fs-6" style="line-height: 25px;">MakeMore delivers premium-quality
+                            agricultural products and spices by
+                            blending traditional farming with modern innovation. We are committed to purity,
+                            sustainability, and building lasting trust across global markets.</p>
+                       
+                    </div>
+                   
+                    <ul class="d-flex gap-2 social-icons list-unstyled mb-md-0 mb-3 m py-2">
+                        @foreach(var s in siteInfo.wsmSocialMedia)
+                        {
+                            <li><a href="@s.Link"><i class="@s.Icon"></i></a></li>
+                        }
+                    </ul>
+                </div>
+                <div class="col-6 col-md-6 col-lg-2 mb-md-0 mb-4 footer-widget">
+                    <h2 class="footer-heading">Useful Links</h2>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul class="navbar-nav" style="line-height: 13px;">
+                                <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-chevron-right small me-2"></i> Home</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-chevron-right small me-2"></i> Harvest chart</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-chevron-right small me-2"></i> Inquiry</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-chevron-right small me-2"></i> Blog</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-chevron-right small me-2"></i> Contact us</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-chevron-right small me-2"></i> Infrastructure</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-chevron-right small me-2"></i> Global Export</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-6 col-lg-2 mb-md-0 mb-4 footer-widget">
+                    <h2 class="footer-heading">Our Products</h2>
+                    <div class="block-21 mb-4 d-flex">
+                        <div class="col-md-12">
+                            <ul class="navbar-nav" style="line-height: 13px;">
+                                <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-chevron-right small me-2"></i> Spices</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-chevron-right small me-2"></i> Herbs & Leaves</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-chevron-right small me-2"></i> Seeds</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-chevron-right small me-2"></i> Millets & Grains</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-chevron-right small me-2"></i> Dried fruits & Nuts</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-chevron-right small me-2"></i> Dehydrated Products</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-chevron-right small me-2"></i> Coconut Products</a></li>
+                                <!-- <li class="nav-item"><a class="nav-link" href="#">Coffee</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#">Pulse</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#">Imported Products</a></li> -->
+                            </ul>
+                        </div>
+                      
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-md-0 mb-4 footer-widget">
+                    <h2 class="footer-heading">About us</h2>
+                    <div class="block-24">
+                        <!-- <h2 class="footer-heading">Location</h2> -->
+                        <div class="block-23 mb-">
+                            <ul class="list-unstyled">
+                                <li><a href="#"><span class="icon"><i class="fa-solid fa-location-dot"></i></span><span
+                                            class="text">@siteInfo.wsmAddress</span></a></li>
+                                <li><a href="#"><span class="icon"><i class="fa-solid fa-phone"></i></span><span
+                                            class="text">@siteInfo.wsmContact</span></a></li>
+                                <li><a href="#"><span class="icon"><i class="fa-solid fa-envelope"></i></span><span
+                                            class="text">
+                                            <span>@siteInfo.wsmEmail</span>
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- <div class="row no-gutters">
+                            <p>MakeMore is an international agri-export platform committed to delivering
+                                high-quality
+                                agricultural products from India to markets around the world. We specialize in
+                                sourcing,
+                                packaging, and exporting a wide range of farm-fresh produce, grains, spices, and
+                                organic
+                                goods—ensuring compliance with global quality and safety standards.</p>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            <div class="border-top pt-4 mt-3">
+                <div class="row">
+                <div class="col-md-6 col-lg-8">
+                    <p class="copyright mb-0">
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;
+                        <script>document.write(new Date().getFullYear());</script> All rights reserved.
+                    </p>
+                </div>
+                <div class="col-md-6 col-lg-4 text-md-end">
+                    <p class="mb-0">Developed by <a href="https://joveinfoverse.com/" class="text-theme2" target="_blank">Jove Infoverse & Edunest.</a></p>
+                </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="google_translate_element" style="display:none;"></div>
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+    </script>
+    <script>
+        function translateLanguage(lang) {
+            var select = document.querySelector("select.goog-te-combo");
+            if (select) {
+                select.value = lang;
+                select.dispatchEvent(new Event('change'));
+            }
+        }
+    </script>
+    <script type="text/javascript"
+            src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+    </script>
+
+
+    <script src="~/web/js/jquery-3.7.1.min.js"></script>
+    <script src="~/web/js/bootstrap.bundle.min.js"></script>
+    <script src="~/web/js/owl.carousel.min.js"></script>
+    <!-- Swiper JS -->
+    <script src="~/web/js/swiper-bundle.min.js"></script>
+    <script src="~/web/js/gsap.min.js"></script>
+    <script src="~/web/js/ScrollTrigger.min.js"></script>
+    <script src="~/web/js/AutoTyping.js"></script>
+    <!-- <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        const map = L.map('map').setView([20, 0], 2); // Centered view of the world
+
+        // Add OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: ''
+        }).addTo(map);
+
+        // Highlighted countries with colors
+        const highlightCountries = [{
+            name: "India",
+            color: "orange"
+        }, {
+            name: "United States of America",
+            color: "pink"
+        }, {
+            name: "United Kingdom",
+            color: "red"
+        }, {
+            name: "Japan",
+            color: "#9c27b0"
+        }, {
+            name: "Turkey",
+            color: "yellow"
+        }];
+
+        // Fetch world GeoJSON and apply style for selected countries
+        fetch('https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json')
+            .then(res => res.json())
+            .then(data => {
+                L.geoJSON(data, {
+                    style: feature => {
+                        const country = highlightCountries.find(c => c.name === feature.properties.name);
+                        if (country) {
+                            return {
+                                color: country.color,
+                                weight: 1,
+                                fillColor: country.color,
+                                fillOpacity: 0.2
+                            };
+                        }
+                        return {
+                            color: "#ccc",
+                            weight: 1,
+                            fillOpacity: 0
+                        };
+                    },
+                    onEachFeature: (feature, layer) => {
+                        const country = highlightCountries.find(c => c.name === feature.properties.name);
+                        if (country) {
+                            layer.bindPopup(`<b>${country.name}</b>`);
+                        }
+                    }
+                }).addTo(map);
+            });
+    </script>
+
+    <!-- <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"95840b0d4c11ff70","version":"2025.6.2","r":1,"token":"499e684b7b1043878977050a0a606794","serverTiming":{"name":{"cfExtPri":true,"cfEdge":true,"cfOrigin":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}}}' crossorigin="anonymous"></script> -->
+
+
+    <!-- Initialize Swiper -->
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            loop: true,
+            autoplay: {
+                delay: 7000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                type: "fraction",
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+        });
+    </script>
+
+
+
+    <script>
+        $(document).ready(function () {
+            $('.owl-carousel').owlCarousel({
+                loop: true,
+                margin: 15,
+                nav: true,      // Navigation arrows
+                dots: false,     // Pagination dots
+                autoplay: true,
+
+                responsive: {
+                    0: { items: 1 },
+                    600: { items: 3 },
+                    1000: { items: 5 }
+                }
+            });
+
+            $(window).on("scroll", function () {
+                if ($(this).scrollTop() > 100) {                    
+                    $("#back-to-top").css("right", "10px");
+                    $('header').css('position', 'static');
+                    $('.head').addClass('sticky-header');
+                    $('.bar-icon').css("color", "black");
+                } else {
+                    $("#back-to-top").css("right", "-90px");
+                    $('header').css('position', 'absolute');
+                    $('.head').removeClass('sticky-header');
+                    $('.bar-icon').css("color", "white");
+                }
+            })
+        });
+    </script>
+
+    <!-- <script>
+        $('.owl-carousel').owlCarousel({
+            loop: true,
+            dots: true,
+            margin: 10,
+            nav: false,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 3
+                },
+                1000: {
+                    items: 5,
+                }
+            }
+        })
+
+       
+    </script> -->
+
+    <script>
+        AOS.init();
+    </script>
+
+    <script>
+        new AutoTyping({
+            id: 'f-tagline',
+            typeText: ['Spicing the World with Legacy and Vision !'],
+            textColor: 'rgba(255, 255, 255, 0.85)',
+            typeSpeed: 80,
+            typeRandom: false,
+            typeDelay: 300,
+            cursorSpeed: 200,
+            deleteSpeed: 10,
+            cursorColor: 'orange',
+            deleteDelay: 1000,
+            typeInfinity: true
+        }).init();
+
+        new AutoTyping({
+            id: 's-tagline',
+            typeText: ['Crafted by Nature Perfected by Innovation !'],
+            textColor: 'rgba(255, 255, 255, 0.85)',
+            typeSpeed: 80,
+            typeRandom: false,
+            typeDelay: 300,
+            cursorSpeed: 200,
+            deleteSpeed: 10,
+            cursorColor: 'orange',
+            deleteDelay: 1000,
+            typeInfinity: true
+        }).init();
+
+        new AutoTyping({
+            id: 't-tagline',
+            typeText: ['Leaves of Life, Herbs of Health !'],
+            textColor: 'rgba(255, 255, 255, 0.85)',
+            typeSpeed: 80,
+            typeRandom: false,
+            typeDelay: 300,
+            cursorSpeed: 200,
+            deleteSpeed: 10,
+            cursorColor: 'orange',
+            deleteDelay: 1000,
+            typeInfinity: true
+        }).init();
+    </script>
+
+
+
+    <script>
+        var cursor = document.querySelector('.cursor');
+        window.addEventListener("mousemove", (dets) => {
+            gsap.to(cursor, {
+                x: dets.x,
+                y: dets.y,
+                duration: 0.5
+            })
+        })
+    </script>
+
+
+
+    <!-- Inquiry -->
+    <script>
+        $('#inq').click(function () {
+            $('.inqury-form').css('bottom', '40px')
+        })
+        $('.inqury-form .btn-close').click(function () {
+            $('.inqury-form').css('bottom', '-100%');
+        })
+    </script>
+
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>

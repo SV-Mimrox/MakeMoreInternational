@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout=null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link rel="shortcut icon" href="img/icons/icon-48x48.png" />
+
+	
+
+	<title>Sign In | MakeMore International</title>
+
+	<link href="~/css/app.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body style="background-color:#DEF5DE !important;">
+	<main class="d-flex w-100">
+		<div class="container d-flex flex-column">
+			<div class="row vh-100">
+				<div class="col-sm-10 col-md-8 col-lg-6 col-xl-4 mx-auto d-table h-100">
+					<div class="d-table-cell align-middle">						
+						<div class="card">
+							<a class="sidebar-brand d-flex align-items-center justify-content-center gap-2 mt-2" href="#">
+								<span class="display-2 fw-bold">
+									<img src="/images/logo/196c55ff-4859-41a3-81cd-6449287c1850.png" width="65" class="mt-0 mx-auto d-block" alt="">
+								</span>
+								<!-- <img src="Images/fav.png" class="" width="70" alt="">--->
+								<span class="pt-2" style="color: #4FCB51;">
+									<h4 class="mb-0 fw-bold" style="font-size: 25px;line-height: 0.7;color: #4FCB51;">
+										Makemore
+									</h4>
+									<span style="letter-spacing: 0.7px;font-size: 14px;-color: white;">
+										International LLP
+									</span>
+								</span>
+
+								@* <span class="align-middle">AdminKit</span> *@
+							</a>
+							<p class="text-center  text-dark mb-0">
+								Sign in to your account to continue
+							</p>
+							<div class="card-body">
+								<div class="m-sm-3">
+									<form method="post">
+										<div class="mb-3">
+											<label class="form-label">Email</label>
+											<input class="form-control form-control-lg" type="email" name="email" placeholder="Enter your email" />
+										</div>
+										<div class="mb-3">
+											<label class="form-label">Password</label>
+											<input class="form-control form-control-lg" type="password" name="password" placeholder="Enter your password" />
+										</div>
+										
+										<div class="d-grid gap-2 mt-4">
+											<button type="submit" class="btn btn-lg btn-success">Sign in</button>
+										</div>
+									</form>
+									@if (ViewBag.Message != null)
+									{
+										<p style="color:red">@ViewBag.Message</p>
+									}
+								</div>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<script src="~/js/app.js"></script>
+
+</body>
+
+</html>
+

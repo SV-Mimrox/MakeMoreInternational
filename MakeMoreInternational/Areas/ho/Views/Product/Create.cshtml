@@ -1,0 +1,228 @@
+﻿@{
+    ViewData["Title"] = "Create Product";
+    Layout = "~/Areas/ho/Views/Shared/_Layout.cshtml";
+}
+
+@model MakeMoreInternational.Models.ProductMaster
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    var categories = ViewBag.Categories as List<MakeMoreInternational.Models.CategoryMaster>;
+}
+
+<div class="container-fluid p-0">
+    <h1 class="h3 mb-3"><strong>Add New</strong> Product</h1>
+
+    <form asp-action="Create" asp-area="ho" asp-controller="Product" enctype="multipart/form-data" method="post" class="form-box">
+        <div class="row">
+
+            <div class="col-md-4">
+                <!-- Category -->
+                <div class="mb-3">
+                    <label asp-for="catId" class="form-label">Category</label>
+                    <select asp-for="catId" class="form-control">
+                        <option value="">-- Select Category --</option>
+                        @foreach (var cat in categories)
+                        {
+                            <option value="@cat.catId">@cat.catName</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <!-- Product Name -->
+                <div class="mb-3">
+                    <label asp-for="prdName" class="form-label">Product Name</label>
+                    <input asp-for="prdName" class="form-control" />
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <!-- Product Image -->
+                <div class="mb-3">
+                    <label class="form-label">Product Image</label>
+                    <input name="prdImageFile" type="file" class="form-control" />
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <!-- Product Banner -->
+                <div class="mb-3">
+                    <label class="form-label">Product Banner</label>
+                    <input name="prdBannerFile" type="file" class="form-control" />
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <!-- Product Icon -->
+                <div class="mb-3">
+                    <label class="form-label">Product Icon</label>
+                    <input name="prdIconFile" type="file" class="form-control" />
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <!-- Product Description -->
+                <div class="mb-3">
+                    <label asp-for="prdDescription" class="form-label">Description</label>
+                    <textarea asp-for="prdDescription" class="form-control"></textarea>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <!-- Product Details -->
+                <div class="mb-3">
+                    <label class="form-label">Product Details</label>
+                    <div id="productDetails"></div>
+                    <button type="button" class="btn btn-sm btn-secondary" onclick="addDetailRow()">+ Add Detail</button>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <!-- Varieties -->
+                <div class="mb-3">
+                    <label class="form-label">Varieties</label>
+                    <div id="varietyList"></div>
+                    <button type="button" class="btn btn-sm btn-secondary" onclick="addVarietyRow()">+ Add Variety</button>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <!-- Physical Specs -->
+                <div class="mb-3">
+                    <label class="form-label">Specification</label>
+                    <div id="physicalSpecs"></div>
+                    <button type="button" class="btn btn-sm btn-secondary" onclick="addPhysicalSpecRow()">+ Add Spec</button>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <!-- Grades -->
+                <div class="mb-3">
+                    <label class="form-label">Grades</label>
+                    <div id="gradesList"></div>
+                    <button type="button" class="btn btn-sm btn-secondary" onclick="addGradeRow()">+ Add Grade</button>
+                </div>
+            </div>
+
+
+            <div class="col-md-6">
+                
+                <!-- Other Details (HTML Editor) -->
+                <div class="mb-3">
+                    <label class="form-label">Other Details</label>
+                    <input type="hidden" name="OtherDetails[0].Key" value="Uses" />
+                    <textarea class="form-control" id="OtherDetailsEditor" name="OtherDetails[0].Value"></textarea>
+                </div>
+               
+                
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="prdUses" class="control-label"></label>
+                    <textarea asp-for="prdUses" class="form-control" id="UsesEditor"></textarea>
+                    <span asp-validation-for="prdUses" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="prdSeqNo" class="form-label"></label>
+                    <input asp-for="prdSeqNo" class="form-control" type="number" min="1" />
+                    <span asp-validation-for="prdSeqNo" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+            <!-- Status -->
+            <div class="mb-3">
+                <label asp-for="prdStatus" class="form-label">Status</label>
+                <select asp-for="prdStatus" class="form-control">
+                    <option value="true">Active</option>
+                    <option value="false">Inactive</option>
+                </select>
+            </div>
+            </div>
+
+            <div class="col-md-4">
+            <!-- Show in Home -->
+            <div class="form-check mt-3">
+                <input asp-for="prdIsHome" class="form-check-input" />
+                <label asp-for="prdIsHome" class="form-check-label">Show on Home Page</label>
+            </div>
+            </div>
+        </div>
+
+        <br />
+        <!-- Submit -->
+        <button type="submit" class="btn btn-success">Save</button>
+        <a asp-area="ho" asp-controller="Product" asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('OtherDetailsEditor');
+        CKEDITOR.replace('UsesEditor');
+    </script>
+    <script>
+
+
+        let detailIndex = 0, specIndex = 0, varietyIndex = 0, gradeIndex = 0;
+
+        function addDetailRow() {
+            const html = `
+                        <div class="input-group mb-2">
+                            <input name="ProductDetails[${detailIndex}].Key" class="form-control" placeholder="Key" />
+                            <input name="ProductDetails[${detailIndex}].Value" class="form-control" placeholder="Value" />
+                            <button type="button" class="btn btn-danger" onclick="this.parentElement.remove()">X</button>
+                        </div>`;
+            document.getElementById('productDetails').insertAdjacentHTML('beforeend', html);
+            detailIndex++;
+        }
+
+        function addVarietyRow() {
+            const html = `
+                        <div class="input-group mb-2">
+                            <input name="Varieties[${varietyIndex}].Key" class="form-control" placeholder="Variety Name" />
+                            <input name="Varieties[${varietyIndex}].Value" class="form-control" placeholder="Value" />
+                            <button type="button" class="btn btn-danger" onclick="this.parentElement.remove()">X</button>
+                        </div>`;
+            document.getElementById('varietyList').insertAdjacentHTML('beforeend', html);
+            varietyIndex++;
+        }
+
+        function addPhysicalSpecRow() {
+            const html = `
+                        <div class="input-group mb-2">
+                            <input name="PhysicalSpecification[${specIndex}].Key" class="form-control" placeholder="Key" />
+                            <input name="PhysicalSpecification[${specIndex}].Value" class="form-control" placeholder="Value" />
+                            <button type="button" class="btn btn-danger" onclick="this.parentElement.remove()">X</button>
+                        </div>`;
+            document.getElementById('physicalSpecs').insertAdjacentHTML('beforeend', html);
+            specIndex++;
+        }
+
+        function addGradeRow() {
+            const html = `
+                    <div class="input-group mb-2">
+                        <input name="Grades[${gradeIndex}].Key" class="form-control" placeholder="Grade Name" />
+                        <input name="Grades[${gradeIndex}].Value" class="form-control" placeholder="Description / Value" />
+                        <button type="button" class="btn btn-danger" onclick="this.parentElement.remove()">X</button>
+                    </div>`;
+            document.getElementById('gradesList').insertAdjacentHTML('beforeend', html);
+            gradeIndex++;
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            addDetailRow();
+            addVarietyRow();
+            addPhysicalSpecRow();
+            addGradeRow();
+        });
+    </script>
+}

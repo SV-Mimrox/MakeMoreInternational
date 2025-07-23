@@ -1,0 +1,37 @@
+﻿@model List<MakeMoreInternational.Models.custom.ProductMenuVM>
+
+<li class="nav-item">
+    <a class="nav-link me-3" href="#">PRODUCTS <i class="fa-solid fa-chevron-down small chev-icon"></i></a>
+    <ul class="htmlCss-sub-menu sub-menu nav">
+        @foreach (var cat in Model)
+        {
+            <li class="more">
+                <span>
+                    <a href="#"><span>@cat.CategoryName</span> <i class="fa-solid fa-chevron-right small"></i></a>
+                    <i class='bx bxs-chevron-right arrow more-arrow'></i>
+                </span>
+                <div class="more-sub-menu sub-menu nav" style="width: 500px;">
+                    <div class="row">
+                        @foreach (var sub in cat.SubCategories)
+                        {
+                            <div class="col-md-6">
+                                <ul class="list-unstyled">
+                                    <h5 class="p-3 pb-0">@sub.SubCategoryName</h5>
+                                    @foreach (var p in sub.Products)
+                                    {
+                                        <li>
+                                            <a href="/products/@p.Slug">
+                                                <img src="@p.Image" class="menu-icon" />
+                                                @p.Name
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </li>
+        }
+    </ul>
+</li>

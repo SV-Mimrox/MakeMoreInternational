@@ -1,0 +1,61 @@
+﻿@model MakeMoreInternational.Models.HarvestProductMaster
+@{
+    bool isEdit = Model.hprdId != null;
+    ViewData["Title"] = isEdit ? "Edit Harvest Product" : "Add Harvest Product";
+    Layout = "~/Areas/ho/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid p-0">
+    <h1 class="h3 mb-3 fw-bold">@ViewData["Title"]</h1>
+
+    <form asp-area="ho" asp-controller="HarvestProduct"
+          asp-action="@(isEdit ? "Edit" : "Create")"
+          asp-route-id="@Model.hprdId"
+          enctype="multipart/form-data" method="post" class="form-box">
+        @Html.AntiForgeryToken()
+
+        <div class="row">
+        <div class="col-md-6 mb-3">
+            <label asp-for="hcatId" class="form-label">Harvest Category</label>
+            <select asp-for="hcatId"
+                    asp-items="ViewBag.CategoryList"
+                    class="form-control"></select>
+            <span asp-validation-for="hcatId" class="text-danger"></span>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label asp-for="hprdName" class="form-label"></label>
+            <input asp-for="hprdName" class="form-control" />
+            <span asp-validation-for="hprdName" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label class="form-label">Icon</label>
+            <input type="file" name="iconFile" class="form-control" />
+            @if (isEdit && !string.IsNullOrEmpty(Model.hprdIcon))
+            {
+                <img src="~/images/harvest/@Model.hprdIcon" width="60" class="mt-2" />
+            }
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <label asp-for="seqNo" class="form-label"></label>
+            <input asp-for="seqNo" type="number" min="1" class="form-control" />
+            <span asp-validation-for="seqNo" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <label asp-for="hprdStatus" class="form-label"></label>
+            <select asp-for="hprdStatus" class="form-control">
+                <option value="true">Active</option>
+                <option value="false">Inactive</option>
+            </select>
+        </div>
+        </div>
+        <button type="submit" class="btn btn-success">Save</button>
+        <a asp-action="Index" class="btn btn-secondary ms-2">Cancel</a>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

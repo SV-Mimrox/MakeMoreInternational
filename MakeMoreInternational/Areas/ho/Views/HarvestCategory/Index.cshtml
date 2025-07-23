@@ -1,0 +1,41 @@
+﻿@model List<MakeMoreInternational.Models.HarvestCategoryMaster>
+@{
+    ViewData["Title"] = "Harvest Categories";
+    Layout = "~/Areas/ho/Views/Shared/_Layout.cshtml";
+}
+
+<div class="d-flex justify-content-between flex-wrap">
+    <h1 class="h3 mb-3"><strong>Harvest Categories</strong> List</h1>
+    <a asp-area="ho" asp-controller="HarvestCategory" asp-action="Create" class="btn btn-success mb-3">
+        + Add Category
+    </a>
+</div>
+<div class="form-box">
+    <table class="table align-middle">
+        <thead class="table-light">
+            <tr>
+                <th>Name</th>
+                <th>Slug</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var c in Model)
+            {
+                <tr>
+                    <td>@c.hcatName</td>
+                    <td>@c.hcatSlug</td>
+                    <td>@(c.hcatStatus ? "Active" : "Inactive")</td>
+                    <td>
+                        <a asp-area="ho" asp-controller="HarvestCategory" asp-action="Edit" asp-route-id="@c.hcatId"
+                           class="btn btn-sm btn-primary">Edit</a>
+                        <a asp-area="ho" asp-controller="HarvestCategory" asp-action="Delete" asp-route-id="@c.hcatId"
+                           class="btn btn-sm btn-danger"
+                           onclick="return confirm('Delete this category?');">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,51 @@
+﻿@model List<MakeMoreInternational.Models.HarvestProductMaster>
+@{
+    ViewData["Title"] = "Harvest Products";
+    Layout = "~/Areas/ho/Views/Shared/_Layout.cshtml";
+}
+
+<div class="d-flex justify-content-between flex-wrap">
+    <h1 class="h3 mb-3"><strong>Harvest Products</strong> List</h1>
+    <a asp-area="ho" asp-controller="HarvestProduct" asp-action="Create"
+       class="btn btn-success mb-3">+ Add Product</a>
+</div>
+<div class="form-box">
+    <table class="table align-middle">
+        <thead class="table-light">
+            <tr>
+                <th>Seq</th>
+                <th>Category</th>
+                <th>Name</th>
+                <th>Icon</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var p in Model)
+            {
+                <tr>
+                    <td>@p.seqNo</td>
+                    <td>@ViewBag.CatDict[p.hcatId]</td>
+                    <td>@p.hprdName</td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(p.hprdIcon))
+                        {
+                            <img src="~/images/harvest/@p.hprdIcon" width="40" />
+                        }
+                    </td>
+                    <td>@(p.hprdStatus ? "Active" : "Inactive")</td>
+                    <td>
+                        <a asp-area="ho" asp-controller="HarvestProduct"
+                           asp-action="Edit" asp-route-id="@p.hprdId"
+                           class="btn btn-sm btn-primary">Edit</a>
+                        <a asp-area="ho" asp-controller="HarvestProduct"
+                           asp-action="Delete" asp-route-id="@p.hprdId"
+                           onclick="return confirm('Delete?');"
+                           class="btn btn-sm btn-danger">Del</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

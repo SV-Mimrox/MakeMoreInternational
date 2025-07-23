@@ -1,0 +1,33 @@
+﻿@model MakeMoreInternational.Models.TeamMemberPageBanner
+@{
+    ViewData["Title"] = "Team Banner";
+    Layout = "~/Areas/ho/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid p-0">
+    <h1 class="h3 mb-3 fw-bold">Team Page Banner</h1>
+
+    <form method="post" enctype="multipart/form-data" class="form-box">
+        @Html.AntiForgeryToken()
+
+        <div class="mb-3">
+            <label class="form-label">Upload Banner Image</label>
+            <input type="file" name="bannerFile" class="form-control" />
+        </div>
+
+        @if (!string.IsNullOrEmpty(Model?.BannerImage))
+        {
+            <div class="mb-3">
+                <label class="form-label">Current Banner:</label><br />
+                <img src="~/images/team/@Model.BannerImage" alt="Banner Image" width="300" class="img-thumbnail" />
+            </div>
+        }
+
+        <button type="submit" class="btn btn-success">Save</button>
+        <a asp-action="Edit" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

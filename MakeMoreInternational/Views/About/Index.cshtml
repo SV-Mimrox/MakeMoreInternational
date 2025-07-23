@@ -1,0 +1,158 @@
+﻿
+@{
+    ViewData["Title"] = "About us";
+    var data = ViewData["aboutData"] as AboutUsMaster;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var vl = 1;
+}
+
+<section class="breadcrumb-block">
+    <div class="container-fluid">
+        <div class="product-banner row overflow-hidden">
+            <div class="product-title col-md-5 col-12" style="">
+                <div class="category-title">
+                    <h1>About us</h1>
+                </div>
+                <div class="category-desc">
+                    <!-- <p>Turn up the heat and ignite your taste budswith the fiery kick of chilli !</p> -->
+                    <ol class="breadcrumb justify-content-center">
+                        <li class="breadcrumb-item"><a href="/" class="text-warning">HOME</a></li>
+                        <li class="breadcrumb-item text-light">ABOUT US</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="product-category-banner col-md-7 col-12 px-0 position-relative">
+                <span></span>
+                <div class="product-category-img-banner">
+                    <!-- <img src="https://koreagro.com/images/spices-banner.jpg" class="img-fluid"> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Hero section -->
+
+<div class="hero-section py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <img src="~/images/aboutus/@data.MainImage" class="img-fluid rounded mb-md-0 mb-3" alt="">
+            </div>
+            <div class="col-md-7">
+                <h2 class="product-txt fw-bold fs-1 text-black">Welcome to <span class="text-theme2">Makemore</span> International</h2>
+                <p class="text-muted">
+                   @data.MainDescription
+                </p>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!------ Mission section ---*--->
+
+<div class="mission py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="d-flex p-md-4 p-3 rounded-3 align-items-center gap-3">
+                    <img src="~/web/Images/mission.png" class="img-fluid d-block mx-auto" width="100" alt="">
+                    <div class="text-md-start text-center">
+                        <h5 class="mb-2 fw-bold text-black">Our Mission</h5>
+                        <p class="mb-0">
+                            @data.OurMission
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="d-flex p-md-4 p-3 rounded-3 align-items-center gap-3">
+                    <img src="~/web/Images/vision.png" class="img-fluid d-block mx-auto" width="100" alt="">
+                    <div class="text-md-start text-center">
+                        <h5 class="mb-2 fw-bold">Our Vision</h5>
+                        <p class="mb-0">
+                            @data.OurVision
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!------ Values section ------>
+<div class="values py-5">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-12 values-head mb-md-0 mb-4">
+                <img src="~/web/Images/values1.png" width="65" class="d-block mx-auto mb-2" alt="">
+                <h3 class="text-center" style="">Values</h3>
+            </div>
+            @foreach(var v in data.Values)
+            {
+                if(vl==3)
+                {
+                    vl = 1;
+                    <div class="col-md-12">
+                        <img src="~/images/aboutus/@v.Image" class="img-fluid mb-3" alt="">
+                        <h4 class="text-center">@v.Title</h4>
+                        <p class="text-center">
+                            @v.Description
+                        </p>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-md-6">
+                        <img src="~/images/aboutus/@v.Image" class="img-fluid mb-3" alt="">
+                        <h4 class="text-center">@v.Title</h4>
+                        <p class="text-center">
+                            @v.Description
+                        </p>
+                    </div>
+                    vl++;
+                }
+                
+            }
+            
+           
+        </div>
+    </div>
+</div>
+
+
+
+<!-- why us -->
+
+<div class="why-us" style="-background-color: #34C85130;">
+    <div class="container">
+        <div class="row">
+            <div class="values-head py-5">
+                <img src="~/images/aboutus/@data.WhyWeAre.Image" width="65" class="d-block mx-auto mb-2" alt="">
+                <h5 class="text-center mb-4" style="-color: #51A22C;">@data.WhyWeAre.Title</h5>
+                <p class="text-muted text-center" style="font-size: 18px;">
+                    @data.WhyWeAre.Description    
+                </p>
+            </div>
+            <div class="values-head py-5">
+                <img src="~/images/aboutus/@data.WhatWeDo.Image" width="65" class="d-block mx-auto mb-2" alt="">
+                <h5 class="text-center mb-4" style="-color: #51A22C;">@data.WhatWeDo.Title</h5>
+                <p class="text-muted text-center" style="font-size: 18px;">
+                    @data.WhatWeDo.Description
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="custom-map py-5">
+    <div class="container">
+        <div id="map"></div>
+    </div>
+</div>

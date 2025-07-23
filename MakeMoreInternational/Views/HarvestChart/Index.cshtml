@@ -1,0 +1,143 @@
+﻿@model List<HarvestSeasonRowVM>
+@{
+    ViewData["Title"] = "Harvest Chart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var m = (string[])ViewBag.MonthNames;    // Jan … Dec abbreviated
+    string title = (string)ViewBag.CategoryName;
+}
+
+
+<section class="breadcrumb-block">
+    <div class="container-fluid">
+        <div class="product-banner row overflow-hidden">
+            <div class="product-title col-md-5 col-12" style="">
+                <div class="category-title">
+                    <h1>Harvest Chart</h1>
+                </div>
+                <div class="category-desc">
+                    <!-- <p>Turn up the heat and ignite your taste budswith the fiery kick of chilli !</p> -->
+                    <ol class="breadcrumb justify-content-center">
+                        <li class="breadcrumb-item"><a href="/" class="text-warning">HOME</a></li>
+                        <li class="breadcrumb-item text-light">HARVEST CHART</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="product-category-banner col-md-7 col-12 px-0 position-relative">
+                <span></span>
+                <div class="product-category-img-banner">
+                    <!-- <img src="https://koreagro.com/images/spices-banner.jpg" class="img-fluid"> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container py-5">
+    <h2 class="text-center mb-4 fw-bold">🌾 Harvest Chart - <span class="text-theme2">@title</span></h2>
+
+    <div class="table-responsive">
+        <table class="table table-bordered text-center align-middle">
+            <thead class="table-success">
+                <tr>
+                    <th class="text-start">Product \ Month</th>
+                    @for (int i = 0; i < 12; i++)
+                    {
+                        <th>@m[i]</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var row in Model)
+                {
+                    <tr>
+                        <td class="text-start fw-semibold">@row.ProductName</td>
+                        @for (int i = 0; i < 12; i++)
+                        {
+                            if (row.Months[i])
+                            {
+                                <td>
+                                    <img src="~/images/harvest/@row.ProductImage" style="width:30px;height:30px;object-fit:contain;" />
+                                </td>
+                            }
+                            else
+                            {
+                                <td></td>
+                            }
+
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="table-responsive d-none">
+        <table class="table harvest-table">
+            <thead>
+                <tr>
+                    <th>Crop</th>
+                    <th>Planting</th>
+                    <th>Harvest</th>
+                    <th>Season</th>
+                    <th>Yield (kg)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        Wheat
+                    </td>
+                    <td>November</td>
+                    <td>April</td>
+                    <td><span class="season-badge spring">Spring</span></td>
+                    <td>1200</td>
+                </tr>
+                <tr>
+                    <td>
+                        Rice
+                    </td>
+                    <td>June</td>
+                    <td>October</td>
+                    <td><span class="season-badge summer">Summer</span></td>
+                    <td>1800</td>
+                </tr>
+                <tr>
+                    <td>
+                        Apple
+                    </td>
+                    <td>March</td>
+                    <td>September</td>
+                    <td><span class="season-badge autumn">Autumn</span></td>
+                    <td>900</td>
+                </tr>
+                <tr>
+                    <td>
+                        Carrot
+                    </td>
+                    <td>October</td>
+                    <td>January</td>
+                    <td><span class="season-badge winter">Winter</span></td>
+                    <td>750</td>
+                </tr>
+                <tr>
+                    <td>
+                        Sugarcane
+                    </td>
+                    <td>April</td>
+                    <td>December</td>
+                    <td><span class="season-badge summer">Summer</span></td>
+                    <td>2200</td>
+                </tr>
+                <tr>
+                    <td>
+                        Maize
+                    </td>
+                    <td>June</td>
+                    <td>September</td>
+                    <td><span class="season-badge summer">Summer</span></td>
+                    <td>1500</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,95 @@
+﻿
+@{
+    ViewData["Title"] = "Web Settings";
+    Layout = "~/Areas/ho/Views/Shared/_Layout.cshtml";
+}
+
+@model IEnumerable<MakeMoreInternational.Models.WebSettingMaster>
+
+<div class="container-fluid p-0">
+    <h1 class="h3 mb-3"><strong>Web Settings</strong></h1>
+    <div class="row">
+        <div class="col-12">
+            <a class="btn btn-primary mb-3" asp-action="create" asp-controller="WebSetting" asp-asp-area="ho">Add New</a>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Logo</th>
+                        <th>Contact</th>
+                        <th>Social Media</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.wstTitle</td>
+                            <td><img src="/images/logo/@item.wsmLogo" width="50" /></td>
+                            <td>@item.wsmContact</td>
+                            <td>
+                                <ul>
+                                    @foreach (var sm in item.wsmSocialMedia)
+                                    {
+                                        <li><i class="@sm.Icon"></i> @sm.Name - <a href="@sm.Link" target="_blank">@sm.Link</a></li>
+                                    }
+                                </ul>
+                            </td>
+                            <td>
+                                <a href="/ho/WebSetting/Edit/@item.wsmId" class="btn btn-sm btn-warning">Edit</a>
+                                @* <a href="/ho/WebSetting/Delete/@item.wsmId" class="btn btn-sm btn-danger">Delete</a> *@
+                                <!-- Delete Button (Triggers Modal) -->
+                                <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"
+                                        data-id="@item.wsmId" data-title="@item.wstTitle">
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content border-danger">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete <strong id="modalRecordTitle">this item</strong>?</p>
+            </div>
+            <div class="modal-footer">
+                <form id="deleteForm" method="get">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-danger">Yes, Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+        const deleteModal = document.getElementById('deleteModal');
+        deleteModal.addEventListener('show.bs.modal', function (event) {
+            const button = event.relatedTarget;
+            const id = button.getAttribute('data-id');
+            const title = button.getAttribute('data-title');
+
+            // Set record title in modal
+            document.getElementById('modalRecordTitle').textContent = title;
+
+            // Set form action
+            const form = document.getElementById('deleteForm');
+            form.action = `/ho/websetting/delete/${id}`;
+        });
+    </script>
+}

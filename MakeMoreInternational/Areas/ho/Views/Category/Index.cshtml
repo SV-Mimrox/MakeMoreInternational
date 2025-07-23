@@ -1,0 +1,88 @@
+﻿@model IEnumerable<MakeMoreInternational.Models.CategoryMaster>
+
+@{
+    ViewData["Title"] = "Categories";
+    int row = 1;
+}
+
+<div class="d-flex justify-content-between flex-wrap">
+<h2 class="mb-3 fw-bold">Categories</h2>
+
+<a asp-action="Create" class="btn btn-success mb-3">
+    <i class="bi bi-plus-circle"></i> Add New Category
+</a>
+</div>
+
+<div class="form-box">
+<table class="table align-middle mb-0">
+    <thead class="table-light">
+        <tr>
+            <th>Seq&nbsp;No.</th>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Parent</th>
+            
+            <th>Home?</th>
+            <th>Status</th>
+            <th style="width:140px">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.seqNo</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.catImage))
+                    {
+                        <img src="~/images/categories/@item.catImage" alt="@item.catName"
+                             style="width:50px;height:auto;" />
+                    }
+                </td>
+                <td>@item.catName</td>
+                
+                @{
+                    var parent = Model.FirstOrDefault(c => c.catId == item.catParentId);
+                    if (parent == null)
+                    {
+                        <td>-</td>
+                    }
+                    else
+                    {
+                        <td>@parent.catName</td>
+                    }
+                }
+                
+                
+                <td>
+                    @if (item.isHome)
+                    {
+                        <span class="badge bg-success">Yes</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">No</span>
+                    }
+                </td>
+                <td>
+                    @if (item.catStatus)
+                    {
+                        <span class="badge bg-success">Active</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">Inactive</span>
+                    }
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.catId"
+                       class="btn btn-sm btn-primary me-1">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@item.catId"
+                       class="btn btn-sm btn-danger"
+                       onclick="return confirm('Delete this category?');">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+</div>
