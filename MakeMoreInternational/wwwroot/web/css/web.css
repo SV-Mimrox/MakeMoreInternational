@@ -90,6 +90,9 @@ a {
     z-index: 1;
     background-color: #c4e9c4;
     display: none;
+    height:calc(100vh - 150px);
+    overflow-y:auto;
+    overflow-x:hidden;
     -border: 1px solid red;
 }
     .head .navbar-nav .nav-item .sub-menu .more-sub-menu li {

@@ -39,5 +39,12 @@ namespace MakeMoreInternational.Models
         [DisplayName("Status")]
         [Required]
         public bool catStatus { get; set; } = true;
+
+        [DisplayName("Meta Title")]
+        public string catMetaTitle { get; set; }
+        [DisplayName("Meta Description")]
+        public string catMetaDesc { get; set; }
+        [DisplayName("Meta Keywords")]
+        public string catMetaKeywords { get; set; }
     }
 }

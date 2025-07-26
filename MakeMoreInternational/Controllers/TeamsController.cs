@@ -5,7 +5,7 @@ namespace MakeMoreInternational.Controllers
 {
     public class TeamsController : BaseController
     {
-        public TeamsController(WebSettingService service) : base(service)
+        public TeamsController(WebSettingService service, CategoryService catService) : base(service, catService)
         {
 
         }

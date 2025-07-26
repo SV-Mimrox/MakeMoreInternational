@@ -7,9 +7,10 @@ namespace MakeMoreInternational.Controllers
     {
         private readonly WebSettingService _service;
         private readonly AboutUsService _aboutUsService;
+        
 
         [ActivatorUtilitiesConstructor]
-        public AboutController(WebSettingService service, AboutUsService aboutUsService) : base(service)
+        public AboutController(WebSettingService service, AboutUsService aboutUsService, CategoryService catService) : base(service,catService)
         {
             _aboutUsService = aboutUsService;
         }

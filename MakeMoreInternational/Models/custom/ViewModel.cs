@@ -6,6 +6,7 @@
     public class ProductMenuVM
     {
         public string CategoryName { get; set; }
+        public string CategorySlug { get; set; }
         public List<SubCategoryVM> SubCategories { get; set; } = new();
     }
 

@@ -79,15 +79,44 @@
                             </li>
                         </ul>
                     </li>
+
                     <li class="sidebar-item">
-                        <a class="sidebar-link" asp-action="Edit" asp-controller="AboutUs" asp-area="ho"><i class="align-middle" data-feather="layers"></i> About Us</a>
+                        <a class="sidebar-link" data-bs-target="#abtmenu" data-bs-toggle="collapse"><i class="align-middle" data-feather="layers"></i> <span class="align-middle">About Us <i class="align-middle float-end mt-1" data-feather="chevron-down"></i></span></a>
+                        <ul class="collapse p-0 m-0" id="abtmenu">
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" asp-action="Edit" asp-controller="AboutUs" asp-area="ho"><i class="align-middle" data-feather="layers"></i> About Us</a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" asp-action="Index" asp-controller="TeamMember" asp-area="ho"><i class="align-middle" data-feather="layers"></i> Team Member</a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" asp-action="Banner" asp-controller="TeamMember" asp-area="ho"><i class="align-middle" data-feather="layers"></i> Team Banner</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" data-bs-target="#inqmenu" data-bs-toggle="collapse"><i class="align-middle" data-feather="layers"></i> <span class="align-middle">Inquiries <i class="align-middle float-end mt-1" data-feather="chevron-down"></i></span></a>
+                        <ul class="collapse p-0 m-0" id="inqmenu">
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" asp-action="Index" asp-controller="ContactInquiry" asp-area="ho"><i class="align-middle" data-feather="layers"></i> Contacts</a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" asp-action="Index" asp-controller="Inquiries" asp-area="ho"><i class="align-middle" data-feather="layers"></i> Inquiries</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" asp-action="Index" asp-controller="Slider" asp-area="ho"><i class="align-middle" data-feather="layers"></i> Slider</a>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" asp-action="Index" asp-controller="TeamMember" asp-area="ho"><i class="align-middle" data-feather="layers"></i> Team Member</a>
+                        <a class="sidebar-link" asp-action="Index" asp-controller="Certificate" asp-area="ho"><i class="align-middle" data-feather="layers"></i> Certificate</a>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" asp-action="Banner" asp-controller="TeamMember" asp-area="ho"><i class="align-middle" data-feather="layers"></i> Team Banner</a>
+                        <a class="sidebar-link" asp-action="Index" asp-controller="Blog" asp-area="ho"><i class="align-middle" data-feather="layers"></i> Blogs</a>
                     </li>
+                   
                     @* <li class="sidebar-item">
                         <a class="sidebar-link" asp-action="Index" asp-controller="HarvestProduct" asp-area="ho">
                             <i class="align-middle" data-feather="layers"></i> <span class="align-middle">Harvest Chart Products</span>

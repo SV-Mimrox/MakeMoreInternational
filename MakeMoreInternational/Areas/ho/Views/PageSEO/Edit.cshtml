@@ -1,0 +1,56 @@
+﻿@model MakeMoreInternational.Models.PageSeo
+@{
+    ViewData["Title"] = (Model.psId == null) ? "Add Page SEO" : "Edit Page SEO";
+    Layout = "~/Areas/ho/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid p-0">
+    <h1 class="h3 mb-3 fw-bold">@ViewData["Title"]</h1>
+
+    <form asp-action="@(Model.psId == null ? "Create" : "Edit")"
+          asp-route-id="@Model.psId"
+          asp-area="ho" asp-controller="PageSEO" method="post" class="form-box">
+        @Html.AntiForgeryToken()
+
+        <div class="mb-3">
+            <label asp-for="psName" class="form-label">Page Name</label>
+            <select asp-for="psName" class="form-control">
+                <option value="">-- Select Page --</option>
+                <option value="Home">Home</option>
+                <option value="About">About</option>
+                <option value="Team">Team</option>
+                <option value="Contact">Contact</option>
+                <option value="Infrastructure">Infrastructure</option>
+                <option value="Product">Product</option>
+                <option value="Blog">Blog</option>
+                <option value="Certificate">Certificate</option>
+            </select>
+            <span asp-validation-for="psName" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="psMetaTitle" class="form-label"></label>
+            <input asp-for="psMetaTitle" class="form-control" />
+            <span asp-validation-for="psMetaTitle" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="psMetaDescription" class="form-label"></label>
+            <textarea asp-for="psMetaDescription" class="form-control" rows="3"></textarea>
+            <span asp-validation-for="psMetaDescription" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="psMetaKeywords" class="form-label"></label>
+            <input asp-for="psMetaKeywords" class="form-control" />
+            <span asp-validation-for="psMetaKeywords" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-success">Save</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

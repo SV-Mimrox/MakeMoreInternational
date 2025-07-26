@@ -1,0 +1,42 @@
+﻿@model List<MakeMoreInternational.Models.ContactMaster>
+@{
+    ViewData["Title"] = "Contact Inquiry";
+    Layout = "~/Areas/ho/Views/Shared/_Layout.cshtml";
+}
+
+<div class="d-flex justify-content-between flex-wrap">
+    <h1 class="h3 mb-3"><strong>Contact Inquiry</strong> List</h1>
+   
+</div>
+<div class="form-box">
+    <table class="table align-middle">
+        <thead class="table-light">
+            <tr>
+                <th>Date</th>
+                <th>Name</th>
+                <th>Contact</th>
+                <th>Email</th>
+                <th>Message</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var c in Model)
+            {
+                <tr>
+                    <td>@c.cntDate.ToString("dd-MM-yyyy")</td>
+                    <td>@c.cntName</td>
+                    <td>@c.cntContact</td>
+                    <td>@c.cntEmail</td>
+                    <td>@c.cntMessage</td>
+                    <td>
+                        
+                        <a asp-area="ho" asp-controller="ContactInquiry" asp-action="Delete" asp-route-id="@c.cntId"
+                           class="btn btn-sm btn-danger"
+                           onclick="return confirm('Delete this Inquiry?');">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

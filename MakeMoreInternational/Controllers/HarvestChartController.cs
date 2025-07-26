@@ -16,8 +16,9 @@ namespace MakeMoreInternational.Controllers
         WebSettingService webSettingService,  // << for BaseController
         HarvestCategoryService catSvc,
         HarvestProductService prdSvc,
-        HarvestSeasonService sesSvc)
-        : base(webSettingService)                    // pass up to Base
+        HarvestSeasonService sesSvc,
+        CategoryService catService)
+        : base(webSettingService, catService)                    // pass up to Base
         {
             _catSvc = catSvc;
             _prdSvc = prdSvc;

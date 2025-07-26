@@ -1,17 +1,34 @@
-﻿using MakeMoreInternational.Services;
+﻿using MakeMoreInternational.Models;
+using MakeMoreInternational.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Build.Framework;
 
 namespace MakeMoreInternational.Controllers
 {
     public class ContactController : BaseController
     {
-        public ContactController(WebSettingService service) : base(service)
+
+        private readonly ContactService _contactService;
+        public ContactController(WebSettingService service, CategoryService catService, ContactService contactService) : base(service, catService)
         {
-            
+            _contactService = contactService;
         }
         public IActionResult Index()
         {
             return View();
+        }
+
+        [HttpPost("/contact/submit")]
+        public IActionResult Index(ContactMaster cnt)
+        {
+            try
+            {
+                _contactService.Create(cnt);
+                return Json("Success");
+            }
+            catch (Exception ex) {
+                return Json("Error Occurred, Please try again");
+            }
         }
     }
 }

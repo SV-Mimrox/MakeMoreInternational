@@ -1,0 +1,110 @@
+﻿@model MakeMoreInternational.Models.BlogMaster
+@{
+    ViewData["Title"] = Model.blmTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .blog-title, .r-b-title {
+        font-size: 1.5rem;
+        -font-weight: bold;
+    }
+
+    .author-box {
+        background-color: #fff;
+        padding: 1.5rem;
+        border-left: 4px solid #51a22c;
+        margin-top: 2rem;
+    }
+
+    .comment-form .form-control {
+        padding: 12px;
+        border-radius: 5px;
+    }
+
+        .comment-form .form-control:focus {
+            background-color: #008a4520;
+            border: 1px solid #008a4550;
+            box-shadow: none;
+            outline: 0;
+        }
+
+    .comment-form textarea {
+        resize: none;
+    }
+
+    .recent-blogs li{
+        display:flex;
+        gap:10px;
+    }
+
+        .recent-blogs li a{
+            font-weight:bold;
+        }
+    .recent-blogs li img{
+        width:50px;height:50px;object-fit:cover;
+        border-radius:5px;
+    }
+</style>
+<section class="breadcrumb-block">
+    <div class="container-fluid">
+        <div class="product-banner row overflow-hidden">
+            <div class="product-title col-md-5 col-12" style="">
+                <div class="category-title">
+                    <h1>Blog Details</h1>
+                </div>
+                <div class="category-desc">
+                    <!-- <p>Turn up the heat and ignite your taste budswith the fiery kick of chilli !</p> -->
+                    <ol class="breadcrumb justify-content-center">
+                        <li class="breadcrumb-item"><a href="/" class="text-warning">HOME</a></li>
+                        <li class="breadcrumb-item text-light">BLOG DETAILS</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="product-category-banner col-md-7 col-12 px-0 position-relative">
+                <span></span>
+                <div class="product-category-img-banner">
+                    <!-- <img src="https://koreagro.com/images/spices-banner.jpg" class="img-fluid"> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Blog section -->
+
+<div class="container py-5">
+    <div class="row">
+        <!-- Main Content -->
+        <div class="col-lg-8">
+
+            <h2 class="blog-title mb-3">@Model.blmTitle</h2>
+            <img src="~/images/blog/@Model.blmImage" alt="Blog Image" class="img-fluid mb-4 rounded">           
+            <p class="text-muted mb-2">By <strong>Makemore</strong> | @Model.blmDate.ToString("MMMM d, yyyy")</p>
+
+            @Html.Raw(Model.blmDescription)
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-lg-4">
+            <div class="mb-5 recent-blogs">
+                <h2 class="mb-3 r-b-title">Recent BLogs</h2>
+                <ul class="list-unstyled">
+                    @foreach (var rb in ViewBag.recent as IEnumerable<BlogMaster>)
+                    {
+                        <li class="mb-2">
+                            <img src="~/images/blog/@rb.blmImage" alt="Alternate Text" />
+                            <span>
+                                <a href="#" class="text-decoration-none text-dark">
+                                    @rb.blmTitle
+                                </a>
+                                <small>@rb.blmDate.ToString("MMMM d, yyyy") </small>
+                            </span>
+                        </li>
+                    }
+                    
+                </ul>
+            </div>            
+        </div>
+    </div>
+</div>
+

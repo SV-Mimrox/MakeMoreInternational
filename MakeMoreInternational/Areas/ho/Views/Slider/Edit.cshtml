@@ -1,0 +1,68 @@
+﻿@model MakeMoreInternational.Models.SliderMaster
+
+@{
+    ViewData["Title"] = "Edit Slider";
+    Layout = "~/Areas/ho/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid p-0">
+    <h1 class="h3 mb-3 fw-bold">@ViewData["Title"]</h1>
+
+    <form asp-action="Edit" asp-controller="Slider" asp-area="ho" method="post" enctype="multipart/form-data" class="form-box">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="MainImage" />
+
+        <div class="mb-3">
+            <label class="form-label mb-1">Main Image</label><br />           
+            <div class="d-flex gap-2 align-items-center">
+                <input type="file" name="mainImageFile" class="form-control" />
+                @if (!string.IsNullOrEmpty(Model.MainImage))
+                {
+                    <img src="~/images/slider/@Model.MainImage" style="width:70px;height:40px;" class="object-fit-cover" />
+                }
+            </div>
+            
+            <span class="text-danger">@Html.ValidationMessage("MainImage")</span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label mb-1">Slogan</label>
+            <input asp-for="Slogan" class="form-control" />
+            <span asp-validation-for="Slogan" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label mb-1">Sub Images (Select up to 7 total)</label><br />
+            <input type="file" name="newSubImages" multiple class="form-control" />
+
+            <div class="d-flex gap-3 flex-wrap mt-2">
+                @for (int i = 0; i < Model.SubImages.Count; i++)
+                {
+                    <div class="mb-2">
+                        <img src="~/images/slider/@Model.SubImages[i]" class="d-block" style="width:80px;height:80px;object-fit:contain;" />
+                        <label class="ms-2">
+                            <input type="checkbox" name="deleteSubImages" value="@Model.SubImages[i]" />
+                            Delete
+                        </label>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label mb-1">Status</label>
+            <select asp-for="Status" class="form-control">
+                <option value="true">Active</option>
+                <option value="false">Inactive</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-success">Save</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

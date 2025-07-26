@@ -1,0 +1,42 @@
+﻿@model List<MakeMoreInternational.Models.BlogMaster>
+@{
+    ViewData["Title"] = "Blogs";
+    Layout = "~/Areas/ho/Views/Shared/_Layout.cshtml";
+}
+
+<div class="d-flex justify-content-between flex-wrap">
+    <h1 class="h3 mb-3"><strong>Blogs</strong> List</h1>
+    <a asp-area="ho" asp-controller="Blog" asp-action="Create" class="btn btn-success mb-3">+ Add Blog</a>
+</div>
+
+<div class="form-box">
+    <table class="table align-middle">
+        <thead class="table-light">
+            <tr>
+                <th>Image</th>
+                <th>Title</th>                
+                <th>Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var b in Model)
+            {
+                <tr>                    
+                    <td>
+                        <img src="~/images/blog/@b.blmImage" class="object-fit-cover" style="width:70px;height:50px;" />
+                    </td>
+                    <td>@b.blmTitle</td>
+                    <td>@b.blmDate.ToString("dd MMM yyyy")</td>
+                    <td>@(b.blmStatus ? "Active" : "Inactive")</td>
+                    <td>
+                        <a asp-area="ho" asp-controller="Blog" asp-action="Edit" asp-route-id="@b.blmId" class="btn btn-sm btn-primary">Edit</a>
+                        <a asp-area="ho" asp-controller="Blog" asp-action="Delete" asp-route-id="@b.blmId" class="btn btn-sm btn-danger"
+                           onclick="return confirm('Delete this blog?');">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

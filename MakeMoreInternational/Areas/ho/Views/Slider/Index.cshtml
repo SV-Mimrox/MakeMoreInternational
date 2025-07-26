@@ -1,0 +1,60 @@
+﻿@model List<MakeMoreInternational.Models.SliderMaster>
+@{
+    ViewData["Title"] = "Sliders";
+    Layout = "~/Areas/ho/Views/Shared/_Layout.cshtml";
+}
+
+<div class="d-flex justify-content-between flex-wrap">
+    <h1 class="h3 mb-3"><strong>Slider</strong> List</h1>
+    <a asp-area="ho" asp-controller="Slider" asp-action="Create" class="btn btn-success mb-3">
+        + Add Slider
+    </a>
+</div>
+
+<div class="form-box">
+    <div class="table-responsive">
+    <table class="table align-middle">
+        <thead class="table-light">
+            <tr>
+                <th>Main Image</th>
+                <th>Slogan</th>
+                <th>Extra Images</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var slider in Model)
+            {
+                <tr>
+                    <td>
+                        <img src="~/images/slider/@slider.MainImage" alt="Main Image" class="img-fluid object-fit-cover" style="width: 70px;height:50px;" />
+                    </td>
+                    <td>@slider.Slogan</td>
+                    <td>
+                        @if (slider.SubImages != null && slider.SubImages.Any())
+                        {
+                            <span>@slider.SubImages.Count</span>
+                        }
+                        else
+                        {
+                            <span>0</span>
+                        }
+                    </td>
+                    <td>
+                        @(slider.Status ? "Active" : "Inactive")
+                    </td>
+                    <td>
+                        <a asp-area="ho" asp-controller="Slider" asp-action="Edit" asp-route-id="@slider.Id"
+                           class="btn btn-sm btn-primary">Edit</a>
+                        <a asp-area="ho" asp-controller="Slider" asp-action="Delete" asp-route-id="@slider.Id"
+                           class="btn btn-sm btn-danger"
+                           onclick="return confirm('Delete this slider?');">Delete</a>
+                      
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+﻿@model MakeMoreInternational.Models.SliderMaster
+
+@{
+    ViewData["Title"] = Model == null  ? "Add Slider" : "Edit Slider";
+    Layout = "~/Areas/ho/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid p-0">
+    <h1 class="h3 mb-3 fw-bold">@ViewData["Title"]</h1>
+
+    <form asp-action="@(Model == null  ? "Create" : "Edit")"
+          asp-area="ho" asp-controller="Slider"
+          enctype="multipart/form-data"
+          method="post"
+          class="form-box">
+        @Html.AntiForgeryToken()
+
+        <!-- Main Image -->
+        <div class="mb-3">
+            <label class="form-label mb-1">Main Image</label>
+            <input type="file" name="mainImage" class="form-control" />
+           
+        </div>
+
+        <!-- Slogan -->
+        <div class="mb-3">
+            <label asp-for="Slogan" class="form-label mb-1"></label>
+            <input asp-for="Slogan" class="form-control" />
+            <span asp-validation-for="Slogan" class="text-danger"></span>
+        </div>
+
+        <!-- Extra Images (max 7) -->
+        <div class="mb-3">
+            <label class="form-label mb-1">Extra Images (Max 7)</label>
+            <input type="file" name="subImages" class="form-control" multiple />
+           
+        </div>
+
+        <!-- Status -->
+        <div class="mb-3">
+            <label asp-for="Status" class="form-label mb-1"></label>
+            <select asp-for="Status" class="form-control">
+                <option value="true">Active</option>
+                <option value="false">Inactive</option>
+            </select>
+        </div>
+
+        <!-- Buttons -->
+        <button type="submit" class="btn btn-success">Save</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

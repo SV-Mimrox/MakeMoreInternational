@@ -15,7 +15,6 @@
                      new { @class = "form-control", placeholder = "Category name" })
             @Html.ValidationMessageFor(m => m.catName, "", new { @class = "text-danger" })
         </div>
-        <!-- Slug field removed -->
     </div>
 
     <div class="row mb-3">
@@ -59,6 +58,32 @@
             </div>
         </div>
     </div>
+
+        <div class="row mb-3">
+            <div class="col-md-12">
+                @Html.LabelFor(m => m.catMetaTitle, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.catMetaTitle,
+                         new { @class = "form-control", placeholder = "Meta Title" })
+                @Html.ValidationMessageFor(m => m.catMetaTitle, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-12">
+                @Html.LabelFor(m => m.catMetaDesc, new { @class = "form-label" })
+                @Html.TextAreaFor(m => m.catMetaDesc,
+                         new { @class = "form-control", placeholder = "Meta Description" })
+                @Html.ValidationMessageFor(m => m.catMetaDesc, "", new { @class = "text-danger" })
+            </div>
+        </div>
+       
+        <div class="row mb-3">
+            <div class="col-md-12">
+                @Html.LabelFor(m => m.catMetaKeywords, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.catMetaKeywords,
+                         new { @class = "form-control", placeholder = "Meta Keywords" })
+                @Html.ValidationMessageFor(m => m.catMetaKeywords, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
     <button type="submit" class="btn btn-success">Save</button>
     <a asp-action="Index" class="btn btn-secondary ms-2">Cancel</a>

@@ -154,6 +154,27 @@
             </div>
         </div>
 
+        <div class="col-md-12">
+            <div class="form-group">
+                <label asp-for="prdMetaTitle" class="control-label"></label>
+                <input asp-for="prdMetaTitle" class="form-control" />
+                <span asp-validation-for="prdMetaTitle" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label asp-for="prdMetaDesc" class="control-label"></label>
+                <textarea asp-for="prdMetaDesc" class="form-control"></textarea>
+                <span asp-validation-for="prdMetaDesc" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label asp-for="prdMetaKeywords" class="control-label"></label>
+                <input asp-for="prdMetaKeywords" class="form-control" />
+                <span asp-validation-for="prdMetaKeywords" class="text-danger"></span>
+            </div>
+        </div>
         <br />
         <!-- Submit -->
         <button type="submit" class="btn btn-success">Save</button>

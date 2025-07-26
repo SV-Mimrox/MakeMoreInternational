@@ -1,7 +1,7 @@
 ﻿@{
     var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
     var siteInfo = ViewBag.WebSetting as WebSettingMaster;
-    
+    var fcat = ViewBag.footerCategories as IEnumerable<CategoryMaster>;
 
 }
 <!DOCTYPE html>
@@ -10,7 +10,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Make More International - Home</title>
+
+    <title>@ViewData["Title"] | Make More International</title>
+    <meta name="description" content="@ViewBag.metaDesc">
+    <meta name="keywords" content="@ViewBag.metaKeyword">
+    <meta name="author" content="Makemore International">
+
+    <!-- Open Graph for Social Sharing -->
+    <meta property="og:title" content="@ViewBag.metaTitle" />
+    <meta property="og:description" content="@ViewBag.metaDesc" />
+    <meta property="og:image" content="@(ViewBag.metaImage != null ? "~/images/blog/"+ViewBag.metaImage :  "~/images/logo/"+siteInfo.wsmLogo)" />
+    <meta property="og:url" content="https://makemoreinternational.com/" />
+    <meta property="og:type" content="website" />
     <link rel="stylesheet" href="~/web/css/web.css">
     <link href="~/web/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="~/web/css/all.min.css">
@@ -45,48 +56,78 @@
 
 <body class="custom-cursor">
     <button class="btn btn-theme2 text-uppercase border-0 px-3" id="inq">Inquiry Now</button>
-    <div class="inqury-form p-3 rounded-3 shadow-lg">
+    <div class="inquiry-form p-3 rounded-3 shadow-lg">
         <div class="d-flex mb-3 justify-content-between">
             <h3 class="fw-bold">Inquiry Form</h3>
             <button class="btn-close"></button>
         </div>
-        <div class="row row-gap-2">
-            <div class="col-md-6">
+        <form id="inqForm" method="post" class="row row-gap-2">
+            <div class="col-md-12">
                 <div>
                     <label class="form-label">First Name</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" 
+                    name="inqName"       
+                    required
+                           data-val="true"
+                           data-val-required="Name is required.">
+                    <span class="text-danger field-validation-valid" data-valmsg-for="inqName" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+           
+            <div class="col-md-6">
+                <div>
+                    <label class="form-label">Email Id</label>
+                    <input type="text" class="form-control" name="inqEmail"
+                           required
+                           data-val="true"
+                           data-val-email="Invalid email format."
+                           data-val-required="Email is required.">
+                    <span class="text-danger field-validation-valid" data-valmsg-for="inqEmail" data-valmsg-replace="true"></span>
                 </div>
             </div>
             <div class="col-md-6">
                 <div>
-                    <label class="form-label">Last Name</label>
-                    <input type="text" class="form-control">
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div>
-                    <label class="form-label">Email Id</label>
-                    <input type="text" class="form-control">
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div>
                     <label class="form-label">Contact</label>
-                    <input type="number" class="form-control">
+                    <input type="number" class="form-control" name="inqContact"
+                           required
+                           data-val="true"
+                           data-val-length="Contact must be 10 digits."
+                           data-val-length-min="10"
+                           data-val-length-max="10"
+                           pattern="\d{10}"
+                           data-val-required="Contact is required.">
+                    <span class="text-danger field-validation-valid" data-valmsg-for="inqContact" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div>
+                    <label class="form-label">Subject</label>
+                    <input type="text" class="form-control" name="inqSubject"
+                           required
+                           data-val="true"
+                           data-val-required="Subject is required.">
+                    <span class="text-danger field-validation-valid" data-valmsg-for="inqSubject" data-valmsg-replace="true"></span>
                 </div>
             </div>
             <div class="col-md-12">
                 <div>
                     <label class="form-label">Message</label>
-                    <textarea class="form-control"></textarea>
+                    <textarea class="form-control" name="inqMessage"
+                              required
+                              data-val="true"
+                              data-val-required="Message is required."></textarea>
+                    <span class="text-danger field-validation-valid" data-valmsg-for="inqMessage" data-valmsg-replace="true"></span>
                 </div>
             </div>
             <div class="col-md-12">
                 <div>
-                    <button class="btn btn-theme rounded-pill border-0 px-4 text-white">Submit</button>
+                    <button type="button" id="btnInqSubmit" class="btn btn-theme rounded-pill border-0 px-4 text-white">
+                        Submit <span style="display:none;" id="loader1" class="spinner-border spinner-border-sm"></span>
+                        </button>
                 </div>
             </div>
-        </div>
+            <span id="responseMsg1" class="p-2"></span>
+        </form>
     </div>
 
     <!-- <div class="cursor"></div> -->
@@ -236,9 +277,9 @@
                         <div class="col-md-5">
                             <div class="navbar-collapse collapse">
                                 <ul class="navbar-nav ms-auto align-items-center justify-content-end">
-                                    <li class="nav-item">
+                                    @* <li class="nav-item">
                                         <a class="nav-link me-3" href="/inquiry">INQUIRY</a>
-                                    </li>
+                                    </li> *@
                                     <li class="nav-item">
                                         <a class="nav-link me-3" href="/blogs">BLOG</a>
                                     </li>
@@ -271,7 +312,13 @@
                 <li class="nav-item"><a href="/" class="nav-link">Home <i class="fa-solid fa-chevron-right"></i></a></li>
                 <li class="nav-item"><a href="/products" class="nav-link">Products <i class="fa-solid fa-chevron-right"></i></a></li>
                 <li class="nav-item"><a href="/about" class="nav-link">About us <i class="fa-solid fa-chevron-right"></i></a></li>
-                <li class="nav-item"><a href="/harvestchart" class="nav-link">Harvest Chart <i class="fa-solid fa-chevron-right"></i></a></li>
+                <li class="nav-item">
+                    <a href="#harvestMenu" data-bs-toggle="collapse" class="nav-link">Harvest Chart <i class="fa-solid fa-chevron-right"></i></a>
+                    <ul class="nav flex-column" id="harvestMenu">
+                        <li class="nav-item"><a href="/harvest-chart/spices" class="nav-link">Spices <i class="fa-solid fa-chevron-right"></i></a></li>
+                        <li class="nav-item"><a href="/harvest-chart/vegetable" class="nav-link">Vegetables <i class="fa-solid fa-chevron-right"></i></a></li>
+                    </ul>
+                </li>
                 <li class="nav-item"><a href="/inquiry" class="nav-link">Inquiry <i class="fa-solid fa-chevron-right"></i></a></li>
                 <li class="nav-item"><a href="/blogs" class="nav-link">Blogs <i class="fa-solid fa-chevron-right"></i></a></li>
                 <li class="nav-item"><a href="/contact" class="nav-link">Contact us <i class="fa-solid fa-chevron-right"></i></a></li>
@@ -346,32 +393,28 @@
                     <div class="row">
                         <div class="col-md-12">
                             <ul class="navbar-nav" style="line-height: 13px;">
-                                <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-chevron-right small me-2"></i> Home</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/"><i class="fa-solid fa-chevron-right small me-2"></i> Home</a></li>
                                 <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-chevron-right small me-2"></i> Harvest chart</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-chevron-right small me-2"></i> Inquiry</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-chevron-right small me-2"></i> Blog</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-chevron-right small me-2"></i> Contact us</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-chevron-right small me-2"></i> Infrastructure</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-chevron-right small me-2"></i> Global Export</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/inquiry"><i class="fa-solid fa-chevron-right small me-2"></i> Inquiry</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/blogs"><i class="fa-solid fa-chevron-right small me-2"></i> Blog</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/contact"><i class="fa-solid fa-chevron-right small me-2"></i> Contact us</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-chevron-right small me-2"></i> Terms & Condition </a></li>
+                                <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-chevron-right small me-2"></i> Privacy Policy</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div class="col-6 col-md-6 col-lg-2 mb-md-0 mb-4 footer-widget">
-                    <h2 class="footer-heading">Our Products</h2>
+                    <h2 class="footer-heading">Our Categories</h2>
                     <div class="block-21 mb-4 d-flex">
                         <div class="col-md-12">
                             <ul class="navbar-nav" style="line-height: 13px;">
-                                <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-chevron-right small me-2"></i> Spices</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-chevron-right small me-2"></i> Herbs & Leaves</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-chevron-right small me-2"></i> Seeds</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-chevron-right small me-2"></i> Millets & Grains</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-chevron-right small me-2"></i> Dried fruits & Nuts</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-chevron-right small me-2"></i> Dehydrated Products</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-chevron-right small me-2"></i> Coconut Products</a></li>
-                                <!-- <li class="nav-item"><a class="nav-link" href="#">Coffee</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#">Pulse</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#">Imported Products</a></li> -->
+                                @foreach (var fc in fcat)
+                                {
+                                    <li class="nav-item"><a class="nav-link" href="/category/@fc.catSlug"><i class="fa-solid fa-chevron-right small me-2"></i> @fc.catName</a></li>
+                                }
+                                
+                                
                             </ul>
                         </div>
                       
@@ -447,9 +490,12 @@
     <script type="text/javascript"
             src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
     </script>
-
+    
 
     <script src="~/web/js/jquery-3.7.1.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/4.0.0/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/web/js/bootstrap.bundle.min.js"></script>
     <script src="~/web/js/owl.carousel.min.js"></script>
     <!-- Swiper JS -->
@@ -544,7 +590,7 @@
 
     <script>
         $(document).ready(function () {
-            $('.owl-carousel').owlCarousel({
+            $('#excellence').owlCarousel({
                 loop: true,
                 margin: 15,
                 nav: true,      // Navigation arrows
@@ -557,6 +603,7 @@
                     1000: { items: 5 }
                 }
             });
+           
 
             $(window).on("scroll", function () {
                 if ($(this).scrollTop() > 100) {                    
@@ -574,75 +621,27 @@
         });
     </script>
 
-    <!-- <script>
-        $('.owl-carousel').owlCarousel({
-            loop: true,
-            dots: true,
-            margin: 10,
-            nav: false,
-            responsive: {
-                0: {
-                    items: 1
-                },
-                600: {
-                    items: 3
-                },
-                1000: {
-                    items: 5,
-                }
-            }
-        })
+    <script>
+         $('#productList').owlCarousel({
+                loop: true,
+                margin: 15,
+                nav: true,      // Navigation arrows
+                dots: false,     // Pagination dots
+                autoplay: true,
 
-       
-    </script> -->
+                responsive: {
+                    0: { items: 1 },
+                    600: { items: 3 },
+                    1000: { items: 4 }
+                }
+            });       
+    </script> 
 
     <script>
         AOS.init();
     </script>
 
-    <script>
-        new AutoTyping({
-            id: 'f-tagline',
-            typeText: ['Spicing the World with Legacy and Vision !'],
-            textColor: 'rgba(255, 255, 255, 0.85)',
-            typeSpeed: 80,
-            typeRandom: false,
-            typeDelay: 300,
-            cursorSpeed: 200,
-            deleteSpeed: 10,
-            cursorColor: 'orange',
-            deleteDelay: 1000,
-            typeInfinity: true
-        }).init();
-
-        new AutoTyping({
-            id: 's-tagline',
-            typeText: ['Crafted by Nature Perfected by Innovation !'],
-            textColor: 'rgba(255, 255, 255, 0.85)',
-            typeSpeed: 80,
-            typeRandom: false,
-            typeDelay: 300,
-            cursorSpeed: 200,
-            deleteSpeed: 10,
-            cursorColor: 'orange',
-            deleteDelay: 1000,
-            typeInfinity: true
-        }).init();
-
-        new AutoTyping({
-            id: 't-tagline',
-            typeText: ['Leaves of Life, Herbs of Health !'],
-            textColor: 'rgba(255, 255, 255, 0.85)',
-            typeSpeed: 80,
-            typeRandom: false,
-            typeDelay: 300,
-            cursorSpeed: 200,
-            deleteSpeed: 10,
-            cursorColor: 'orange',
-            deleteDelay: 1000,
-            typeInfinity: true
-        }).init();
-    </script>
+   
 
 
 
@@ -662,13 +661,68 @@
     <!-- Inquiry -->
     <script>
         $('#inq').click(function () {
-            $('.inqury-form').css('bottom', '40px')
+            $('.inquiry-form').css('bottom', '40px')
         })
-        $('.inqury-form .btn-close').click(function () {
-            $('.inqury-form').css('bottom', '-100%');
+        $('#inq1').click(function () {
+            $('.inquiry-form').css('bottom', '40px')
+        })
+        $('.inquiry-form .btn-close').click(function () {
+            $('.inquiry-form').css('bottom', '-200%');
         })
     </script>
+    <script>
+        $(function () {
+            // Ensure the form is parsed for unobtrusive validation
+            $.validator.unobtrusive.parse("#inqForm");
 
+            $("#btnInqSubmit").click(function () {
+                alert("test");
+                $("#responseMsg1").text("");
+                var form = $("#inqForm");
+
+                if (form.valid()) {
+                    $("#loader1").show();
+                    // Collect form data
+                    var formData = {
+                        inqName: $("input[name='inqName']").val(),
+                        inqEmail: $("input[name='inqEmail']").val(),
+                        inqContact: $("input[name='inqContact']").val(),
+                        inqMessage: $("textarea[name='inqMessage']").val(),
+                        inqSubject: $("input[name='inqSubject']").val(),
+                        inqPage: window.location.href
+                    };
+
+                    // Send via AJAX
+                    $.ajax({
+                        url: "/inquiry/submit", // Replace with your actual controller endpoint
+                        type: "POST",
+                        data: formData,
+                        success: function (response) {
+                            if (response == "Success") {
+                                $("#responseMsg1").text("Your inquiry is successfully submitted.");
+                                $("#responseMsg1").addClass("text-success");
+                                $("#responseMsg1").removeClass("text-danger");
+                            }
+                            else {
+                                $("#responseMsg1").text(response);
+                                $("#responseMsg1").addClass("text-danger");
+                                $("#responseMsg1").removeClass("text-success");
+                            }
+                            form[0].reset();
+                            $("#loader1").hide();
+                        },
+                        error: function (xhr, status, error) {
+                            $("#responseMsg1").text("Something went wrong. Please try again.");
+                            $("#responseMsg1").addClass("text-danger");
+                            $("#responseMsg1").removeClass("text-success");
+                            $("#loader1").hide();
+                        }
+
+                    });
+                }
+            });
+        });
+    </script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

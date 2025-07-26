@@ -26,6 +26,12 @@ builder.Services.AddSingleton<HarvestProductService>();
 builder.Services.AddSingleton<HarvestSeasonService>();
 builder.Services.AddSingleton<AboutUsService>();
 builder.Services.AddSingleton<TeamMemberService>();
+builder.Services.AddSingleton<ContactService>();
+builder.Services.AddSingleton<InquiryService>();
+builder.Services.AddSingleton<SliderService>();
+builder.Services.AddSingleton<CertificateService>();
+builder.Services.AddSingleton<BlogService>();
+builder.Services.AddSingleton<PageSEOService>();
 
 var app = builder.Build();
 

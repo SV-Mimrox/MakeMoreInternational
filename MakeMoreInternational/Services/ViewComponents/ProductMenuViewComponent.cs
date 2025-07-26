@@ -26,6 +26,7 @@ namespace MakeMoreInternational.ViewComponents
             var menu = mainCats.Select(cat => new Models.custom.ProductMenuVM
             {
                 CategoryName = cat.catName,
+                CategorySlug=cat.catSlug,
                 SubCategories = subCats
                     .Where(sub => sub.catParentId == cat.catId)
                     .Select(sub => new Models.custom.SubCategoryVM

@@ -5,15 +5,27 @@ namespace MakeMoreInternational.Controllers
 {
     public class BlogsController : BaseController
     {
-        
-        public BlogsController(WebSettingService service) : base(service)
+        private readonly BlogService _blogService;
+        public BlogsController(WebSettingService service, CategoryService catService, BlogService blogService) : base(service, catService)
         {
-            
+            _blogService = blogService;
         }
         public IActionResult Index()
         {
-            
-            return View();
+            var data = _blogService.GetActive();
+            return View(data);
+        }
+
+        [HttpGet("/blog/{id}")]
+        public IActionResult Details(string id)
+        {
+            var data = _blogService.GetByUrl(id);
+            ViewBag.recent = _blogService.GetActive().OrderByDescending(t => t.blmDate).Take(5);
+            ViewBag.metaTitle = data.blmMetaTitle;
+            ViewBag.metaDesc = data.blmMetaDescription;
+            ViewBag.metaKeyword = data.blmMetaKeywords;
+            ViewBag.metaImage = data.blmImage;
+            return View(data);
         }
     }
 }

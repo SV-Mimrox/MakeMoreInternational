@@ -1,0 +1,43 @@
+﻿@model MakeMoreInternational.Models.CertificateMaster
+
+@{
+    ViewData["Title"] = "Add Certificate" ;
+    Layout = "~/Areas/ho/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid p-0">
+    <h1 class="h3 mb-3 fw-bold">@ViewData["Title"]</h1>
+
+    <form asp-action="Create"
+          
+          asp-area="ho" asp-controller="Certificate" method="post" enctype="multipart/form-data" class="form-box">
+        @Html.AntiForgeryToken()
+
+        <div class="mb-3">
+            <label class="form-label mb-1">Certificate Image</label>
+            <input type="file" name="crtImageFile" class="form-control" />
+           
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label mb-1">Certificate Preview Image</label>
+            <input type="file" name="crtCertiImageFile" class="form-control" />
+           
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="crtStatus" class="form-label mb-1">Crt Status</label>
+            <select asp-for="crtStatus" class="form-control">
+                <option value="true">Active</option>
+                <option value="false">Inactive</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-success">Save</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

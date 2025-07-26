@@ -1,6 +1,6 @@
 ﻿@model MakeMoreInternational.Models.ProductMaster
 @{
-    ViewData["Title"] = "Product Details";
+    ViewData["Title"] = Model.prdName;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -81,7 +81,7 @@
                    
                     
 
-                    <button class="btn btn-theme px-4 text-white rounded-pill shadow">Inquiry Now</button>
+                    <button id="inq1" class="btn btn-theme px-4 text-white rounded-pill shadow">Inquiry Now</button>
                     </div>
                 </div>
             </div>
@@ -213,43 +213,23 @@
 <div class="related-products py-5">
     <div class="container">
         <h2 class="product-txt">Related Products</h2>
-        <div class="owl-carousel owl-theme mt-4">
-            <div class="">
-                <div class="card border-0">
-                    <img src="~/web/Images/download.jpg" class="rounded img-fluid" alt="">
-                    <div class="card-title">
-                        Whole chilli
-                    </div>
-                    <a href="#" class="stretched-link"></a>
-                </div>
-            </div>
-            <div class="">
-                <div class="card border-0">
-                    <img src="~/web/Images/images.jpg" class="rounded img-fluid" alt="">
-                    <div class="card-title">
-                        Cumin Seeds
-                    </div>
-                    <a href="#" class="stretched-link"></a>
-                </div>
-            </div>
-            <div class="">
-                <div class="card order-0">
-                    <img src="~/web/Images/download (2).jpg" class="rounded img-fluid" alt="">
-                    <div class="card-title">
-                        Nutmeg Whole
-                    </div>
-                    <a href="#" class="stretched-link"></a>
-                </div>
-            </div>
-            <div class="">
-                <div class="card border-0">
-                    <img src="~/web/Images/90855769.jpg" class="rounded img-fluid" alt="">
-                    <div class="card-title">
-                        Turmeric finger
-                    </div>
-                    <a href="#" class="stretched-link"></a>
-                </div>
-            </div>
+        <div class="owl-carousel owl-theme mt-4" id="productList">
+                @if (ViewBag.relatedProducts != null)
+                {
+                    foreach(var rp in ViewBag.relatedProducts as IEnumerable<ProductMaster>)
+                    {
+                        <div class="">
+                            <div class="card border-0">
+                                <img src="~/images/products/@rp.prdImage" class="rounded img-fluid" alt="">
+                                <div class="card-title">
+                                    @rp.prdName
+                                </div>
+                                <a href="/product/@rp.prdSlug" class="stretched-link"></a>
+                            </div>
+                        </div>
+                    }
+                }
+               
         </div>
     </div>
 </div>

@@ -1,0 +1,79 @@
+﻿@model MakeMoreInternational.Models.BlogMaster
+@{
+    ViewData["Title"] = "Add Blog";
+    Layout = "~/Areas/ho/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid p-0">
+    <h1 class="h3 mb-3 fw-bold">@ViewData["Title"]</h1>
+
+    <form asp-action="Create" 
+          asp-route-id="@Model.blmId"
+          asp-area="ho" asp-controller="Blog" method="post" class="form-box" enctype="multipart/form-data">
+
+          <div class="row">
+        @Html.AntiForgeryToken()
+
+        <div class="mb-3">
+            <label asp-for="blmTitle" class="form-label mb-1"></label>
+            <input asp-for="blmTitle" class="form-control" />
+            <span asp-validation-for="blmTitle" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label asp-for="blmImage" class="form-label mb-1">Image</label>
+            <input type="file" name="blmImageFile" class="form-control" />
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label asp-for="blmImageAlt" class="form-label mb-1">Image Alt</label>
+            <input asp-for="blmImageAlt" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="blmDescription" class="form-label mb-1"></label>
+            <textarea asp-for="blmDescription" class="form-control" rows="5"></textarea>
+            <span asp-validation-for="blmDescription" class="text-danger"></span>
+        </div>
+
+       
+
+        <div class="mb-3">
+            <label asp-for="blmStatus" class="form-label mb-1"></label>
+            <select asp-for="blmStatus" class="form-control">
+                <option value="true">Active</option>
+                <option value="false">Inactive</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="blmMetaTitle" class="form-label mb-1">Meta Title</label>
+            <input asp-for="blmMetaTitle" class="form-control" />
+        </div>
+
+            <div class="mb-3">
+                <label asp-for="blmMetaKeywords" class="form-label mb-1">Meta Keywords</label>
+                <input asp-for="blmMetaKeywords" class="form-control" />
+            </div>
+
+        <div class="mb-3">
+            <label asp-for="blmMetaDescription" class="form-label mb-1">Meta Description</label>
+            <textarea asp-for="blmMetaDescription" class="form-control" rows="3"></textarea>
+        </div>
+
+      
+        </div>
+
+        <button type="submit" class="btn btn-success">Save</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" /> \
+    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('blmDescription');
+        
+    </script>
+}

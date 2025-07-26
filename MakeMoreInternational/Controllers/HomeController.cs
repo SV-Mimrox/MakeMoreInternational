@@ -12,19 +12,26 @@ namespace MakeMoreInternational.Controllers
         private readonly CategoryService _categoryService;
         private readonly ProductService _productService;
         private readonly WebSettingService _service;
+        private SliderService _sliderService;
+        private CertificateService _certiService;
 
 
-        public HomeController(WebSettingService service,CategoryService categoryservice, ProductService productService)
-            :base(service)
+        public HomeController(WebSettingService service,CategoryService categoryservice, ProductService productService,SliderService sliderService, CertificateService certiService)
+            :base(service, categoryservice)
         {
-            
+
+            _sliderService = sliderService;
             _categoryService = categoryservice;
             _productService = productService;
+            _certiService = certiService;
         }
 
         public IActionResult Index()
         {
             ViewBag.categories = _categoryService.GetHome().OrderBy(t=>t.seqNo);
+            ViewBag.products = _productService.GetForHome().OrderBy(t => t.prdSeqNo);
+            ViewBag.sliders = _sliderService.GetAll();
+            ViewBag.certificates = _certiService.GetActive();
             return View();
         }
 

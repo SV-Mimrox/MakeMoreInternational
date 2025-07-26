@@ -1,36 +1,52 @@
 ﻿@model List<MakeMoreInternational.Models.custom.ProductMenuVM>
-
+@{
+    var scWidth = 250;
+    var dclass = 12;
+}
 <li class="nav-item">
-    <a class="nav-link me-3" href="#">PRODUCTS <i class="fa-solid fa-chevron-down small chev-icon"></i></a>
+    <a class="nav-link me-3" href="/products">PRODUCTS <i class="fa-solid fa-chevron-down small chev-icon"></i></a>
     <ul class="htmlCss-sub-menu sub-menu nav">
         @foreach (var cat in Model)
         {
             <li class="more">
                 <span>
-                    <a href="#"><span>@cat.CategoryName</span> <i class="fa-solid fa-chevron-right small"></i></a>
+                    <a href="/category/@cat.CategorySlug"><span>@cat.CategoryName</span> <i class="fa-solid fa-chevron-right small"></i></a>
                     <i class='bx bxs-chevron-right arrow more-arrow'></i>
                 </span>
-                <div class="more-sub-menu sub-menu nav" style="width: 500px;">
-                    <div class="row">
-                        @foreach (var sub in cat.SubCategories)
-                        {
-                            <div class="col-md-6">
-                                <ul class="list-unstyled">
-                                    <h5 class="p-3 pb-0">@sub.SubCategoryName</h5>
-                                    @foreach (var p in sub.Products)
-                                    {
-                                        <li>
-                                            <a href="/products/@p.Slug">
-                                                <img src="@p.Image" class="menu-icon" />
-                                                @p.Name
-                                            </a>
-                                        </li>
-                                    }
-                                </ul>
-                            </div>
-                        }
+                @if(cat.SubCategories.Count>=1)
+                {
+                    scWidth = 250;
+                    dclass = 12;
+                    scWidth *= cat.SubCategories.Count;
+                    dclass /= cat.SubCategories.Count;
+                    var wdth = scWidth + "px";
+
+                    <div class="more-sub-menu sub-menu nav" style="width: @wdth;">
+                        <div class="row">
+                            @foreach (var sub in cat.SubCategories)
+                            {
+
+                                <div class="col-md-@dclass">
+                                    <ul class="list-unstyled">
+                                        <h5 class="p-3 pb-0">@sub.SubCategoryName</h5>
+                                        @foreach (var p in sub.Products)
+                                        {
+                                            <li>
+                                                <a href="/products/@p.Slug">
+                                                    <img src="@p.Image" class="menu-icon" />
+                                                    @p.Name
+                                                </a>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+
+
+                            }
+                        </div>
                     </div>
-                </div>
+                }
+                
             </li>
         }
     </ul>

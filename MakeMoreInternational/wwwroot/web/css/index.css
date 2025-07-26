@@ -572,7 +572,8 @@ header {
 /****products*****/
 .products,
 .excellence,
-.blogs {
+.blogs,
+.custom-map {
     -background: url(https://grokery.myshopify.com/cdn/shop/files/bg_image_for_product.jpg?v=1650520368);
     background-size: 100%;
     background-color: #c4edc4;
@@ -594,8 +595,11 @@ header {
         border-radius: 15px;
     }
 
-        .products .card img {
+        .products .card img, .related-products .card img {
             transition: 1s;
+            -border: 1px solid red;
+            aspect-ratio: 1/0.8;
+            object-fit: cover;
             -filter: grayscale(50%);
         }
 
@@ -1346,10 +1350,11 @@ footer {
 }
 
 #map {
-    height: 600px;
+    height: 500px;
     width: 100%;
     border: 0;
     border-radius: 10px;
+    z-index:1;
 }
 
 .physics table {
@@ -1361,7 +1366,7 @@ footer {
 
 /****** Inquiry *******/
 
-.inqury-form {
+.inquiry-form {
     max-width: 400px;
     position: fixed;
     z-index: 11;
@@ -1370,14 +1375,12 @@ footer {
     transition: 1s;
     background-color: #fff;
     -display: none;
-    .form-label
-
+}
+.form-label
 {
     font-size: 14px;
     margin-bottom: 1px;
     color: grey;
-}
-
 }
 
 #inq {

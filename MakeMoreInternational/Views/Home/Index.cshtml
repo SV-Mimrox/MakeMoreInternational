@@ -9,62 +9,38 @@
 <!-- Swiper Slider -->
 <div class="swiper mySwiper">
     <div class="swiper-wrapper">
-        <div class="swiper-slide">
-            <img src="~/web/Images/sld1.jpg" alt="">
-            <div class="text-overlay">
-                <h2 class="display-5 fw-bold mb-md-4 mb-3 text-white-85" id="s-tagline"></h2>
-                <!-- Crafted by <span class="text-theme2">Nature</span> Perfected by Innovation ! -->
-                <a href="#" class="btn btn-theme2 rounded-pill px-4 py-2 text-white">Explore more</a>
-                <div class="spices-img">
-                    <img src="~/web/Images/spices/almonds.png" class="animate__animated animate__bounceInUp" alt="">
-                    <img src="~/web/Images/spices/kaju.png" class="animate__animated animate__bounceInUp" alt="">
-                    <img src="~/web/Images/spices/blackpaper.png" class="animate__animated animate__bounceInUp" alt="">
-                    <img src="~/web/Images/spices/mix.png" class="animate__animated animate__bounceInUp" alt="">
-                    <img src="~/web/Images/spices/chilli.png" class="animate__animated animate__bounceInUp" alt="">
-                    <img src="~/web/Images/spices/turmeric.png" class="animate__animated animate__bounceInUp" alt="">
-                    <img src="~/web/Images/spices/ginjer.png" class="animate__animated animate__bounceInUp" alt="">
-                </div>
-            </div>
-        </div>
-        <div class="swiper-slide">
-            <img src="~/web/Images/sld2.jpg" alt="">
-            <div class="text-overlay">
-                <h2 class="display-5 fw-bold mb-md-4 mb-3 text-white-85" id="f-tagline"></h2>
-                <!-- Spicing the <span
-                        class="text-theme2">World</span> with Legacy and Vision ! -->
-                <a href="#" class="btn btn-theme2 rounded-pill px-4 py-2 text-white">Explore more</a>
-                <div class="spices-img">
-                    <img src="~/web/Images/Veg/potato.png" class="animate__animated animate__bounceInUp" alt="">
-                    <img src="~/web/Images/Veg/onion.png" class="animate__animated animate__bounceInUp" alt="">
-                    <img src="~/web/Images/Veg/karrot.png" class="animate__animated animate__bounceInUp" alt="">
-                    <img src="~/web/Images/Veg/tomato.png" class="animate__animated animate__bounceInUp" alt="">
-                    <img src="~/web/Images/Veg/Cabege.png" class="animate__animated animate__bounceInUp" alt="">
-                    <img src="~/web/Images/Veg/brokaly.png" class="animate__animated animate__bounceInUp" alt="">
-                    <img src="~/web/Images/Veg/peas.png" class="animate__animated animate__bounceInUp" alt="">
-                </div>
+        @if(ViewBag.sliders != null)
+        {
+            int i = 0;
+            @foreach (var sld in ViewBag.sliders as IEnumerable<SliderMaster>)
+            {
+                <div class="swiper-slide">
+                    <img src="~/uploads/slider/@sld.MainImage" alt="">
+                    <div class="text-overlay">
+                        <h2 class="display-5 fw-bold mb-md-4 mb-3 text-white-85" id="f-tagline-@i"></h2>
+                        <!-- Crafted by <span class="text-theme2">Nature</span> Perfected by Innovation ! -->
+                        <a href="#" class="btn btn-theme2 rounded-pill px-4 py-2 text-white">Explore more</a>
+                        <div class="spices-img">
+                            @foreach (var si in sld.SubImages)
+                            {
+                                if (si != null)
+                                {
+                                    <img src="~/uploads/slider/@si" class="animate__animated animate__bounceInUp" alt="">
+                                }
 
-            </div>
-        </div>
-        <div class="swiper-slide">
-            <img src="~/web/Images/sld3.jpg" alt="">
-            <div class="text-overlay">
-                <h2 class="display-5 fw-bold mb-md-4 mb-3 text-white-85" id="t-tagline"></h2>
-                <!-- Spicing the <span
-                        class="text-theme2">World</span> with Legacy and Vision ! -->
-                <a href="#" class="btn btn-theme2 rounded-pill px-4 py-2 text-white">Explore more</a>
-                <div class="spices-img">
-                    <img src="~/web/Images/Veg/potato.png" class="animate__animated animate__bounceInUp" alt="">
-                    <img src="~/web/Images/Veg/onion.png" class="animate__animated animate__bounceInUp" alt="">
-                    <img src="~/web/Images/Veg/karrot.png" class="animate__animated animate__bounceInUp" alt="">
-                    <img src="~/web/Images/Veg/tomato.png" class="animate__animated animate__bounceInUp" alt="">
-                    <img src="~/web/Images/Veg/Cabege.png" class="animate__animated animate__bounceInUp" alt="">
-                    <img src="~/web/Images/Veg/brokaly.png" class="animate__animated animate__bounceInUp" alt="">
-                    <img src="~/web/Images/Veg/peas.png" class="animate__animated animate__bounceInUp" alt="">
-                </div>
+                            }
 
-            </div>
-        </div>
-        <!-- <div class="swiper-slide"><img src="~/web/Images/S1.jpg" alt=""></div> -->
+
+                        </div>
+                    </div>
+                </div>
+                i++;
+            }
+        }
+        
+        
+       
+        
     </div>
     <!-- <div class="swiper-button-next"></div>
     <div class="swiper-button-prev"></div>
@@ -112,43 +88,20 @@
             <h2 class="text-center">Our Products</h2>
             <span class="animate-border"></span>
         </div>
-        <div class="row">
-            <div class="col-md-3">
-                <div class="card border-0">
-                    <img src="~/web/Images/download.jpg" class="rounded img-fluid" alt="">
-                    <div class="card-title">
-                        Whole chilli
+        <div class="owl-carousel owl-theme" id="productList">
+            
+                @foreach(var p in ViewBag.products as IEnumerable<ProductMaster>)
+                {
+                <div class="item">
+                        <div class="card border-0">
+                            <img src="~/images/products/@p.prdImage" class="rounded img-fluid" alt="">
+                            <div class="card-title">
+                                @p.prdName
+                            </div>
+                            <a href="/products/@p.prdSlug" class="stretched-link"></a>
+                        </div>
                     </div>
-                    <a href="#" class="stretched-link"></a>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card border-0">
-                    <img src="~/web/Images/images.jpg" class="rounded img-fluid" alt="">
-                    <div class="card-title">
-                        Cumin Seeds
-                    </div>
-                    <a href="#" class="stretched-link"></a>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card order-0">
-                    <img src="~/web/Images/download (2).jpg" class="rounded img-fluid" alt="">
-                    <div class="card-title">
-                        Nutmeg Whole
-                    </div>
-                    <a href="#" class="stretched-link"></a>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card border-0">
-                    <img src="~/web/Images/90855769.jpg" class="rounded img-fluid" alt="">
-                    <div class="card-title">
-                        Turmeric finger
-                    </div>
-                    <a href="#" class="stretched-link"></a>
-                </div>
-            </div>
+                }                                  
         </div>
     </div>
 </div>
@@ -208,7 +161,7 @@
                              style="background-color: rgba(0,0,0,0.5);">
                             <h5 class="mb-0 text-white fs-4">@cat.catName</h5>
                             <div class="overlay-btn">
-                                <a href="#" class="btn btn-theme2 rounded-pill px-3 text-white">View Details</a>
+                                <a href="/category/@cat.catSlug" class="btn btn-theme2 rounded-pill px-3 text-white">View Details</a>
                             </div>
                         </div>
                     </div>
@@ -290,94 +243,34 @@
         <span class="animate-border ml-auto mr-auto mb-4"></span>
     </div>
     <div class="container">
-        <div class="owl-carousel owl-theme">
-            <div class="item">
-                <a href="#item1" data-bs-toggle="modal">
-                    <img src="~/web/Images/aeoL.webp" alt="" style="width: 200px;">
-                </a>
-            </div>
-            <div class="item">
-                <a href="#item2" data-bs-toggle="modal">
-                    <img src="~/web/Images/apeda.png" alt="">
-                </a>
-            </div>
-            <div class="item">
-                <a href="#item3">
-                    <img src="~/web/Images/fdaL.webp" alt="">
-                </a>
-            </div>
-            <div class="item">
-                <a href="#item4">
-                    <img src="~/web/Images/fssai.png" alt="">
-                </a>
-            </div>
-            <div class="item">
-                <a href="#item5">
-                    <img src="~/web/Images/iso9001L.webp" alt="">
-                </a>
-            </div>
-            <div class="item">
-                <a href="#item6">
-                    <img src="~/web/Images/fdaL.webp" alt="">
-                </a>
-            </div>
+        <div class="owl-carousel owl-theme" id="excellence">
+            @foreach(var ci in ViewBag.certificates as IEnumerable<CertificateMaster>)
+            {
+                <div class="item">
+                    <a href="#@(ci.crtId)" data-bs-toggle="modal">
+                        <img src="~/images/certificate/@ci.crtImage" alt="" style="width: 200px;">
+                    </a>
+                </div>
+            }
+            
+           
 
         </div>
-
-        <div class="modal fade" id="item1">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <img src="~/web/Images/90855769.avif" alt="Image" class="img-fluid">
+        
+        @foreach (var ci in ViewBag.certificates as IEnumerable<CertificateMaster>)
+        {
+            <div class="modal fade" id="@(ci.crtId)">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <img src="~/images/certificate/@ci.crtCertiImage" alt="Image" class="img-fluid">
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="modal fade" id="item2">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <img src="~/web/Images/90855769.avif" alt="Image" class="img-fluid">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- <div class="modal fade" id="item3">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <img src="~/web/Images/90855769.avif" alt="Image" class="img-fluid">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal fade" id="item4">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <img src="~/web/Images/90855769.avif" alt="Image" class="img-fluid">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal fade" id="item5">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <img src="~/web/Images/90855769.avif" alt="Image" class="img-fluid">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal fade" id="item6">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <img src="~/web/Images/90855769.avif" alt="Image" class="img-fluid">
-                    </div>
-                </div>
-            </div>
-        </div> -->
+        }
+        
+        
     </div>
 </div>
 
@@ -463,7 +356,7 @@
 
 
 <!-----Blog start------>
-<section class="blogs py-5">
+<section class="blogs py-5 d-none">
     <div class="container">
         <div class="title-section mb-md-5 mb-3">
             <img src="~/web/Images/values1.png" width="65" class="d-block mx-auto" alt="">
@@ -525,9 +418,38 @@
     </div>
 </section>
 
-<div class="custom-map py-5">
+<section class="custom-map py-5" style="-background-color: #c4edc4;">
     <div class="container">
         <div id="map"></div>
     </div>
-</div>
+</section>
 
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+        @if (ViewBag.sliders != null)
+        {
+            int i = 0;
+            foreach (var s in ViewBag.sliders as IEnumerable<SliderMaster>)
+            {
+                <text>
+                        new AutoTyping({
+                            id: 'f-tagline-@i',
+                            typeText: ['@s.Slogan'],
+                            textColor: 'rgba(255, 255, 255, 0.85)',
+                            typeSpeed: 80,
+                            typeRandom: false,
+                            typeDelay: 300,
+                            cursorSpeed: 200,
+                            deleteSpeed: 10,
+                            cursorColor: 'orange',
+                            deleteDelay: 1000,
+                            typeInfinity: true
+                        }).init();
+                </text>
+                i++;
+            }
+        }
+                });
+    </script>
+}

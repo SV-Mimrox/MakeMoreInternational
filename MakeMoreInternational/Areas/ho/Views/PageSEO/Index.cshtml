@@ -1,0 +1,44 @@
+﻿@model List<MakeMoreInternational.Models.PageSeo>
+@{
+    ViewData["Title"] = "Page SEO List";
+    Layout = "~/Areas/ho/Views/Shared/_Layout.cshtml";
+}
+
+<div class="d-flex justify-content-between flex-wrap">
+    <h1 class="h3 mb-3"><strong>Page SEO</strong> List</h1>
+    <a asp-area="ho" asp-controller="PageSEO" asp-action="Create" class="btn btn-success mb-3">
+        + Add Page SEO
+    </a>
+</div>
+
+<div class="form-box">
+    <table class="table align-middle">
+        <thead class="table-light">
+            <tr>
+                <th>Page</th>
+                <th>Meta Title</th>
+                <th>Meta Description</th>
+                <th>Meta Keywords</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var seo in Model)
+            {
+                <tr>
+                    <td>@seo.psName</td>
+                    <td>@seo.psMetaTitle</td>
+                    <td>@seo.psMetaDescription</td>
+                    <td>@seo.psMetaKeywords</td>
+                    <td>
+                        <a asp-area="ho" asp-controller="PageSEO" asp-action="Edit" asp-route-id="@seo.psId"
+                           class="btn btn-sm btn-primary">Edit</a>
+                        <a asp-area="ho" asp-controller="PageSEO" asp-action="Delete" asp-route-id="@seo.psId"
+                           class="btn btn-sm btn-danger"
+                           onclick="return confirm('Delete this SEO entry?');">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

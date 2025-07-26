@@ -49,6 +49,11 @@ namespace MakeMoreInternational.Services
             return _collection.Find(c => c.catId == id).FirstOrDefault();
         }
 
+        public CategoryMaster? GetBySlug(string id)
+        {
+            return _collection.Find(c => c.catSlug == id).FirstOrDefault();
+        }
+
         // Create new category
         public void Create(CategoryMaster model)
         {

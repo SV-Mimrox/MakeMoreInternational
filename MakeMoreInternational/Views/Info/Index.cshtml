@@ -1,0 +1,59 @@
+﻿@model IEnumerable<ProductMaster>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="breadcrumb-block">
+    <div class="container-fluid">
+        <div class="product-banner row overflow-hidden">
+            <div class="product-title col-md-5 col-12" style="">
+                <div class="category-title">
+                    <h1>Products</h1>
+                </div>
+                <div class="category-desc">
+                    <!-- <p>Turn up the heat and ignite your taste budswith the fiery kick of chilli !</p> -->
+                    <ol class="breadcrumb justify-content-center">
+                        <li class="breadcrumb-item"><a href="/" class="text-warning">HOME</a></li>
+                        <li class="breadcrumb-item text-light">PRODUCTS</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="product-category-banner col-md-7 col-12 px-0 position-relative">
+                <span></span>
+                <div class="product-category-img-banner">
+                    <!-- <img src="https://koreagro.com/images/spices-banner.jpg" class="img-fluid"> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-----Products------>
+<div class="products py-5">
+    <div class="container">
+        <!-- <div class="title-section mb-md-5 mb-3">
+            <h2 class="text-center">Our Products</h2>
+            <span class="animate-border"></span>
+        </div> -->
+        <div class="row row-gap-3">
+            
+            @foreach(var p in Model)
+            {
+                <div class="col-md-3">
+                    <div class="card border-0">
+                        <img src="~/images/products/@p.prdImage" class="rounded img-fluid" alt="">
+                        <div class="card-title">
+                            @p.prdName
+                        </div>
+                        <a href="/products/@p.prdSlug" class="stretched-link"></a>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+    </div>
+    </div>

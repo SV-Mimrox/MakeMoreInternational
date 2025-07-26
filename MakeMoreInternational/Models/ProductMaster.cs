@@ -63,5 +63,12 @@ namespace MakeMoreInternational.Models
         public int prdSeqNo { get; set; }
         [DisplayName("Uses")]
         public string? prdUses { get; set; }
+
+        [DisplayName("Meta Title")]
+        public string? prdMetaTitle { get; set; }
+        [DisplayName("Meta Description")]
+        public string? prdMetaDesc { get; set; }
+        [DisplayName("Meta Keywords")]
+        public string? prdMetaKeywords { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model MakeMoreInternational.Models.ProductMaster
+﻿
 @{
     ViewData["Title"] = "Contact us";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -66,32 +66,118 @@
         <div class="col-lg-8">
             <div class="contact-box">
                 <h4 class="mb-4 text-theme">Send Us a Message</h4>
-                <form>
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <label class="form-label">Name</label>
-                            <input type="text" class="form-control" required>
+                    <form id="contactForm" method="post">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Name</label>
+                                <input type="text" name="cntName" class="form-control"
+                                       required
+                                       data-val="true"
+                                       data-val-required="Name is required.">
+                                <span class="text-danger field-validation-valid" data-valmsg-for="cntName" data-valmsg-replace="true"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Email Id</label>
+                                <input type="email" name="cntEmail" class="form-control"
+                                       required
+                                       data-val="true"
+                                       data-val-required="Email is required."
+                                       data-val-email="Invalid email format.">
+                                <span class="text-danger field-validation-valid" data-valmsg-for="cntEmail" data-valmsg-replace="true"></span>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label class="form-label">Contact Number</label>
+                                <input type="text" name="cntContact" class="form-control"
+                                       required
+                                       data-val="true"
+                                       data-val-required="Contact number is required."
+                                       data-val-length="Contact must be 10 digits."
+                                       data-val-length-min="10"
+                                       data-val-length-max="10"
+                                       pattern="\d{10}">
+                                <span class="text-danger field-validation-valid" data-valmsg-for="cntContact" data-valmsg-replace="true"></span>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label class="form-label">Message</label>
+                                <textarea name="cntMessage" class="form-control" rows="5"
+                                          required
+                                          data-val="true"
+                                          data-val-required="Message is required."></textarea>
+                                <span class="text-danger field-validation-valid" data-valmsg-for="cntMessage" data-valmsg-replace="true"></span>
+                            </div>
+
+                            <div class="col-md-12 text-end">
+                                <button type="button" id="btnSubmit" class="btn rounded-pill text-white px-4 py-2 mt-3 btn-theme">
+                                    Send Message <span style="display:none;" id="loader" class="spinner-border spinner-border-sm"></span>
+                                    </button>
+                            </div>
+                            <span id="responseMsg" class="p-2"></span>
                         </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Email Id</label>
-                            <input type="email" class="form-control" required>
-                        </div>
-                        <div class="col-md-12">
-                            <label class="form-label">Contact Number</label>
-                            <input type="text" class="form-control" required>
-                        </div>
-                        <div class="col-md-12">
-                            <label class="form-label">Message</label>
-                            <textarea class="form-control" rows="5" required></textarea>
-                        </div>
-                        <div class="col-md-12 text-end">
-                            <button type="submit" class="btn rounded-pill text-white px-4 py-2 mt-3 btn-theme">Send Message</button>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+
             </div>
         </div>
 
     </div>
 </div>
 </section>
+<!-- Add this in your _Layout.cshtml or Contact.cshtml -->
+
+
+
+@section Scripts {
+   
+    <script>
+        $(function () {
+            // Ensure the form is parsed for unobtrusive validation
+            $.validator.unobtrusive.parse("#contactForm");
+
+            $("#btnSubmit").click(function () {
+                $("#responseMsg").text("");
+                var form = $("#contactForm");
+
+                if (form.valid()) {
+                    $("#loader").show();
+                    // Collect form data
+                    var formData = {
+                        cntName: $("input[name='cntName']").val(),
+                        cntEmail: $("input[name='cntEmail']").val(),
+                        cntContact: $("input[name='cntContact']").val(),
+                        cntMessage: $("textarea[name='cntMessage']").val()
+                    };
+
+                    // Send via AJAX
+                    $.ajax({
+                        url: "/contact/submit", // Replace with your actual controller endpoint
+                        type: "POST",
+                        data: formData,
+                        success: function (response) {
+                            if(response=="Success"){
+                                $("#responseMsg").text("Your information is successfully submitted.");
+                                $("#responseMsg").addClass("text-success");
+                                $("#responseMsg").removeClass("text-danger");
+                            }
+                            else{
+                                $("#responseMsg").text(response);
+                                $("#responseMsg").addClass("text-danger");
+                                $("#responseMsg").removeClass("text-success");
+                            }
+                            form[0].reset();
+                            $("#loader").hide();
+                        },
+                        error: function (xhr, status, error) {
+                            $("#responseMsg").text("Something went wrong. Please try again.");
+                            $("#responseMsg").addClass("text-danger");
+                            $("#responseMsg").removeClass("text-success");
+                            $("#loader").hide();
+                        }
+
+                    });
+                }
+            });
+        });
+    </script>
+}
