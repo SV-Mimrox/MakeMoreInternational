@@ -14,16 +14,22 @@ namespace MakeMoreInternational.Controllers
         private readonly WebSettingService _service;
         private SliderService _sliderService;
         private CertificateService _certiService;
+        private PackagingService _packageService;
+        private CountryMasterService _countryService;
 
-
-        public HomeController(WebSettingService service,CategoryService categoryservice, ProductService productService,SliderService sliderService, CertificateService certiService)
-            :base(service, categoryservice)
+        public HomeController(WebSettingService service, PageSEOService seoService, LanguageService languageService,
+            CategoryService categoryservice, ProductService productService,SliderService sliderService,
+            CertificateService certiService, PackagingService packageService, CountryMasterService countryService)
+            : base(service, categoryservice, seoService, languageService)
         {
 
             _sliderService = sliderService;
             _categoryService = categoryservice;
             _productService = productService;
             _certiService = certiService;
+            _packageService = packageService;
+            _service = service;
+            _countryService = countryService;
         }
 
         public IActionResult Index()
@@ -32,6 +38,8 @@ namespace MakeMoreInternational.Controllers
             ViewBag.products = _productService.GetForHome().OrderBy(t => t.prdSeqNo);
             ViewBag.sliders = _sliderService.GetAll();
             ViewBag.certificates = _certiService.GetActive();
+            ViewBag.packaging = _packageService.GetActive();
+            ViewBag.siteSetting = _service.GetAll().FirstOrDefault();
             return View();
         }
 
@@ -46,6 +54,12 @@ namespace MakeMoreInternational.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        [HttpGet("/get-country")]
+        public IActionResult GetCountry()
+        {
+            var country = _countryService.GetActive();
+            return Json(country);
+        }
         public IActionResult ProductMenu()
         {
             var categories = _categoryService.GetAll(); // CategoryMaster

@@ -1,0 +1,44 @@
+﻿@model MakeMoreInternational.Models.PackagingMaster
+
+@{
+    ViewData["Title"] = "Add Package";
+    Layout = "~/Areas/ho/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid p-0">
+    <h1 class="h3 mb-3 fw-bold">@ViewData["Title"]</h1>
+
+    <form asp-action="Create"
+          asp-area="ho" asp-controller="Packaging" method="post" enctype="multipart/form-data" class="form-box">
+        @Html.AntiForgeryToken()
+
+        <div class="mb-3">
+            <label class="form-label mb-1">Seq No</label>
+            <input  asp-for="pkgSeqNo" class="form-control" />
+            <span asp-validation-for="pkgSeqNo"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label mb-1">Package Image</label>
+            <input type="file" name="pkgImageFile" class="form-control" />
+
+        </div>
+
+        
+
+        <div class="mb-3">
+            <label asp-for="pkgStatus" class="form-label mb-1">Status</label>
+            <select asp-for="pkgStatus" class="form-control">
+                <option value="true">Active</option>
+                <option value="false">Inactive</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-success">Save</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -10,7 +10,9 @@ namespace MakeMoreInternational.Controllers
         private readonly CategoryService _categoryService;
 
 
-        public InfoController(ProductService productService, WebSettingService service, CategoryService categoryService) : base(service, categoryService)
+        public InfoController(ProductService productService, WebSettingService service, 
+            CategoryService categoryService, PageSEOService seoService, LanguageService languageService) 
+            : base(service, categoryService, seoService, languageService)
         {
             _productService = productService;
             _categoryService = categoryService;

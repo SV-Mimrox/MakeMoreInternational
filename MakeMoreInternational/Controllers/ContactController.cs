@@ -9,7 +9,9 @@ namespace MakeMoreInternational.Controllers
     {
 
         private readonly ContactService _contactService;
-        public ContactController(WebSettingService service, CategoryService catService, ContactService contactService) : base(service, catService)
+        public ContactController(WebSettingService service, CategoryService catService,
+            ContactService contactService, PageSEOService seoService, LanguageService languageService) : 
+            base(service, catService, seoService, languageService)
         {
             _contactService = contactService;
         }

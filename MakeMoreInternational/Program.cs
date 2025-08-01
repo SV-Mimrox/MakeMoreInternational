@@ -32,6 +32,9 @@ builder.Services.AddSingleton<SliderService>();
 builder.Services.AddSingleton<CertificateService>();
 builder.Services.AddSingleton<BlogService>();
 builder.Services.AddSingleton<PageSEOService>();
+builder.Services.AddSingleton<LanguageService>();
+builder.Services.AddSingleton<PackagingService>();
+builder.Services.AddSingleton<CountryMasterService>();
 
 var app = builder.Build();
 

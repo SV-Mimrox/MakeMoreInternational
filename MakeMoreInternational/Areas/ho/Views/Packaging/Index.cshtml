@@ -1,0 +1,47 @@
+﻿@model List<MakeMoreInternational.Models.PackagingMaster>
+@{
+    ViewData["Title"] = "Packagings";
+    Layout = "~/Areas/ho/Views/Shared/_Layout.cshtml";
+}
+
+<div class="d-flex justify-content-between flex-wrap">
+    <h1 class="h3 mb-3"><strong>Packaging</strong> List</h1>
+    <a asp-area="ho" asp-controller="Packaging" asp-action="Create" class="btn btn-success mb-3">
+        + Add Package
+    </a>
+</div>
+
+<div class="form-box">
+    <table class="table align-middle">
+        <thead class="table-light">
+            <tr>
+                <th>Seq No</th>
+                <th>Image</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var c in Model)
+            {
+                <tr>
+                    <td>@c.pkgSeqNo</td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(c.pkgImage))
+                        {
+                            <img src="@Url.Content("~/images/packaging/" + c.pkgImage)" width="60" height="60" class="img-thumbnail" />
+                        }
+                    </td>
+                   
+                    <td>@(c.pkgStatus ? "Active" : "Inactive")</td>
+                    <td>
+                      
+                        <a asp-area="ho" asp-controller="Certificate" asp-action="Delete" asp-route-id="@c.pkgId"
+                           class="btn btn-sm btn-danger"
+                           onclick="return confirm('Are you sure to delete this Packaging?');">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -18,6 +18,7 @@ public class TeamMemberService
     }
 
     public List<TeamMemberMaster> GetAll() => _collection.Find(_ => true).ToList();
+    
 
     public TeamMemberMaster GetById(string id) => _collection.Find(x => x.Id == id).FirstOrDefault();
 

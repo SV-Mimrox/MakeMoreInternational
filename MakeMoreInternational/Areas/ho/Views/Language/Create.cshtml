@@ -1,0 +1,42 @@
+﻿@model MakeMoreInternational.Models.LanguageMaster
+@{
+    ViewData["Title"] = Model.lmId == null ? "Add Language" : "Edit Language";
+    Layout = "~/Areas/ho/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid p-0">
+    <h1 class="h3 mb-3 fw-bold">@ViewData["Title"]</h1>
+
+    <form asp-action="@(Model.lmId == null ? "Create" : "Edit")"
+          asp-route-id="@Model.lmId"
+          asp-area="ho" asp-controller="Language" method="post" class="form-box">
+        @Html.AntiForgeryToken()
+
+        <div class="mb-3">
+            <label asp-for="lmName" class="form-label"></label>
+            <input asp-for="lmName" class="form-control" />
+            <span asp-validation-for="lmName" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="lmCode" class="form-label"></label>
+            <input asp-for="lmCode" class="form-control" />
+            <span asp-validation-for="lmCode" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="lmStatus" class="form-label"></label>
+            <select asp-for="lmStatus" class="form-control">
+                <option value="true">Active</option>
+                <option value="false">Inactive</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-success">Save</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

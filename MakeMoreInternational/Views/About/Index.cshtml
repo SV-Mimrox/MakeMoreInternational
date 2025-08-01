@@ -4,6 +4,7 @@
     var data = ViewData["aboutData"] as AboutUsMaster;
     Layout = "~/Views/Shared/_Layout.cshtml";
     var vl = 1;
+    var siteInfo = ViewBag.siteSetting as WebSettingMaster;
 }
 
 <section class="breadcrumb-block">
@@ -151,8 +152,19 @@
     </div>
 </div>
 
-<div class="custom-map py-5">
-    <div class="container">
-        <div id="map"></div>
-    </div>
-</div>
+@if (siteInfo.wsmAboutSec1 == "Map")
+{
+    <section class="custom-map py-5" style="-background-color: #c4edc4;">
+        <div class="container">
+            <div id="map"></div>
+        </div>
+    </section>
+}
+else
+{
+    <section class="custom-map py-5" style="-background-color: #c4edc4;">
+        <div class="container">
+            <iframe src="@siteInfo.wsmAboutPageVideo"></iframe>
+        </div>
+    </section>
+}

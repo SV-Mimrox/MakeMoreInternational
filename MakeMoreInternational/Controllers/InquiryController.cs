@@ -7,7 +7,9 @@ namespace MakeMoreInternational.Controllers
     public class InquiryController : BaseController
     {
         private readonly InquiryService _inqService;
-        public InquiryController(WebSettingService service, CategoryService catService, InquiryService inqService) : base(service, catService)
+        public InquiryController(WebSettingService service, 
+            CategoryService catService, InquiryService inqService, PageSEOService seoService, LanguageService languageService) 
+            : base(service, catService, seoService, languageService)
         {
             _inqService = inqService;
         }

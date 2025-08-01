@@ -6,7 +6,9 @@ namespace MakeMoreInternational.Controllers
     public class BlogsController : BaseController
     {
         private readonly BlogService _blogService;
-        public BlogsController(WebSettingService service, CategoryService catService, BlogService blogService) : base(service, catService)
+        public BlogsController(WebSettingService service, CategoryService catService, 
+            BlogService blogService, PageSEOService seoService, LanguageService languageService) 
+            : base(service, catService, seoService, languageService)
         {
             _blogService = blogService;
         }

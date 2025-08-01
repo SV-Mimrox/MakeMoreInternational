@@ -10,14 +10,18 @@ namespace MakeMoreInternational.Controllers
         
 
         [ActivatorUtilitiesConstructor]
-        public AboutController(WebSettingService service, AboutUsService aboutUsService, CategoryService catService) : base(service,catService)
+        public AboutController(WebSettingService service, AboutUsService aboutUsService, 
+            CategoryService catService, PageSEOService seoService, LanguageService languageService) : 
+            base(service,catService, seoService, languageService)
         {
             _aboutUsService = aboutUsService;
+            _service = service;
         }
        
         public IActionResult Index()
         {
             var data = _aboutUsService.Get();
+            ViewBag.siteSetting = _service.GetAll().FirstOrDefault();
             ViewData["aboutData"] = data;
             return View();
         }

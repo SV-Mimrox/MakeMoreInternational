@@ -24,6 +24,23 @@ body {
     /* background-color: #0B534560; */
 }
 
+::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+    background: #ddd;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--btn-theme);
+    -webkit-border-radius: 1ex;
+    -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.75);
+}
+
+::-webkit-scrollbar-corner {
+    background: red;
+}
+
+
 .bg-theme {
     background-color: var(--btn-theme);
 }
@@ -163,7 +180,7 @@ body {
 
 .language-select {
     width: 100%;
-    padding: 3px 12px;
+    padding: 3px 25px 3px 10px;
     font-size: 14px;
     border: 1px solid #51a22c;
     border-radius: 4px;
@@ -174,7 +191,7 @@ body {
     -moz-appearance: none;
     background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
     background-repeat: no-repeat;
-    background-position: right 12px center;
+    background-position: right 5px center;
     background-size: 16px;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
@@ -572,8 +589,7 @@ header {
 /****products*****/
 .products,
 .excellence,
-.blogs,
-.custom-map {
+.blogs {
     -background: url(https://grokery.myshopify.com/cdn/shop/files/bg_image_for_product.jpg?v=1650520368);
     background-size: 100%;
     background-color: #c4edc4;
@@ -661,20 +677,36 @@ header {
         -border: 1px solid red;
     }
     .packing-cont-data table ul li {
-        padding: 0px 15px;
+        padding: 0px 15px;color:var(--btn-theme);font-weight:600;
         -border:1px solid red;
     }
-    .packing-cont-data table ul li strong{
-        display:inline-block;margin-bottom:5px;color:var(--btn-theme);
+        .packing-cont-data table ul li strong {
+            display: inline-block;
+            margin-bottom: 5px;
+            color: var(--btn-theme);
+            font-weight: 600;
+        }
+        .packing-cont-data table ul li li {
+            padding-block: 5px;
+            padding-inline: 0;
+            font-weight: normal;
+            color: #222222;
+        }
+    .packing-cont-data table tr td {
+        -border: 1px solid red;
+        width: 50%;
+        vertical-align: top;
     }
-    .packing-cont-data table ul li li{
-        padding-block:5px;
-        padding-inline:0;
+    .packing-cont-data table ul li li strong {
+        -border: 1px solid red;
+        font-weight: normal;
+        color: #222222;
     }
-    .packing-cont-data table tr td{
+    .packing-cont-data table ul li li p{
+        display:inline-block;
         -border:1px solid red;
-        width:50%;
     }
+
 
 /******Category******/
 .category ul {
@@ -1371,7 +1403,7 @@ footer {
     position: fixed;
     z-index: 11;
     left: 15px;
-    bottom: -100%;
+    bottom: -200%;
     transition: 1s;
     background-color: #fff;
     -display: none;

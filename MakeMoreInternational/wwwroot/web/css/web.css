@@ -90,11 +90,17 @@ a {
     z-index: 1;
     background-color: #c4e9c4;
     display: none;
-    height:calc(100vh - 150px);
+    max-height:calc(100vh - 150px);
     overflow-y:auto;
     overflow-x:hidden;
     -border: 1px solid red;
 }
+
+.head .navbar-nav .nav-item .sub-menu .more-sub-menu h5{
+    -border:1px solid red;
+    font-size:17px;
+}
+
     .head .navbar-nav .nav-item .sub-menu .more-sub-menu li {
         -border-bottom: 1px solid #10715e30;
         border-bottom: 0;
@@ -200,4 +206,9 @@ a {
 }
 
 
+.packaging .item img {
+    width:100%;
+    height:auto;
+    border-radius:10px;
+}
 

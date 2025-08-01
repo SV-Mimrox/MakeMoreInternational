@@ -31,7 +31,7 @@ public class WebSettingController : Controller
 
     // POST: ho/websetting
     [HttpPost("edit")]
-    public IActionResult Save(WebSettingMaster model, IFormFile? logoFile)
+    public IActionResult Save(WebSettingMaster model, IFormFile? logoFile, IFormFile? BroucherFile)
     {
         if (!ModelState.IsValid)
         {
@@ -67,10 +67,43 @@ public class WebSettingController : Controller
 
             model.wsmLogo = fileName;
         }
-        else if (existing != null)
+        else
         {
-            model.wsmLogo = existing.wsmLogo; // retain old logo
+            model.wsmLogo = existing.wsmLogo;
         }
+
+        if (BroucherFile != null && BroucherFile.Length > 0)
+        {
+            var bfileName = Guid.NewGuid().ToString() + Path.GetExtension(BroucherFile.FileName);
+            var bfolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/doc/broucher");
+
+            if (!Directory.Exists(bfolderPath))
+                Directory.CreateDirectory(bfolderPath);
+
+            var bfilePath = Path.Combine(bfolderPath, bfileName);
+            using (var stream = new FileStream(bfilePath, FileMode.Create))
+            {
+                BroucherFile.CopyTo(stream);
+            }
+
+            // Delete old logo
+            if (existing != null && !string.IsNullOrEmpty(existing.wsmBroucher))
+            {
+                var boldPath = Path.Combine(bfolderPath, existing.wsmBroucher);
+                if (System.IO.File.Exists(boldPath))
+                {
+                    System.IO.File.Delete(boldPath);
+                }
+            }
+
+            model.wsmBroucher = bfileName;
+        }
+        else
+        {
+            model.wsmBroucher = existing.wsmBroucher;
+        }
+
+       
 
         _service.CreateOrUpdate(model);
         TempData["success"] = "Website settings saved successfully!";

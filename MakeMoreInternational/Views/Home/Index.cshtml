@@ -1,5 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    var siteInfo = ViewBag.siteSetting as WebSettingMaster;
 }
 <style>
     .leaflet-control-attribution{
@@ -355,6 +356,26 @@
 </div>
 
 
+<!----Packaging----->
+<div class="excellence packaging py-5">
+    <div class="title-section mb-md-5 mb-3">
+        <img src="~/web/Images/values1.png" width="65" class="d-block mx-auto" alt="">
+        <h2 class="text-center">Packaging</h2>
+        <span class="animate-border ml-auto mr-auto mb-4"></span>
+    </div>
+    <div class="container">
+        <div class="owl-carousel owl-theme" id="packaging">
+            @foreach (var ci in ViewBag.packaging as IEnumerable<PackagingMaster>)
+            {
+                <div class="item">
+                    <a href="#@(ci.pkgId)" data-bs-toggle="modal">
+                        <img src="~/images/packaging/@ci.pkgImage" alt="" style="width: 100%;">
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
 <!-----Blog start------>
 <section class="blogs py-5 d-none">
     <div class="container">
@@ -418,11 +439,25 @@
     </div>
 </section>
 
-<section class="custom-map py-5" style="-background-color: #c4edc4;">
-    <div class="container">
-        <div id="map"></div>
-    </div>
-</section>
+@if(siteInfo.wsmHomeSec1=="Map")
+{
+    <section class="custom-map py-5" style="-background-color: #c4edc4;">
+        <div class="container">
+            <div id="map"></div>
+        </div>
+    </section>
+}
+else
+{
+    <section class="custom-map py-5" style="-background-color: #c4edc4;">
+        <div class="container">
+            <a href="@siteInfo.wsmHomePageVideo" target="_blank">
+                <iframe src="@siteInfo.wsmHomePageVideo" class="rounded-3 w-100" style="aspect-ratio:16/9;"></iframe>
+            </a>
+        </div>
+    </section>
+}
+
 
 @section Scripts {
     <script>

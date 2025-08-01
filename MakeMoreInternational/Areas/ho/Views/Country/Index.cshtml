@@ -1,0 +1,50 @@
+﻿@model List<MakeMoreInternational.Models.CountryMaster>
+@{
+    ViewData["Title"] = "Country";
+    Layout = "~/Areas/ho/Views/Shared/_Layout.cshtml";
+}
+
+<div class="d-flex justify-content-between flex-wrap">
+    <h1 class="h3 mb-3"><strong>Country</strong> List</h1>
+    <a asp-area="ho" asp-controller="Country" asp-action="Create" class="btn btn-success mb-3">
+        + Add Country
+    </a>
+</div>
+
+<div class="form-box">
+    <table class="table align-middle">
+        <thead class="table-light">
+            <tr>
+                <th>Country</th>
+                <th>Image</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var c in Model)
+            {
+                <tr>
+                    <td>@c.cntName</td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(c.cntImage))
+                        {
+                            <img src="@Url.Content("~/images/countries/" + c.cntImage)" width="60" height="60" class="img-thumbnail" />
+                        }
+                    </td>
+                    <td>@c.cntLat</td>
+                    <td>@c.cntLng</td>
+                    <td>@(c.cntStatus ? "Active" : "Inactive")</td>
+                    <td>
+
+                        <a asp-area="ho" asp-controller="Country" asp-action="Delete" asp-route-id="@c.cntId"
+                           class="btn btn-sm btn-danger"
+                           onclick="return confirm('Are you sure to delete this Packaging?');">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

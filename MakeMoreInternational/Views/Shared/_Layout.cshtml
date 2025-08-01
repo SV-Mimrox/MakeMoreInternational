@@ -1,7 +1,28 @@
 ﻿@{
     var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+    var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
     var siteInfo = ViewBag.WebSetting as WebSettingMaster;
     var fcat = ViewBag.footerCategories as IEnumerable<CategoryMaster>;
+    var seoList = ViewBag.seoInfo as IEnumerable<PageSeo>;
+    if ((currentController != "Info" && currentAction != "ProductDetails") 
+    && (currentController != "Info" && currentAction != "category")
+    && (currentController != "Blogs" && currentAction != "Details"))
+    {
+        var seoInfo = seoList.Where(t => t.psName == currentController).FirstOrDefault();
+        if (seoInfo != null)
+        {
+            ViewBag.metaTitle = seoInfo.psMetaTitle;
+            ViewBag.metaKeyword = seoInfo.psMetaKeywords;
+            ViewBag.metaDesc = seoInfo.psMetaDescription;
+        }
+        else
+        {
+            ViewBag.metaTitle = "Makemore International LLP";
+            ViewBag.metaKeyword = "Makemore, Import, Export";
+            ViewBag.metaDesc = "Makemore International";
+        }
+    }
+    
 
 }
 <!DOCTYPE html>
@@ -49,6 +70,9 @@
 
             .head {
                 border-radius: 0;
+            }
+            .leaflet-container .leaflet-control-attribution{
+                display:none;
             }
         </style>
     }
@@ -139,7 +163,7 @@
     <!-----Whatsapp Icon----->
     <div class="w-icon">
         <ul class="list-unstyled">
-            <li><a href="#" target="_blank"><i class="fab fa-whatsapp fs-4"></i></a></li>
+            <li><a href="https://wa.me/@siteInfo.wsmContact" target="_blank"><i class="fab fa-whatsapp fs-4"></i></a></li>
         </ul>
     </div>
     <!-- <div class="ficon">
@@ -178,13 +202,11 @@
                         <div class="language-select-wrapper">
                             <select class="language-select" onchange="translateLanguage(this.value)">
                             <option value="en">Language</option>
-                            <option value="en">🇺🇸 English</option>
-                            <option value="hi">🇮🇳 Hindi</option>
-                            <option value="fr">🇫🇷 French</option>
-                            <option value="de">🇩🇪 German</option>
-                            <option value="ja">🇯🇵 Japanese</option>
-                                <option value="ur">Urdu</option>
-                        </select>
+                                @foreach(var lan in ViewBag.languages as IEnumerable<LanguageMaster>)
+                                {
+                                    <option value="@lan.lmCode">@lan.lmName</option>
+                                }
+                            </select>
                         </div>
                        
                     </div>
@@ -221,11 +243,11 @@
                                             <ul class="dropdown-menu">
                                                 @if(siteInfo.wsmIsAbout==true)
                                                 {
-                                                    <li><a href="about" class="dropdown-item">About Company</a></li>
+                                                    <li><a href="/about" class="dropdown-item">About Company</a></li>
                                                 }
                                                 @if (siteInfo.wsmIsTeam == true)
                                                 {
-                                                    <li><a href="teams" class="dropdown-item">Our Team</a></li>
+                                                    <li><a href="/teams" class="dropdown-item">Our Team</a></li>
                                                 }
                                                 @if (siteInfo.wsmIsInfrastructure == true)
                                                 {
@@ -286,11 +308,15 @@
                                     <li class="nav-item">
                                         <a class="nav-link me-3" href="/contact">CONTACT</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="btn btn-theme2 rounded-pill text-white nav-link px-3" href="#">
-                                            @* <img src="~/web/Images/brochure.png" width="25" class="me-2" alt=""> *@
-                                         BROCHURE</a>
-                                    </li>
+                                    @if (!string.IsNullOrEmpty(siteInfo.wsmBroucher))
+                                    {
+                                        <li class="nav-item">
+                                            <a target="_blank" class="btn btn-theme2 rounded-pill text-white nav-link px-3" href="~/doc/broucher/@siteInfo.wsmBroucher">
+                                                BROCHURE
+                                            </a>
+                                        </li>
+                                    }
+                                   
                                 </ul>
                             </div>
                         </div>
@@ -314,13 +340,13 @@
                 <li class="nav-item"><a href="/about" class="nav-link">About us <i class="fa-solid fa-chevron-right"></i></a></li>
                 <li class="nav-item">
                     <a href="#harvestMenu" data-bs-toggle="collapse" class="nav-link">Harvest Chart <i class="fa-solid fa-chevron-right"></i></a>
-                    <ul class="nav flex-column" id="harvestMenu">
-                        <li class="nav-item"><a href="/harvest-chart/spices" class="nav-link">Spices <i class="fa-solid fa-chevron-right"></i></a></li>
-                        <li class="nav-item"><a href="/harvest-chart/vegetable" class="nav-link">Vegetables <i class="fa-solid fa-chevron-right"></i></a></li>
+                    <ul class="collapse text-white" id="harvestMenu">
+                        <li class="nav-item"><a href="/harvest-chart/spices" class="nav-link d-block">Spices</a></li>
+                        <li class="nav-item"><a href="/harvest-chart/vegetable" class="nav-link d-block">Vegetables</a></li>
                     </ul>
                 </li>
-                <li class="nav-item"><a href="/inquiry" class="nav-link">Inquiry <i class="fa-solid fa-chevron-right"></i></a></li>
-                <li class="nav-item"><a href="/blogs" class="nav-link">Blogs <i class="fa-solid fa-chevron-right"></i></a></li>
+                @* <li class="nav-item"><a href="/inquiry" class="nav-link">Inquiry <i class="fa-solid fa-chevron-right"></i></a></li>
+                <li class="nav-item"><a href="/blogs" class="nav-link">Blogs <i class="fa-solid fa-chevron-right"></i></a></li> *@
                 <li class="nav-item"><a href="/contact" class="nav-link">Contact us <i class="fa-solid fa-chevron-right"></i></a></li>
             </ul>
         </div>
@@ -374,10 +400,9 @@
                         <!-- <a href="#" class="">
                             <img src="Images/newlogo.png" class="footer-logo" width="200" alt="">
                         </a> -->
-                        <p class="text mt-3 fs-6" style="line-height: 25px;">MakeMore delivers premium-quality
-                            agricultural products and spices by
-                            blending traditional farming with modern innovation. We are committed to purity,
-                            sustainability, and building lasting trust across global markets.</p>
+                        <p class="text mt-3 fs-6" style="line-height: 25px;">
+                            @siteInfo.wsmShortDesc
+                        </p>
                        
                     </div>
                    
@@ -506,62 +531,55 @@
     <!-- <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
-        const map = L.map('map').setView([20, 0], 2); // Centered view of the world
+
+         // Initialize map
+        var map = L.map('map').setView([20, 0], 2); // World view
 
         // Add OpenStreetMap tiles
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: ''
+            maxZoom: 5,
+            minZoom:3,
+            attribution: '&copy; OpenStreetMap contributors'
         }).addTo(map);
 
-        // Highlighted countries with colors
-        const highlightCountries = [{
-            name: "India",
-            color: "orange"
-        }, {
-            name: "United States of America",
-            color: "pink"
-        }, {
-            name: "United Kingdom",
-            color: "red"
-        }, {
-            name: "Japan",
-            color: "#9c27b0"
-        }, {
-            name: "Turkey",
-            color: "yellow"
-        }];
-
-        // Fetch world GeoJSON and apply style for selected countries
-        fetch('https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json')
-            .then(res => res.json())
-            .then(data => {
-                L.geoJSON(data, {
-                    style: feature => {
-                        const country = highlightCountries.find(c => c.name === feature.properties.name);
-                        if (country) {
-                            return {
-                                color: country.color,
-                                weight: 1,
-                                fillColor: country.color,
-                                fillOpacity: 0.2
-                            };
-                        }
-                        return {
-                            color: "#ccc",
-                            weight: 1,
-                            fillOpacity: 0
-                        };
-                    },
-                    onEachFeature: (feature, layer) => {
-                        const country = highlightCountries.find(c => c.name === feature.properties.name);
-                        if (country) {
-                            layer.bindPopup(`<b>${country.name}</b>`);
-                        }
-                    }
-                }).addTo(map);
+        // Add country flags as custom icons
+        function addFlag(lat, lng, countryName, flagUrl) {
+            var flagIcon = L.icon({
+                iconUrl: flagUrl,
+                iconSize: [20, 20], // Adjust size
+                className: 'flag-icon'
             });
+
+            L.marker([lat, lng], { icon: flagIcon })
+                .addTo(map)
+                .bindPopup(countryName);
+        }
+
+
+        $.ajax({
+            url: '/get-country',
+            dataType: 'json',
+            method: 'get',
+            success: function (response) {
+                $.each(response, function (index, item) {
+                    console.log("Index:", index);
+                    console.log("Item:", item.cntLng);
+                    addFlag(item.cntLat, item.cntLng, item.cntName, '/images/countries/'+item.cntImage);
+                });
+            }
+        });
+    </script>
+
+    <script>
+        
+       
+        
+
+        // Example flags (Lat, Lng, Name, Flag URL)
+       
+
     </script>
 
     <!-- <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"95840b0d4c11ff70","version":"2025.6.2","r":1,"token":"499e684b7b1043878977050a0a606794","serverTiming":{"name":{"cfExtPri":true,"cfEdge":true,"cfOrigin":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}}}' crossorigin="anonymous"></script> -->
@@ -603,6 +621,20 @@
                     1000: { items: 5 }
                 }
             });
+
+            $('#packaging').owlCarousel({
+                loop: true,
+                margin: 15,
+                nav: true,      // Navigation arrows
+                dots: false,     // Pagination dots
+                autoplay: true,
+
+                responsive: {
+                    0: { items: 1 },
+                    600: { items: 2 },
+                    1000: { items: 5 }
+                }
+            });
            
 
             $(window).on("scroll", function () {
@@ -625,7 +657,7 @@
          $('#productList').owlCarousel({
                 loop: true,
                 margin: 15,
-                nav: true,      // Navigation arrows
+                nav: false,      // Navigation arrows
                 dots: false,     // Pagination dots
                 autoplay: true,
 

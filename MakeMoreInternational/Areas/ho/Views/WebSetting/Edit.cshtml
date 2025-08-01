@@ -75,6 +75,46 @@
                     <input asp-for="wsmMapLink" class="form-control" />
                     <span asp-validation-for="wsmMapLink" class="text-danger"></span>
                 </div>
+
+                    <div class="form-group mb-3">
+                        <label>Broucher</label>
+                        <input type="file" name="BroucherFile" class="form-control" />
+                        @if (!string.IsNullOrEmpty(Model.wsmBroucher))
+                        {
+                            <span>
+                                <a target="_blank" href="~/doc/broucher/@Model.wsmBroucher">Broucher</a>
+                            </span>
+                        }
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="wsmHomePageVideo" class="form-label"></label>
+                        <input asp-for="wsmHomePageVideo" class="form-control" />
+                        <span asp-validation-for="wsmHomePageVideo" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="wsmAboutPageVideo" class="form-label"></label>
+                        <input asp-for="wsmAboutPageVideo" class="form-control" />
+                        <span asp-validation-for="wsmAboutPageVideo" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label asp-for="wsmHomeSec1" class="form-label"></label>
+                                <select asp-for="wsmHomeSec1" class="form-control">
+                                    <option value="Map">Map</option>
+                                    <option value="Video">Video</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="wsmAboutSec1" class="form-label"></label>
+                                <select asp-for="wsmAboutSec1" class="form-control">
+                                    <option value="Map">Map</option>
+                                    <option value="Video">Video</option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
                 <!-- Social Media -->
                 <h5 class="mt-4 mb-2 fw-bold">Social Media Links</h5>
                 <div id="socialMediaContainer"></div>

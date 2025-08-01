@@ -2,6 +2,9 @@
 @{
     ViewData["Title"] = "Teams";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var members = ViewBag.members as IEnumerable<TeamMemberMaster>;
+    var first = members.Where(t => t.ShowOnTopRow == true).ToList();
+    var second = members.Where(t => t.ShowOnTopRow == false).ToList();
 }
 
 <section class="breadcrumb-block">
@@ -33,100 +36,48 @@
 <section class="our-teams py-5">
     <div class="container">
         <div class="row justify-content-center mb-md-4 mb-2 row-gap-2">
-            <div class="col-md-4">
-                <div class="team-box bg-white position-relative overflow-hidden rounded">
-                    <img src="https://koreagro.com/images/team/Mrvinayjain.webp" class="img-fluid" alt="user-img">
-                    <div class="overlay-info">
-                        <div class="team-name">
-                            <h4 class="text-white mb-1">VINAY JAIN</h4>
-                            <h6 class="text-white-70">Director</h6>
-                        </div>
-                        <div class="social-block pb-2">
-                            <a href="tel:+91-98765-43210"><i class="fas fa-phone-alt" target="_blank"></i></a>
-                            <a href="mailto:abcd@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="team-box bg-white position-relative overflow-hidden rounded">
-                    <img src="https://koreagro.com/images/team/mrpratikjain.webp" class="img-fluid" alt="user-img">
-                    <div class="overlay-info">
-                        <div class="team-name">
-                            <h4 class="text-white mb-1">PRATIK JAIN</h4>
-                            <h6 class="text-white-70">Director</h6>
-                        </div>
-                        <div class="social-block pb-2">
-                            <a href="tel:+91-98765-43210"><i class="fas fa-phone-alt" target="_blank"></i></a>
-                            <a href="mailto:abcd@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+            @foreach(var f in first)
+            {
+                <div class="col-md-4">
+                    <div class="team-box bg-white position-relative overflow-hidden rounded">
+                        <img src="~/images/team/@f.Photo" class="img-fluid" alt="user-img">
+                        <div class="overlay-info">
+                            <div class="team-name">
+                                <h4 class="text-white mb-1">@f.Name</h4>
+                                <h6 class="text-white-70">@f.Position</h6>
+                            </div>
+                            <div class="social-block pb-2">
+                                <a href="tel:@f.Contact"><i class="fas fa-phone-alt" target="_blank"></i></a>
+                                <a href="mailto:@f.Email" target="_blank"><i class="fas fa-envelope"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            }
+            
+           
 
 
         <div class="row justify-content-center  row-gap-2">
-            <div class="col-md-3">
-                <div class="team-box bg-white position-relative overflow-hidden rounded">
-                    <img src="https://koreagro.com/images/team/Mrvinayjain.webp" class="img-fluid" alt="user-img">
-                    <div class="overlay-info">
-                        <div class="team-name">
-                            <h5 class="text-white mb-1">VINAY JAIN</h5>
-                            <h6 class="text-white-70">Director</h6>
-                        </div>
-                        <div class="social-block pb-2">
-                            <a href="tel:+91-98765-43210"><i class="fas fa-phone-alt" target="_blank"></i></a>
-                            <a href="mailto:abcd@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="team-box bg-white position-relative overflow-hidden rounded">
-                    <img src="https://koreagro.com/images/team/mrpratikjain.webp" class="img-fluid" alt="user-img">
-                    <div class="overlay-info">
-                        <div class="team-name">
-                            <h5 class="text-white mb-1">PRATIK JAIN</h5>
-                            <h6 class="text-white-70">Director</h6>
-                        </div>
-                        <div class="social-block pb-2">
-                            <a href="tel:+91-98765-43210"><i class="fas fa-phone-alt" target="_blank"></i></a>
-                            <a href="mailto:abcd@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+                @foreach(var s in second)
+                {
+                    <div class="col-md-3">
+                        <div class="team-box bg-white position-relative overflow-hidden rounded">
+                            <img src="~/images/team/@s.Photo" class="img-fluid" alt="user-img">
+                            <div class="overlay-info">
+                                <div class="team-name">
+                                    <h5 class="text-white mb-1">@s.Name</h5>
+                                    <h6 class="text-white-70">@s.Position</h6>
+                                </div>
+                                <div class="social-block pb-2">
+                                    <a href="tel:@s.Contact"><i class="fas fa-phone-alt" target="_blank"></i></a>
+                                    <a href="mailto:@s.Email" target="_blank"><i class="fas fa-envelope"></i></a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="team-box bg-white position-relative overflow-hidden rounded">
-                    <img src="https://koreagro.com/images/team/Mrvinayjain.webp" class="img-fluid" alt="user-img">
-                    <div class="overlay-info">
-                        <div class="team-name">
-                            <h5 class="text-white mb-1">VINAY JAIN</h5>
-                            <h6 class="text-white-70">Director</h6>
-                        </div>
-                        <div class="social-block pb-2">
-                            <a href="tel:+91-98765-43210"><i class="fas fa-phone-alt" target="_blank"></i></a>
-                            <a href="mailto:abcd@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="team-box bg-white position-relative overflow-hidden rounded">
-                    <img src="https://koreagro.com/images/team/mrpratikjain.webp" class="img-fluid" alt="user-img">
-                    <div class="overlay-info">
-                        <div class="team-name">
-                            <h5 class="text-white mb-1">PRATIK JAIN</h5>
-                            <h6 class="text-white-70">Director</h6>
-                        </div>
-                        <div class="social-block pb-2">
-                            <a href="tel:+91-98765-43210"><i class="fas fa-phone-alt" target="_blank"></i></a>
-                            <a href="mailto:abcd@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+                }
         </div>
 
     </div>

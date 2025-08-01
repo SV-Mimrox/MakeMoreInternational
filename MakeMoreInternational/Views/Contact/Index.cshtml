@@ -57,8 +57,11 @@
                     </div>
                     <span>@siteinfo.wsmContact</span>
                 </div>
-
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d217.29545395280425!2d72.35326813818445!3d23.615316665730663!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395c43c218b01a85%3A0x3cca837aa5bb4621!2sBest%20Voyage%20Pvt%20Ltd.!5e1!3m2!1sen!2sin!4v1751619732242!5m2!1sen!2sin" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                @if(!string.IsNullOrEmpty(siteinfo.wsmMapLink))
+                    {
+                        <iframe src="@siteinfo.wsmMapLink" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    }
+                    
             </div>
         </div>
 

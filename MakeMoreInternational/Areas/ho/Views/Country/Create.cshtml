@@ -1,0 +1,55 @@
+﻿@model MakeMoreInternational.Models.CountryMaster
+
+@{
+    ViewData["Title"] = "Add Country";
+    Layout = "~/Areas/ho/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid p-0">
+    <h1 class="h3 mb-3 fw-bold">@ViewData["Title"]</h1>
+
+    <form asp-action="Create"
+          asp-area="ho" asp-controller="Country" method="post" enctype="multipart/form-data" class="form-box">
+        @Html.AntiForgeryToken()
+
+        <div class="mb-3">
+            <label class="form-label mb-1">Name</label>
+            <input asp-for="cntName" class="form-control" />
+            <span asp-validation-for="cntName"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label mb-1">Latitude</label>
+            <input asp-for="cntLat" class="form-control" />
+            <span asp-validation-for="cntLat"></span>
+        </div>
+        <div class="mb-3">
+            <label class="form-label mb-1">Longitude</label>
+            <input asp-for="cntLng" class="form-control" />
+            <span asp-validation-for="cntLng"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label mb-1">Country Image</label>
+            <input type="file" name="cntImageFile" class="form-control" />
+
+        </div>
+
+
+
+        <div class="mb-3">
+            <label asp-for="cntStatus" class="form-label mb-1">Status</label>
+            <select asp-for="cntStatus" class="form-control">
+                <option value="true">Active</option>
+                <option value="false">Inactive</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-success">Save</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

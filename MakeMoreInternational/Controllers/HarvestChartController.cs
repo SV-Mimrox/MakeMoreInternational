@@ -17,8 +17,10 @@ namespace MakeMoreInternational.Controllers
         HarvestCategoryService catSvc,
         HarvestProductService prdSvc,
         HarvestSeasonService sesSvc,
-        CategoryService catService)
-        : base(webSettingService, catService)                    // pass up to Base
+        CategoryService catService,
+        PageSEOService seoService,
+        LanguageService languageService)
+        : base(webSettingService, catService, seoService, languageService)                    // pass up to Base
         {
             _catSvc = catSvc;
             _prdSvc = prdSvc;

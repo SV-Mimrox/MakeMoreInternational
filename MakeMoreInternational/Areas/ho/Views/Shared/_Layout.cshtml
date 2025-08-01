@@ -42,30 +42,68 @@
                 </a>               
 
                 <ul class="sidebar-nav">
-                    <li class="sidebar-header">Pages</li>
+                    <li class="sidebar-header">Pages</li>                   
+
                     <li class="sidebar-item">
                         <a class="sidebar-link" asp-action="Index" asp-controller="Dashboard" asp-area="ho">
-                            <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
+                            <img src="~/img/icons/dashboard.png" class="sidebar-icon" /> Dashboard
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" asp-action="Index" asp-controller="WebSetting" asp-area="ho">
-                            <i class="align-middle" data-feather="settings"></i> <span class="align-middle">Web Setting</span>
+                        <a href="#master-menu" class="sidebar-link" data-bs-toggle="collapse">
+                            <img src="~/img/icons/master.png" class="sidebar-icon" /> <span class="align-middle">Master Menu <i class="fa-solid fa-chevron-down float-end mt-1"></i></span>
                         </a>
+                        <ul class="collapse p-0 m-0" id="master-menu">
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" asp-action="Index" asp-controller="Category" asp-area="ho">
+                                    <i class="fa-solid fa-list"></i> <span class="align-middle">Category</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" asp-action="Index" asp-controller="Product" asp-area="ho">
+                                    <i class="fa-solid fa-box-open"></i> <span class="align-middle">Products</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
+
                     <li class="sidebar-item">
-                        <a class="sidebar-link" asp-action="Index" asp-controller="Category" asp-area="ho">
-                            <i class="align-middle" data-feather="list"></i> <span class="align-middle">Category</span>
+                        <a href="#general-menu" class="sidebar-link" data-bs-toggle="collapse">
+                            <img src="~/img/icons/settings.png" class="sidebar-icon" /> <span class="align-middle">General Settings <i class="fa-solid fa-chevron-down float-end mt-1"></i></span>
                         </a>
-                    </li>
+                        <ul class="collapse p-0 m-0 open-dropdown" id="general-menu" style="">
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" asp-action="Index" asp-controller="WebSetting" asp-area="ho">
+                                    <i class="align-middle" data-feather="settings"></i> <span class="align-middle">Web Setting</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" asp-action="Index" asp-controller="Slider" asp-area="ho"><i class="align-middle" data-feather="layers"></i> Slider</a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" asp-action="Index" asp-controller="Certificate" asp-area="ho"><i class="align-middle" data-feather="layers"></i> Certificate</a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" asp-action="Index" asp-controller="Blog" asp-area="ho"><i class="align-middle" data-feather="layers"></i> Blogs</a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" asp-action="Index" asp-controller="PageSeo" asp-area="ho"><i class="align-middle" data-feather="layers"></i> Page SEO</a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" asp-action="Index" asp-controller="Language" asp-area="ho"><i class="align-middle" data-feather="layers"></i> Language</a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" asp-action="Index" asp-controller="Packaging" asp-area="ho"><i class="align-middle" data-feather="layers"></i> Packaging</a>
+                            </li>
+                             <li class="sidebar-item">
+                                <a class="sidebar-link" asp-action="Index" asp-controller="Country" asp-area="ho"><i class="align-middle" data-feather="layers"></i> Country</a>
+                            </li>
+                        </ul>
+                    </li>                                       
+                   
                     <li class="sidebar-item">
-                        <a class="sidebar-link" asp-action="Index" asp-controller="Product" asp-area="ho">
-                            <i class="align-middle" data-feather="box"></i> <span class="align-middle">Product</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a href="#harvest-menu" class="sidebar-link" data-bs-toggle="collapse">
-                            <i class="align-middle" data-feather="pie-chart"></i> <span class="align-middle">Harvest Chart <i class="align-middle float-end mt-1" data-feather="chevron-down"></i></span>
+                        <a href="#harvest-menu" class="sidebar-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="harvest-menu">
+                            <img src="~/img/icons/harvest.png" class="sidebar-icon" /> <span class="align-middle">Harvest Chart <i class="fa-solid fa-chevron-down float-end mt-1"></i></span>
                         </a>
                         <ul class="collapse p-0 m-0" id="harvest-menu">
                             <li class="sidebar-item">
@@ -81,7 +119,7 @@
                     </li>
 
                     <li class="sidebar-item">
-                        <a class="sidebar-link" data-bs-target="#abtmenu" data-bs-toggle="collapse"><i class="align-middle" data-feather="layers"></i> <span class="align-middle">About Us <i class="align-middle float-end mt-1" data-feather="chevron-down"></i></span></a>
+                        <a class="sidebar-link" data-bs-target="#abtmenu" data-bs-toggle="collapse"><img src="~/img/icons/about.png" class="sidebar-icon" /> <span class="align-middle">About Us <i class="fa-solid fa-chevron-down float-end mt-1"></i></span></a>
                         <ul class="collapse p-0 m-0" id="abtmenu">
                             <li class="sidebar-item">
                                 <a class="sidebar-link" asp-action="Edit" asp-controller="AboutUs" asp-area="ho"><i class="align-middle" data-feather="layers"></i> About Us</a>
@@ -96,7 +134,7 @@
                     </li>
 
                     <li class="sidebar-item">
-                        <a class="sidebar-link" data-bs-target="#inqmenu" data-bs-toggle="collapse"><i class="align-middle" data-feather="layers"></i> <span class="align-middle">Inquiries <i class="align-middle float-end mt-1" data-feather="chevron-down"></i></span></a>
+                        <a class="sidebar-link" data-bs-target="#inqmenu" data-bs-toggle="collapse"><img src="~/img/icons/inquiry.png" class="sidebar-icon" /> <span class="align-middle">Inquiries <i class="fa-solid fa-chevron-down float-end mt-1"></i></span></a>
                         <ul class="collapse p-0 m-0" id="inqmenu">
                             <li class="sidebar-item">
                                 <a class="sidebar-link" asp-action="Index" asp-controller="ContactInquiry" asp-area="ho"><i class="align-middle" data-feather="layers"></i> Contacts</a>
@@ -107,15 +145,7 @@
                         </ul>
                     </li>
 
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" asp-action="Index" asp-controller="Slider" asp-area="ho"><i class="align-middle" data-feather="layers"></i> Slider</a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" asp-action="Index" asp-controller="Certificate" asp-area="ho"><i class="align-middle" data-feather="layers"></i> Certificate</a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" asp-action="Index" asp-controller="Blog" asp-area="ho"><i class="align-middle" data-feather="layers"></i> Blogs</a>
-                    </li>
+                    
                    
                     @* <li class="sidebar-item">
                         <a class="sidebar-link" asp-action="Index" asp-controller="HarvestProduct" asp-area="ho">
@@ -172,8 +202,12 @@
             </footer>
         </div>
     </div>
+    <script src="~/js/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" ></script>
-    <script src="~/js/app.js"></script>
+    @* <script src="~/js/app.js"></script> *@
+    <script>
+
+    </script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

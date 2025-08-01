@@ -20,7 +20,7 @@ namespace MakeMoreInternational.Models
         public string wsmSubtitle { get; set; } = string.Empty;
 
         [DisplayName("Logo URL")]
-        [Url(ErrorMessage = "Enter a valid URL")]
+        
         public string? wsmLogo { get; set; }
 
         [DisplayName("Contact Information")]
@@ -52,6 +52,21 @@ namespace MakeMoreInternational.Models
         public bool wsmIsAbout { get; set; }
         public bool wsmIsTeam { get; set; }
         public bool wsmIsInfrastructure { get; set; }
+
+        public string? wsmBroucher { get; set; }
+
+        [Url(ErrorMessage = "Enter a valid URL")]
+        [Display(Name = "Home Page Video URL")]
+        public string? wsmHomePageVideo { get; set; }
+
+        [Url(ErrorMessage = "Enter a valid URL")]
+        [Display(Name = "About Page Video URL")]
+        public string? wsmAboutPageVideo { get; set; }
+
+        [Display(Name = "Home Section")]
+        public string? wsmHomeSec1 { get; set; }
+        [Display(Name = "About Section")]
+        public string? wsmAboutSec1 { get; set; }
     }
 
 
@@ -95,6 +110,8 @@ namespace MakeMoreInternational.Models
         public bool wsmIsTeam { get; set; }
         [DisplayName("Infrastructure Page")]
         public bool wsmIsInfrastructure { get; set; }
+        [Display(Name = "Broucher")]
+        public string wsmBroucher { get; set; }
     }
 
     public class SocialMedia

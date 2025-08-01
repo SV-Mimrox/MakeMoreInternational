@@ -19,14 +19,14 @@ namespace MakeMoreInternational.Areas.ho.Controllers
         {
             return new List<SelectListItem>
         {
-            new("Home", "home"),
-            new("About", "about"),
-            new("Team", "team"),
-            new("Infrastructure", "infrastructure"),
-            new("Harvest", "harvest"),
-            new("Contact", "contact"),
-            new("Product", "products"),
-            new("Blog", "blog"),
+            new("Home", "Home"),
+            new("About", "About"),
+            new("Team", "Teams"),
+            new("Infrastructure", "Infrastructure"),
+            new("Harvest", "HarvestChart"),
+            new("Contact", "Contact"),
+            new("Product", "Info"),
+            new("Blog", "Blogs"),
             
         };
         }
@@ -41,7 +41,7 @@ namespace MakeMoreInternational.Areas.ho.Controllers
         public IActionResult Create()
         {
             ViewBag.PageList = GetPageOptions();
-            return View();
+            return View(new PageSeo());
         }
 
         [HttpPost("create")]
