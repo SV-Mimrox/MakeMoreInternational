@@ -31,7 +31,7 @@ public class WebSettingController : Controller
 
     // POST: ho/websetting
     [HttpPost("edit")]
-    public IActionResult Save(WebSettingMaster model, IFormFile? logoFile, IFormFile? BroucherFile)
+    public IActionResult Save(WebSettingMaster model, IFormFile? logoFile, IFormFile? BroucherFile, IFormFile? wsmChoiceImageFile)
     {
         if (!ModelState.IsValid)
         {
@@ -103,7 +103,38 @@ public class WebSettingController : Controller
             model.wsmBroucher = existing.wsmBroucher;
         }
 
-       
+        if (wsmChoiceImageFile != null && wsmChoiceImageFile.Length > 0)
+        {
+            var cfileName = Guid.NewGuid().ToString() + Path.GetExtension(wsmChoiceImageFile.FileName);
+            var cfolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/choice");
+
+            if (!Directory.Exists(cfolderPath))
+                Directory.CreateDirectory(cfolderPath);
+
+            var cfilePath = Path.Combine(cfolderPath, cfileName);
+            using (var stream = new FileStream(cfilePath, FileMode.Create))
+            {
+                wsmChoiceImageFile.CopyTo(stream);
+            }
+
+            // Delete old logo
+            if (existing != null && !string.IsNullOrEmpty(existing.wsmChoiceImage))
+            {
+                var boldPath = Path.Combine(cfolderPath, existing.wsmChoiceImage);
+                if (System.IO.File.Exists(boldPath))
+                {
+                    System.IO.File.Delete(boldPath);
+                }
+            }
+
+            model.wsmChoiceImage = cfileName;
+        }
+        else
+        {
+            model.wsmChoiceImage = existing.wsmChoiceImage;
+        }
+
+
 
         _service.CreateOrUpdate(model);
         TempData["success"] = "Website settings saved successfully!";

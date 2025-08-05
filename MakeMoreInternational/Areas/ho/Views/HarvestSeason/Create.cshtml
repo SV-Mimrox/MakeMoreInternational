@@ -53,11 +53,29 @@
         <!-- Months multi‑select -->
         <div class="mb-3">
             <label class="form-label">Months in Season</label>
-            <select asp-for="Months"
+            <div class="multiSelect">
+                <select multiple class="multiSelect_field" data-placeholder="">
+                    <option value="chrome">January</option>
+                    <option value="firefox">February</option>
+                    <option value="opera">March</option>
+                    <option value="safari">April</option>
+                    <option value="edge">May</option>
+                    <option value="vivaldi">June</option>
+                </select>
+                <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="iconX">
+                        <g stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </g>
+                    </symbol>
+                </svg>
+            </div>
+            @* <select asp-for="Months"
                     asp-items="monthItems"
                     multiple
                     class="form-select js-months"
-                    data-placeholder="Select months..."></select>
+                    data-placeholder="Select months..."></select> *@ 
             <span asp-validation-for="Months" class="text-danger"></span>
         </div>
 

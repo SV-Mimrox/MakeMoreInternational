@@ -112,6 +112,19 @@
                                     <option value="Video">Video</option>
                                 </select>
                             </div>
+                            <div class="col-md-6">
+                                <label asp-for="wsmChoiceTitle" class="form-label"></label>
+                                <input asp-for="wsmChoiceTitle" class="form-control" />
+                                <span asp-validation-for="wsmChoiceTitle" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="wsmChoiceImage" class="form-label"></label>
+                                <input type="file" name="wsmChoiceImageFile" class="form-control" />
+                                @if (!string.IsNullOrEmpty(Model.wsmChoiceImage))
+                                {
+                                    <img src="~/images/choice/@Model.wsmChoiceImage" alt="Logo" style="height:50px;width:50px;object-fit:contain;" class="mb-2" />
+                                }
+                            </div>
 
                         </div>
                     </div>

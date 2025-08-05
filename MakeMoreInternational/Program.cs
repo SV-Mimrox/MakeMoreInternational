@@ -35,6 +35,7 @@ builder.Services.AddSingleton<PageSEOService>();
 builder.Services.AddSingleton<LanguageService>();
 builder.Services.AddSingleton<PackagingService>();
 builder.Services.AddSingleton<CountryMasterService>();
+builder.Services.AddSingleton<WebPageService>();
 
 var app = builder.Build();
 

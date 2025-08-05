@@ -1,16 +1,16 @@
 ﻿@model List<HarvestCategoryMaster>
 
-<li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" href="#" id="harvestMenu"
+<li class="nav-item">
+    <a class="nav-link" href="#" id="harvestMenu"
        role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        HARVEST CHART
+        HARVEST CHART <i class="fa-solid fa-chevron-down small chev-icon"></i>
     </a>
 
-    <ul class="dropdown-menu" aria-labelledby="harvestMenu">
+    <ul class="htmlCss-sub-menu sub-menu nav" aria-labelledby="harvestMenu">
         @foreach (var cat in Model)
         {
-            <li>
-                <a class="dropdown-item"
+            <li class="more">
+                <a class=""
                    href="/harvest-chart/@cat.hcatSlug">
                     @cat.hcatName
                 </a>

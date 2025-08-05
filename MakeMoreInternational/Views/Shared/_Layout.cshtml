@@ -236,31 +236,33 @@
 
                                     @await Component.InvokeAsync("ProductMenu")
 
+                                    @await Component.InvokeAsync("HarvestChartMenu")
+
                                     @if(siteInfo.wsmIsAbout==true || siteInfo.wsmIsInfrastructure==true || siteInfo.wsmIsTeam==true)
                                     {
-                                        <li class="nav-item dropdown">
-                                            <a class="nav-link me-3 dropdown-toggle" href="#" data-bs-toggle="dropdown">ABOUT</a>
-                                            <ul class="dropdown-menu">
+                                        <li class="nav-item">
+                                            <a class="nav-link me-3" href="/about">ABOUT <i class="fa-solid fa-chevron-down small chev-icon"></i></a>
+                                            <ul class="htmlCss-sub-menu sub-menu nav">
                                                 @if(siteInfo.wsmIsAbout==true)
                                                 {
-                                                    <li><a href="/about" class="dropdown-item">About Company</a></li>
+                                                    <li class="more">
+                                                        <a href="/about" class="">About Company </a>
+                                                        </li>
                                                 }
                                                 @if (siteInfo.wsmIsTeam == true)
                                                 {
-                                                    <li><a href="/teams" class="dropdown-item">Our Team</a></li>
+                                                    <li class="more"><a href="/teams" class="">Our Team</a></li>
                                                 }
                                                 @if (siteInfo.wsmIsInfrastructure == true)
                                                 {
-                                                    <li><a href="#" class="dropdown-item">Infrastructure</a></li>
-                                                }
-                                                
-                                                
+                                                    <li class="more"><a href="infrastructure" class="">Infrastructure</a></li>
+                                                }                                                                                               
                                             </ul>
                                         </li>
                                     }
                                     
                                    
-                                    @await Component.InvokeAsync("HarvestChartMenu")
+                                   
                                     @* <li class="nav-item">
                                         <a class="nav-link me-1" href="/harvestchart">HARVEST CHART</a>
                                     </li> *@
@@ -336,7 +338,13 @@
         <div class="offcanvas-body">
             <ul class="nav flex-column">
                 <li class="nav-item"><a href="/" class="nav-link">Home <i class="fa-solid fa-chevron-right"></i></a></li>
-                <li class="nav-item"><a href="/products" class="nav-link">Products <i class="fa-solid fa-chevron-right"></i></a></li>
+                <li class="nav-item">
+                    <a href="#prdList" data-bs-toggle="collapse" class="nav-link">Products <i class="fa-solid fa-chevron-right"></i></a>
+                    <ul class="collapse text-white" id="prdList">
+                        <li class="nav-item"><a href="/harvest-chart/spices" class="nav-link d-block">Spices</a></li>
+                        <li class="nav-item"><a href="/harvest-chart/vegetable" class="nav-link d-block">Vegetables</a></li>
+                    </ul>
+                </li>
                 <li class="nav-item"><a href="/about" class="nav-link">About us <i class="fa-solid fa-chevron-right"></i></a></li>
                 <li class="nav-item">
                     <a href="#harvestMenu" data-bs-toggle="collapse" class="nav-link">Harvest Chart <i class="fa-solid fa-chevron-right"></i></a>
@@ -453,8 +461,11 @@
                             <ul class="list-unstyled">
                                 <li><a href="#"><span class="icon"><i class="fa-solid fa-location-dot"></i></span><span
                                             class="text">@siteInfo.wsmAddress</span></a></li>
-                                <li><a href="#"><span class="icon"><i class="fa-solid fa-phone"></i></span><span
-                                            class="text">@siteInfo.wsmContact</span></a></li>
+                                <li>
+                                    <a href="#">
+                                        <span class="icon"><i class="fa-solid fa-phone"></i></span><span class="text">@siteInfo.wsmContact</span> <span class="px-2">|</span> <span class="text">@siteInfo.wsmContact</span>
+                                    </a>
+                                </li>
                                 <li><a href="#"><span class="icon"><i class="fa-solid fa-envelope"></i></span><span
                                             class="text">
                                             <span>@siteInfo.wsmEmail</span>

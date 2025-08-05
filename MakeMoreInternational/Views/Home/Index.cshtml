@@ -20,7 +20,7 @@
                     <div class="text-overlay">
                         <h2 class="display-5 fw-bold mb-md-4 mb-3 text-white-85" id="f-tagline-@i"></h2>
                         <!-- Crafted by <span class="text-theme2">Nature</span> Perfected by Innovation ! -->
-                        <a href="#" class="btn btn-theme2 rounded-pill px-4 py-2 text-white">Explore more</a>
+                        <a href="/about" class="btn btn-theme2 rounded-pill px-4 py-2 text-white">Explore more</a>
                         <div class="spices-img">
                             @foreach (var si in sld.SubImages)
                             {
@@ -59,16 +59,10 @@
             <div class="col-md-6">
                 <h3 class="fw-bold mt-4">Hi, We Are Make More Agro !</h3>
                 <p class="mt-4" style="line-height: 2;font-size: 16px;">
-                    Since 2015,
-                    we've
-                    been exporting and importing spices, oilseeds and herbs worldwide. Currently, we export
-                    to over
-                    81 countries and import from more than 9 countries. Our rapid growth over these 9 years
-                    is a
-                    testament to our commitment to quality. As our tagline says,
+                   @siteInfo.wsmShortDesc
                 </p>
-                <h5 class="mt-4 fw-bold text-theme">"We grow Quality, We harvest Trust."</h5>
-                <a href="#" class="btn btn-theme text-white rounded-pill mt-4 py-2 px-4">View more</a>
+                <h5 class="mt-4 fw-bold text-theme">"@siteInfo.wsmSlogan"</h5>
+                <a href="/about" class="btn btn-theme text-white rounded-pill mt-4 py-2 px-4">View more</a>
             </div>
             <div class="col-md-6">
                 <div class="position-relative">
@@ -165,6 +159,7 @@
                                 <a href="/category/@cat.catSlug" class="btn btn-theme2 rounded-pill px-3 text-white">View Details</a>
                             </div>
                         </div>
+                        <a href="/category/@cat.catSlug" class="stretched-link"></a>
                     </div>
                 </div>
             }
@@ -280,75 +275,36 @@
         <div class="row">
             <div class="col-md-5">
                 <div class="card">
-                    <img src="~/web/Images/chilli-harvesting.jpg" class="rounded-3" alt="">
+                    <img src="~/images/choice/@siteInfo.wsmChoiceImage" class="rounded-3" alt="">
                     <div class="card-img-overlay choice-mtxt">
-                        <h2>Why We're Your <br> Perfect Choice</h2>
+                        <h2>@siteInfo.wsmChoiceTitle</h2>
                     </div>
                 </div>
             </div>
             <div class="col-md-7 choice-left">
-                <div class="choice-block d-flex">
-                    <div>
-                        <div class="choice-content mt-0">
-                            <div class="choice-img rounded-4">
-                                <img src="~/web/Images/Choice/qualityw.png" class="img-fluid" width="" alt="">
-                            </div>
-                            <div class="choice-txt">
-                                <h5>Top Quality At Competitive Prices</h5>
-                            </div>
-                        </div>
-                        <div class="choice-content">
-                            <div class="choice-img rounded-4">
-                                <img src="~/web/Images/Choice/organicw.png" class="img-fluid" width="" alt="">
-                            </div>
-                            <div class="choice-txt">
-                                <h5>No Artificial Colors and Pesticides</h5>
-                            </div>
-                        </div>
-                        <div class="choice-content">
-                            <div class="choice-img rounded-4">
-                                <img src="~/web/Images/Choice/deliveryw.png" class="img-fluid" width="" alt="">
-                            </div>
-                            <div class="choice-txt">
-                                <h5>Just-In-Time Delivery</h5>
-                            </div>
-                        </div>
-                        <div class="choice-content">
-                            <div class="choice-img rounded-4">
-                                <img src="~/web/Images/Choice/happy-customer.png" class="img-fluid" width="" alt="">
-                            </div>
-                            <div class="choice-txt">
-                                <h5>Morethan 1500+ happy customers</h5>
-                            </div>
-                        </div>
+                <div class="choice-block ">
+                    <div class="row">
+                        
+                        @if (ViewBag.values != null)
+                        {
+                            
+                            foreach(var v in ViewBag.values as IEnumerable<AboutValue>)
+                            {
+                                <div class="col-md-6 choice-content mt-0">
+                                    <div class="choice-img rounded-4">
+                                        <img src="~/images/aboutus/@v.Image" class="img-fluid" width="" alt="">
+                                    </div>
+                                    <div class="choice-txt">
+                                        <h5>@v.Title</h5>
+                                    </div>
+                                </div>
+                            }
+                        }
+                       
+                       
                     </div>
 
-                    <div>
-                        <div class="choice-content mt-0">
-                            <div class="choice-img rounded-4">
-                                <img src="~/web/Images/Choice/staffw.png" class="img-fluid" width="" alt="">
-                            </div>
-                            <div class="choice-txt">
-                                <h5>Experienced, Knowledgeable Staff</h5>
-                            </div>
-                        </div>
-                        <div class="choice-content">
-                            <div class="choice-img rounded-4">
-                                <img src="~/web/Images/Choice/packagew.png" class="img-fluid" width="" alt="">
-                            </div>
-                            <div class="choice-txt">
-                                <h5>Moisture Free Packaging</h5>
-                            </div>
-                        </div>
-                        <div class="choice-content">
-                            <div class="choice-img rounded-4">
-                                <img src="~/web/Images/Choice/worldmarketw.png" class="img-fluid" width="" alt="">
-                            </div>
-                            <div class="choice-txt">
-                                <h5>Widespread Market</h5>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>

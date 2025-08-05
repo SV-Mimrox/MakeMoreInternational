@@ -16,10 +16,11 @@ namespace MakeMoreInternational.Controllers
         private CertificateService _certiService;
         private PackagingService _packageService;
         private CountryMasterService _countryService;
+        private AboutUsService _aboutService;
 
         public HomeController(WebSettingService service, PageSEOService seoService, LanguageService languageService,
             CategoryService categoryservice, ProductService productService,SliderService sliderService,
-            CertificateService certiService, PackagingService packageService, CountryMasterService countryService)
+            CertificateService certiService, PackagingService packageService, CountryMasterService countryService, AboutUsService aboutService)
             : base(service, categoryservice, seoService, languageService)
         {
 
@@ -30,6 +31,7 @@ namespace MakeMoreInternational.Controllers
             _packageService = packageService;
             _service = service;
             _countryService = countryService;
+            _aboutService = aboutService;
         }
 
         public IActionResult Index()
@@ -40,6 +42,11 @@ namespace MakeMoreInternational.Controllers
             ViewBag.certificates = _certiService.GetActive();
             ViewBag.packaging = _packageService.GetActive();
             ViewBag.siteSetting = _service.GetAll().FirstOrDefault();
+            var data = _aboutService.Get();
+            if(data!= null)
+            {
+                ViewBag.values = data.Values;
+            }
             return View();
         }
 

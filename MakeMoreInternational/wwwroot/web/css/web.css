@@ -64,13 +64,19 @@ a {
     font-size: 14px;
     font-weight: 400;
     -display: block;
+    -border:1px solid red;
 }
+    .head .navbar-nav .nav-item .sub-menu a:hover {
+        color: #ffc107;
+        background-color: #125e4f;
+    }
 
 .head .navbar-nav .nav-item .sub-menu .more-arrow {
     line-height: 40px;
 }
 
-.more span a {
+.more span a,
+.more a{
     -border: 1px solid red;
     padding: 0 20px;
     display: flex;
@@ -111,9 +117,13 @@ a {
 .head .navbar-nav .nav-item .sub-menu .more-sub-menu a{
     color: #10715e;font-size: 15px;
     display: block;
-    padding: 2px 15px;
-   
+    padding: 2px 15px;   
 }
+    .head .navbar-nav .nav-item .sub-menu .more-sub-menu a:hover {
+        color: #ffc107;
+        background-color:transparent;
+        -border:1px solid red;
+    }
 
 .head .navbar-nav .nav-item .sub-menu .more:hover .more-sub-menu {
     display: block;

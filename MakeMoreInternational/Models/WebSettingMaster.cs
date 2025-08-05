@@ -67,6 +67,10 @@ namespace MakeMoreInternational.Models
         public string? wsmHomeSec1 { get; set; }
         [Display(Name = "About Section")]
         public string? wsmAboutSec1 { get; set; }
+        [Display(Name = "Choice Section Title")]
+        public string? wsmChoiceTitle { get; set; }
+        [Display(Name = "Choice Section Image")]
+        public string? wsmChoiceImage { get; set; }
     }
 
 

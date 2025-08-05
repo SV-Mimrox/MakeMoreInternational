@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewData["Title"] = "Terms & Condition";
+    Layout = "~/Areas/ho/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid p-0">
+    <h1 class="h3 mb-3 fw-bold">@ViewData["Title"]</h1>
+
+    <form asp-action="Save"
+          asp-area="ho" asp-controller="WebPage" method="post" class="form-box">
+        @Html.AntiForgeryToken()
+
+       
+        <input type="hidden" name="page" value="terms" />
+        <div class="mb-3">
+            <label class="form-label">Terms & Condition</label>
+            <textarea name="pageData" id="TermsCond" class="form-control" >@Html.Raw(ViewBag.data)</textarea>
+        </div>
+
+       
+        <button type="submit" class="btn btn-success">Save</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('TermsCond');
+    </script>
+}

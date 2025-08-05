@@ -10,7 +10,9 @@
             <div class="product-title col-md-5 col-12" style="">
                 <div class="category-title">
                     <h1>@Model.prdName</h1>
+                    <p>@Model.prdDescription</p>
                 </div>
+
                 <div class="category-desc">
                     <!-- <p>Turn up the heat and ignite your taste budswith the fiery kick of chilli !</p> -->
                     <ol class="breadcrumb justify-content-center">
@@ -50,7 +52,7 @@
             <div class="row">
                 <div class="col-md-5">
                     <div class="product-chilli mb-md-0 mb-3">
-                        <img src="~/images/products/@Model.prdImage" class="img-fluid img-thumbnail" alt="">
+                        <img src="~/images/products/@Model.prdImage" class="img-fluid w-100" alt="">
                     </div>
                 </div>
                 <div class="col-md-7 ps-md-5">
@@ -61,18 +63,18 @@
                         @foreach(var pd in Model.ProductDetails)
                         {
                             <li>
-                                    <i class="fa-solid fa-circle text-theme small"></i> <b style="font-weight:600;">@pd.Key : </b> @pd.Value
+                                  <i class="fa-solid fa-chevron-right text-theme small"></i> <b style="font-weight:600;">@pd.Key : </b> @pd.Value
                             </li>
                         }
                        
                         
                     </ul>
                     <h5 class="fw-bold product-txt mb-3">Varities</h5>
-                    <ul class="list-unstyled d-flex flex-column row-gap-3 mb-3 text-black-85">
+                        <ul class="list-unstyled d-flex flex-column row-gap-2 mb-md-4 mb-3 text-black-85">
                         @foreach(var v in Model.Varieties)
                         {
                             <li>
-                                    <i class="fa-solid fa-circle text-theme small"></i> <b style="font-weight:600;">@v.Key : </b> @v.Value
+                                    <i class="fa-solid fa-chevron-right text-theme small"></i> <b style="font-weight:600;">@v.Key : </b> @v.Value
                                     @* <i class="fa-regular fa-circle-dot text-theme"></i>  *@
                             </li>
                         }
@@ -93,7 +95,7 @@
     <div style="-background-color:rgb(46, 125, 50,0.01);">
     <div class="container ">
         <div class="row">
-    <div class="col-md-10 mx-auto packing-cont-data">
+                <div class="col-md-10 mx-auto packing-cont-data mb-5">
                     @foreach(var od in Model.OtherDetails)
                     {
                         @Html.Raw(od.Value)
@@ -108,16 +110,16 @@
 
     
 
-    <div class="specifications py-3" style="-background-color:rgb(46, 125, 50,0.01);">
+    <div class="specifications" style="-background-color:rgb(46, 125, 50,0.01);">
     <div class="container">
         <div class="row">                
             <div class="col-md-10 mx-auto mb-5">
                     <div class="card border-theme shadow-none" style="background-color: #eaf7ea;">
-                    <div class="card-header py-3 border-0 bg-transparent">
+                    <div class="card-header py-3 border-0 bg-light">
                         <h4 class="product-txt mb-0">Specifications</h4>
                     </div>
-                    <div class="table-responsive rounded-3">
-                            <table class="table mb-0 rounded-3" style="background-color: #eaf7ea;">
+                    <div class="table-responsive rounded-3 mb-0">
+                            <table class="table mb-0" style="-background-color: #eaf7ea;">
                             <tr>
                                 <th style="-background-color: #0B534508;">Parameter</th>
                                 <th>Range/Specification</th>
@@ -151,7 +153,7 @@
 
                 <div class="col-md-10 mx-auto mb-5">
                     <div class="card border-theme shadow-none" style="background-color: #eaf7ea;">
-                    <div class="card-header py-3 bg-transparent border-0">
+                    <div class="card-header py-3 bg-light border-0">
                         <h4 class="product-txt mb-0">Grades</h4>
                     </div>
                     <div class="table-responsive rounded-3">
