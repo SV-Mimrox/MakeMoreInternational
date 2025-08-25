@@ -20,6 +20,8 @@ namespace MakeMoreInternational.Models
 
         [DisplayName("Status")]
         public bool hcatStatus { get; set; } = true;
+        [DisplayName("Seq No")]
+        public int hcatSeq { get; set; } = 0;
 
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime createdAt { get; set; } = DateTime.Now;

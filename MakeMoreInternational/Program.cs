@@ -5,6 +5,11 @@ using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.WebHost.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.ListenLocalhost(5101); // Use your desired port
+});
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -36,6 +41,7 @@ builder.Services.AddSingleton<LanguageService>();
 builder.Services.AddSingleton<PackagingService>();
 builder.Services.AddSingleton<CountryMasterService>();
 builder.Services.AddSingleton<WebPageService>();
+builder.Services.AddSingleton<ExhibitionService>();
 
 var app = builder.Build();
 

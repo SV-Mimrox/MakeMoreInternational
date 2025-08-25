@@ -1,0 +1,45 @@
+﻿@model IEnumerable<MakeMoreInternational.Models.ExhibitionMaster>
+@{
+    ViewData["Title"] = "Exhibitions";
+    Layout = "~/Areas/ho/Views/Shared/_Layout.cshtml";
+}
+
+<div class="d-flex justify-content-between flex-wrap">
+    <h2 class="mb-3 fw-bold">Exhibitions</h2>
+
+    <a asp-action="Create" class="btn btn-success mb-3">
+        <i class="bi bi-plus-circle"></i> Add New Image
+    </a>
+</div>
+<div class="container-fluid p-0">
+
+    <div class="form-box">
+        <table class="table align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Seq No</th>
+                    <th>Image</th>
+                    <th style="width:150px;">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.ebmSeqNo</td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(item.ebmImage))
+                            {
+                                <img src="~/images/exhibitions/@item.ebmImage" width="100" />
+                            }
+                        </td>
+                        <td>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger"
+                               onclick="return confirm('Are you sure to delete?')">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

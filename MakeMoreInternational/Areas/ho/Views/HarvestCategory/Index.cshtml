@@ -14,6 +14,7 @@
     <table class="table align-middle">
         <thead class="table-light">
             <tr>
+                <th>Seq No</th>
                 <th>Name</th>
                 <th>Slug</th>
                 <th>Status</th>
@@ -24,6 +25,7 @@
             @foreach (var c in Model)
             {
                 <tr>
+                    <td>@c.hcatSeq</td>
                     <td>@c.hcatName</td>
                     <td>@c.hcatSlug</td>
                     <td>@(c.hcatStatus ? "Active" : "Inactive")</td>

@@ -23,9 +23,12 @@ namespace MakeMoreInternational.Models
         
         public string? wsmLogo { get; set; }
 
-        [DisplayName("Contact Information")]
+        [DisplayName("Contact Number")]
         [Required(ErrorMessage = "Contact is required")]
         public string wsmContact { get; set; } = string.Empty;
+        [DisplayName("Whatsapp Number")]
+        [Required(ErrorMessage = "Whatsapp No is required")]
+        public string wsmWhatsapp { get; set; } = string.Empty;
 
         [DisplayName("Email Information")]
         [Required(ErrorMessage = "Email is required")]
@@ -45,6 +48,9 @@ namespace MakeMoreInternational.Models
         [DisplayName("Map Link")]
         [Url(ErrorMessage = "Enter a valid Map URL")]
         public string? wsmMapLink { get; set; } = string.Empty;
+        [DisplayName("Map Address Link")]
+        
+        public string? wsmMapAddressLink { get; set; } = string.Empty;
 
         [DisplayName("Social Media Links")]
         public List<SocialMedia> wsmSocialMedia { get; set; } = new();
@@ -71,6 +77,10 @@ namespace MakeMoreInternational.Models
         public string? wsmChoiceTitle { get; set; }
         [Display(Name = "Choice Section Image")]
         public string? wsmChoiceImage { get; set; }
+        [DisplayName("Home Section 2 Main Image")]
+        public string? wsmhsMainImage { get; set; }
+        [DisplayName("Home Section 2 Sub Image")]
+        public string? wsmhsSubImage { get; set; }
     }
 
 
@@ -116,6 +126,10 @@ namespace MakeMoreInternational.Models
         public bool wsmIsInfrastructure { get; set; }
         [Display(Name = "Broucher")]
         public string wsmBroucher { get; set; }
+        [DisplayName("Home Section 2 Main Image")]
+        public string? wsmhsMainImage { get; set; }
+        [DisplayName("Home Section 2 Sub Image")]
+        public string? wsmhsSubImage { get; set; }
     }
 
     public class SocialMedia
@@ -132,5 +146,7 @@ namespace MakeMoreInternational.Models
 		[Required(ErrorMessage = "Link is required")]
 		
 		public string Link { get; set; } = string.Empty;
-	}
+        
+        
+    }
 }

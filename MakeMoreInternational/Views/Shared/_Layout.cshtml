@@ -14,17 +14,25 @@
             ViewBag.metaTitle = seoInfo.psMetaTitle;
             ViewBag.metaKeyword = seoInfo.psMetaKeywords;
             ViewBag.metaDesc = seoInfo.psMetaDescription;
+            ViewBag.bgImage = "/images/pages/" + seoInfo.psBanner;
         }
         else
         {
             ViewBag.metaTitle = "Makemore International LLP";
             ViewBag.metaKeyword = "Makemore, Import, Export";
             ViewBag.metaDesc = "Makemore International";
+            ViewBag.bgImage = "https://koreagro.com/images/spices-banner.jpg";
         }
     }
-    
+    else
+    {
+        var seoInfo = seoList.Where(t => t.psName == currentController).FirstOrDefault();
+        ViewBag.bgImage = "/images/pages/" + seoInfo.psBanner;
+    }
+
 
 }
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,7 +44,7 @@
     <meta name="description" content="@ViewBag.metaDesc">
     <meta name="keywords" content="@ViewBag.metaKeyword">
     <meta name="author" content="Makemore International">
-
+    <meta http-equiv="ScreenOrientation" content="autoRotate:disabled">
     <!-- Open Graph for Social Sharing -->
     <meta property="og:title" content="@ViewBag.metaTitle" />
     <meta property="og:description" content="@ViewBag.metaDesc" />
@@ -56,6 +64,13 @@
     <link href="~/web//css/responsive.css" rel="stylesheet" />
     <link rel="icon" href="~/web/Images/fav.png">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="~/web/css/lightcase.css" />
+
+    <style>
+        .product-banner{
+            background-image:url(@ViewBag.bgImage);
+        }
+    </style>
 
     @if (!string.Equals(currentController, "Home", StringComparison.OrdinalIgnoreCase))
     {
@@ -76,6 +91,15 @@
             }
         </style>
     }
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TK94GSHXEW"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-TK94GSHXEW');
+    </script>
 </head>
 
 <body class="custom-cursor">
@@ -177,11 +201,10 @@
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-md-4">
-                        <a href="#" class="text-white-85 small">
+                        <a href="tel:@siteInfo.wsmContact" class="text-white-85 small">
                              @siteInfo.wsmContact
                         </a>&nbsp;<span class="text-light">|</span>&nbsp;
-                        <a class="text-decoration-none text-white-85 small" href="#">
-                            
+                        <a class="text-decoration-none text-white-85 small" href="mailto:@siteInfo.wsmEmail">
                             @siteInfo.wsmEmail
                         </a>
                     </div>
@@ -246,7 +269,7 @@
                                                 @if(siteInfo.wsmIsAbout==true)
                                                 {
                                                     <li class="more">
-                                                        <a href="/about" class="">About Company </a>
+                                                        <a href="/about" class="">About Us </a>
                                                         </li>
                                                 }
                                                 @if (siteInfo.wsmIsTeam == true)
@@ -338,13 +361,7 @@
         <div class="offcanvas-body">
             <ul class="nav flex-column">
                 <li class="nav-item"><a href="/" class="nav-link">Home <i class="fa-solid fa-chevron-right"></i></a></li>
-                <li class="nav-item">
-                    <a href="#prdList" data-bs-toggle="collapse" class="nav-link">Products <i class="fa-solid fa-chevron-right"></i></a>
-                    <ul class="collapse text-white" id="prdList">
-                        <li class="nav-item"><a href="/harvest-chart/spices" class="nav-link d-block">Spices</a></li>
-                        <li class="nav-item"><a href="/harvest-chart/vegetable" class="nav-link d-block">Vegetables</a></li>
-                    </ul>
-                </li>
+                @await Component.InvokeAsync("ProductMenuMobile")
                 <li class="nav-item"><a href="/about" class="nav-link">About us <i class="fa-solid fa-chevron-right"></i></a></li>
                 <li class="nav-item">
                     <a href="#harvestMenu" data-bs-toggle="collapse" class="nav-link">Harvest Chart <i class="fa-solid fa-chevron-right"></i></a>
@@ -427,12 +444,11 @@
                         <div class="col-md-12">
                             <ul class="navbar-nav" style="line-height: 13px;">
                                 <li class="nav-item"><a class="nav-link" href="/"><i class="fa-solid fa-chevron-right small me-2"></i> Home</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-chevron-right small me-2"></i> Harvest chart</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/inquiry"><i class="fa-solid fa-chevron-right small me-2"></i> Inquiry</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/blogs"><i class="fa-solid fa-chevron-right small me-2"></i> Blog</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/contact"><i class="fa-solid fa-chevron-right small me-2"></i> Contact us</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-chevron-right small me-2"></i> Terms & Condition </a></li>
-                                <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-chevron-right small me-2"></i> Privacy Policy</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/terms"><i class="fa-solid fa-chevron-right small me-2"></i> Terms & Condition </a></li>
+                                <li class="nav-item"><a class="nav-link" href="/privacy"><i class="fa-solid fa-chevron-right small me-2"></i> Privacy Policy</a></li>
                             </ul>
                         </div>
                     </div>
@@ -459,15 +475,21 @@
                         <!-- <h2 class="footer-heading">Location</h2> -->
                         <div class="block-23 mb-">
                             <ul class="list-unstyled">
-                                <li><a href="#"><span class="icon"><i class="fa-solid fa-location-dot"></i></span><span
+                                <li><a target="_blank" href="@siteInfo.wsmMapAddressLink"><span class="icon"><i class="fa-solid fa-location-dot"></i></span><span
                                             class="text">@siteInfo.wsmAddress</span></a></li>
-                                <li>
-                                    <a href="#">
-                                        <span class="icon"><i class="fa-solid fa-phone"></i></span><span class="text">@siteInfo.wsmContact</span> <span class="px-2">|</span> <span class="text">@siteInfo.wsmContact</span>
-                                    </a>
+                                <li class="d-flex">
+                                    <span class="icon"><i class="fa-solid fa-phone"></i></span>
+                                    <span class="text d-flex align-items-center">
+                                        <a href="tel:@siteInfo.wsmContact"> @siteInfo.wsmContact</a> <span class="px-2 text-light small">|</span>
+                                        <a href="https://wa.me/@siteInfo.wsmWhatsapp" target="_blank">@siteInfo.wsmWhatsapp</a>
+                                    </span>
                                 </li>
-                                <li><a href="#"><span class="icon"><i class="fa-solid fa-envelope"></i></span><span
-                                            class="text">
+                                <li>
+                                    <a href="mailto:@siteInfo.wsmEmail">
+                                        <span class="icon">
+                                            <i class="fa-solid fa-envelope"></i>
+                                        </span>
+                                        <span class="text">
                                             <span>@siteInfo.wsmEmail</span>
                                         </span>
                                     </a>
@@ -543,6 +565,7 @@
     <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="~/web/js/lightcase.js"></script>
     <script>
 
          // Initialize map
@@ -584,13 +607,8 @@
     </script>
 
     <script>
-        
-       
-        
-
-        // Example flags (Lat, Lng, Name, Flag URL)
-       
-
+        $("a[data-rel^=lightcase]").lightcase();
+        // Example flags (Lat, Lng, Name, Flag URL);
     </script>
 
     <!-- <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"95840b0d4c11ff70","version":"2025.6.2","r":1,"token":"499e684b7b1043878977050a0a606794","serverTiming":{"name":{"cfExtPri":true,"cfEdge":true,"cfOrigin":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}}}' crossorigin="anonymous"></script> -->
@@ -633,6 +651,7 @@
                 }
             });
 
+
             $('#packaging').owlCarousel({
                 loop: true,
                 margin: 15,
@@ -646,7 +665,21 @@
                     1000: { items: 5 }
                 }
             });
-           
+
+            $('#productList').owlCarousel({
+                loop: true,
+                margin: 15,
+                nav: true,      // Navigation arrows
+                dots: false,     // Pagination dots
+                autoplay: true,
+
+                responsive: {
+                    0: { items: 1 },
+                    600: { items: 3 },
+                    1000: { items: 4 }
+                }
+            });
+
 
             $(window).on("scroll", function () {
                 if ($(this).scrollTop() > 100) {                    
@@ -664,21 +697,7 @@
         });
     </script>
 
-    <script>
-         $('#productList').owlCarousel({
-                loop: true,
-                margin: 15,
-                nav: false,      // Navigation arrows
-                dots: false,     // Pagination dots
-                autoplay: true,
-
-                responsive: {
-                    0: { items: 1 },
-                    600: { items: 3 },
-                    1000: { items: 4 }
-                }
-            });       
-    </script> 
+    
 
     <script>
         AOS.init();
@@ -764,6 +783,12 @@
                     });
                 }
             });
+        });
+    </script>
+
+    <script>
+        $(".packing-cont-data").each(function () {
+            $(this).find('<p>&nbsp;</p>').remove();
         });
     </script>
 

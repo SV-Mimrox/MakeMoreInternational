@@ -32,16 +32,24 @@
         resize: none;
     }
 
+    .recent-blogs{
+        position:sticky;
+        top:100px;
+    }
     .recent-blogs li{
         display:flex;
-        gap:10px;
+        gap:10px; align-items:center;      
     }
 
         .recent-blogs li a{
-            font-weight:bold;
+            font-weight:500;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
     .recent-blogs li img{
-        width:50px;height:50px;object-fit:cover;
+        width:70px;height:60px;object-fit:cover;
         border-radius:5px;
     }
 </style>
@@ -78,7 +86,7 @@
         <div class="col-lg-8">
 
             <h2 class="blog-title mb-3">@Model.blmTitle</h2>
-            <img src="~/images/blog/@Model.blmImage" alt="Blog Image" class="img-fluid mb-4 rounded">           
+            <img src="~/images/blog/@Model.blmImage" alt="Blog Image" class="img-fluid mb-4 rounded object-fit-cover" style="aspect-ratio:16/9">           
             <p class="text-muted mb-2">By <strong>Makemore</strong> | @Model.blmDate.ToString("MMMM d, yyyy")</p>
 
             @Html.Raw(Model.blmDescription)
@@ -91,13 +99,13 @@
                 <ul class="list-unstyled">
                     @foreach (var rb in ViewBag.recent as IEnumerable<BlogMaster>)
                     {
-                        <li class="mb-2">
-                            <img src="~/images/blog/@rb.blmImage" alt="Alternate Text" />
+                        <li class="mb-3">
+                            <img src="~/images/blog/@rb.blmImage" alt="Alternate Text" class="flex-shrink-0" />
                             <span>
                                 <a href="#" class="text-decoration-none text-dark">
                                     @rb.blmTitle
                                 </a>
-                                <small>@rb.blmDate.ToString("MMMM d, yyyy") </small>
+                                <small class="text-theme">@rb.blmDate.ToString("MMMM d, yyyy") </small>
                             </span>
                         </li>
                     }
@@ -107,4 +115,6 @@
         </div>
     </div>
 </div>
+
+
 

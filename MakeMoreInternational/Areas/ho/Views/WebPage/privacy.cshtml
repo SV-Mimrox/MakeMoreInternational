@@ -1,6 +1,8 @@
-﻿@{
+﻿@model Terms
+@{
     ViewData["Title"] = "Privacy Policy";
     Layout = "~/Areas/ho/Views/Shared/_Layout.cshtml";
+
 }
 
 <div class="container-fluid p-0">
@@ -11,12 +13,47 @@
         @Html.AntiForgeryToken()
 
 
-        <input type="hidden" name="page" value="terms" />
+        <input type="hidden" name="page" value="privacy" />
         <div class="mb-3">
-            <label class="form-label">Terms & Condition</label>
-            <textarea name="pageData" id="PrivacyPolicy" class="form-control">@Html.Raw(ViewBag.data)</textarea>
+            <label class="form-label">Title</label>
+            <input type="text" name="tcTitle" value="@Model?.tcTitle" class="form-control" required />
+        </div>
+        <div id="keyValueContainer">
+            <label class="form-label">Description (Key–Value)</label>
+            @if (Model?.tcDesc != null && Model.tcDesc.Count > 0)
+            {
+                foreach (var kv in Model.tcDesc)
+                {
+                    <div class="row mb-2">
+                        <div class="col-md-5">
+                            <input type="text" name="tcKeys" value="@kv.Key" class="form-control" placeholder="Key" required />
+                        </div>
+                        <div class="col-md-5">
+                            <input type="text" name="tcValues" value="@kv.Value" class="form-control" placeholder="Value" required />
+                        </div>
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-danger removeRow">X</button>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="row mb-2">
+                    <div class="col-md-5">
+                        <input type="text" name="tcKeys" class="form-control" placeholder="Key" required />
+                    </div>
+                    <div class="col-md-5">
+                        <input type="text" name="tcValues" class="form-control" placeholder="Value" required />
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-danger removeRow">X</button>
+                    </div>
+                </div>
+            }
         </div>
 
+        <button type="button" id="addRow" class="btn btn-secondary mb-3">+ Add Row</button>
 
         <button type="submit" class="btn btn-success">Save</button>
         <a asp-action="Index" class="btn btn-secondary">Cancel</a>
@@ -27,7 +64,28 @@
     <partial name="_ValidationScriptsPartial" />
     <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
     <script>
-        CKEDITOR.replace('PrivacyPolicy');
+        document.getElementById("addRow").addEventListener("click", function () {
+            let container = document.getElementById("keyValueContainer");
+            let row = document.createElement("div");
+            row.classList.add("row", "mb-2");
+            row.innerHTML = `
+                            <div class="col-md-5">
+                                <input type="text" name="tcKeys" class="form-control" placeholder="Key" required />
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" name="tcValues" class="form-control" placeholder="Value" required />
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" class="btn btn-danger removeRow">X</button>
+                            </div>
+                        `;
+            container.appendChild(row);
+        });
+
+        document.addEventListener("click", function (e) {
+            if (e.target.classList.contains("removeRow")) {
+                e.target.closest(".row").remove();
+            }
+        });
     </script>
 }
-

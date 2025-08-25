@@ -192,27 +192,30 @@ a {
     object-fit: contain;
 }
 
-.excellence .owl-carousel .owl-nav button.owl-next, 
-.excellence .owl-carousel .owl-nav button.owl-prev {
-  -border: 1px solid red;
-  width: 35px;
-  height: 35px;
-  display: flex;
-  justify-content: center;
-  border-radius: 50%;
-  font-size: 21px;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: #008a45;
-  color: #fff;
+.excellence .owl-carousel .owl-nav button.owl-next,
+.excellence .owl-carousel .owl-nav button.owl-prev,
+.products .owl-carousel .owl-nav button.owl-next,
+.products .owl-carousel .owl-nav button.owl-prev {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 21px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #008a45;
+    color: #fff;
 }
 
-.excellence .owl-carousel .owl-nav button.owl-prev {
-  left: -15px;
+.excellence .owl-carousel .owl-nav button.owl-prev,
+.products .owl-carousel .owl-nav button.owl-prev {
+    left: -15px;
 }
-.excellence .owl-carousel .owl-nav button.owl-next {
-  right: -15px;
+.excellence .owl-carousel .owl-nav button.owl-next,
+.products .owl-carousel .owl-nav button.owl-next {
+    right: -15px;
 }
 
 

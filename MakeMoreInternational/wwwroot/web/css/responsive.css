@@ -70,18 +70,23 @@
 
     /*****Breadcrumb*****/
     .product-banner{
-        height:160px;background-size:cover;
+        height:180px;background-size:cover;
     }
-    .product-title {
-        background-color: #052e2699;        
-        height: 100%;padding:15px;flex-direction:row;
+    .product-chilli img {
+        height: auto;        
+    }
+    .product-banner .product-title {
+        background-color: #052e2699;
+        height: 100%;
+        padding: 15px;
+        -flex-direction: row;
     }
     .product-category-banner span{
         display:none;
     }
     .product-banner .category-title,
     .product-banner .category-desc {
-        width: max-content;
+        width: auto;
     }
 
     /****Product Details****/
@@ -133,13 +138,19 @@
     /****Chioce Block****/
     .choice-mtxt{
         height:auto;
+        width:100%;
     }
     .choice-block {
         gap: 10px;
     }
+    .choice-block .row{
+        margin:0;
+    }
     .choice-content{
-        flex-wrap: wrap;justify-content: center;text-align: center;
-        gap: 10px;background-color: #fff;padding: 20px 10px;border-radius: 10px;
+        -flex-wrap: wrap;
+        -justify-content: center;
+        -text-align: center;
+        gap: 10px;background-color: #fff;padding: 15px 10px;border-radius: 10px;
     }
     .choice .card{
         margin-bottom: 15px;
@@ -156,9 +167,21 @@
     .category .card .card-img-overlay h5 {
         font-size: 16px !important;text-align:center;
     }
-
-    /*****Map*****/
-    #map{
-        height:300px;
+    .harvest-table tr th:first-child, .harvest-table tr td:first-child{
+        font-size:13px;
     }
+    .harvest-table .card {
+        background-color: transparent !important;
+        border: 0;box-shadow:none !important;
+    }
+    /*****Map*****/
+    #map {
+        height: 300px;
+    }
+
+    /****footer******/
+    .footer .footer-heading {
+        font-size:20px;
+    }
+
 }

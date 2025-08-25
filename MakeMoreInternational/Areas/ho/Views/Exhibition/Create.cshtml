@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewData["Title"] = "Add Image";
+    Layout = "~/Areas/ho/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid p-0">
+    <h1 class="h3 mb-3 fw-bold">@ViewData["Title"]</h1>
+
+    <form asp-action="Create"
+          asp-area="ho" asp-controller="Exhibition" method="post" class="form-box" enctype="multipart/form-data">
+
+        <div class="row">
+            @Html.AntiForgeryToken()
+
+            <div class="col-md-6 mb-3">
+                <label class="form-label mb-1">Seq No</label>
+                <input name="ebmSeqNo" id="ebmSeqNo" type="number" class="form-control" required />
+            </div>
+            
+
+            <div class="col-md-6 mb-3">
+                <label  class="form-label mb-1">Image</label>
+                <input type="file" name="ImageFile" class="form-control" required />
+            </div>
+
+            
+
+        </div>
+
+        <button type="submit" class="btn btn-success">Save</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" /> \
+   
+}

@@ -31,7 +31,7 @@ public class WebSettingController : Controller
 
     // POST: ho/websetting
     [HttpPost("edit")]
-    public IActionResult Save(WebSettingMaster model, IFormFile? logoFile, IFormFile? BroucherFile, IFormFile? wsmChoiceImageFile)
+    public IActionResult Save(WebSettingMaster model, IFormFile? logoFile, IFormFile? BroucherFile, IFormFile? wsmChoiceImageFile, IFormFile? secMainImage, IFormFile? secSubImage)
     {
         if (!ModelState.IsValid)
         {
@@ -134,7 +134,67 @@ public class WebSettingController : Controller
             model.wsmChoiceImage = existing.wsmChoiceImage;
         }
 
+        if (secMainImage != null && secMainImage.Length > 0)
+        {
+            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(secMainImage.FileName);
+            var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/section");
 
+            if (!Directory.Exists(folderPath))
+                Directory.CreateDirectory(folderPath);
+
+            var filePath = Path.Combine(folderPath, fileName);
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                secMainImage.CopyTo(stream);
+            }
+
+            // Delete old logo
+            if (existing != null && !string.IsNullOrEmpty(existing.wsmhsMainImage))
+            {
+                var oldPath = Path.Combine(folderPath, existing.wsmhsMainImage);
+                if (System.IO.File.Exists(oldPath))
+                {
+                    System.IO.File.Delete(oldPath);
+                }
+            }
+
+            model.wsmhsMainImage = fileName;
+        }
+        else
+        {
+            model.wsmhsMainImage = existing.wsmhsMainImage;
+        }
+
+        if (secSubImage != null && secSubImage.Length > 0)
+        {
+            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(secSubImage.FileName);
+            var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/section");
+
+            if (!Directory.Exists(folderPath))
+                Directory.CreateDirectory(folderPath);
+
+            var filePath = Path.Combine(folderPath, fileName);
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                secSubImage.CopyTo(stream);
+            }
+
+            // Delete old logo
+            if (existing != null && !string.IsNullOrEmpty(existing.wsmhsSubImage))
+            {
+                var oldPath = Path.Combine(folderPath, existing.wsmhsSubImage);
+                if (System.IO.File.Exists(oldPath))
+                {
+                    System.IO.File.Delete(oldPath);
+                }
+            }
+
+            model.wsmhsSubImage = fileName;
+        }
+        else
+        {
+            model.wsmhsSubImage = existing.wsmhsSubImage;
+        }
 
         _service.CreateOrUpdate(model);
         TempData["success"] = "Website settings saved successfully!";

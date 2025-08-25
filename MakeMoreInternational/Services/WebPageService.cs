@@ -15,22 +15,22 @@ namespace MakeMoreInternational.Services
             _collection = db.GetCollection<WebPageMaster>("WebPageMaster");
         }
 
-        public void savePage(string page,string pageData)
+        public void savePage(string page,string pageData, Terms terms, Infra infra)
         {
             var data = _collection.Find(t => true).FirstOrDefault();
             if (data == null) {
                 var newData = new WebPageMaster();
                 if(page == "terms")
                 {
-                    newData.wpmTerms = pageData;
+                    newData.wpmTerms = terms;
                 }
                 if (page == "privacy")
                 {
-                    newData.wpmPrivacy = pageData;
+                    newData.wpmPrivacy = terms;
                 }
                 if (page == "infrastructure")
                 {
-                    newData.wpmInfrastructure = pageData;
+                    newData.wpmInfrastructure = infra;
                 }
                 _collection.InsertOne(newData);
             }
@@ -38,40 +38,80 @@ namespace MakeMoreInternational.Services
             {
                 if (page == "terms")
                 {
-                    data.wpmTerms = pageData;
+                    data.wpmTerms = terms;
                 }
                 if (page == "privacy")
                 {
-                    data.wpmPrivacy = pageData;
+                    data.wpmPrivacy = terms;
                 }
                 if (page == "infrastructure")
                 {
-                    data.wpmInfrastructure = pageData;
+                    data.wpmInfrastructure = infra;
                 }
                 _collection.ReplaceOne(t => t.wpmId == data.wpmId, data);
             }
         }
 
-        public string getPageData(string page)
+        public void deleteInfraImage(string img)
         {
-            var response = "";
             var data = _collection.Find(t => true).FirstOrDefault();
             if (data != null)
             {
-                if (page == "terms")
+                var infraData = data.wpmInfrastructure;
+                if (infraData != null)
                 {
-                    response = data.wpmTerms;
+                    var images = infraData.infraImages;
+                    if (images.Count >= 1)
+                    {
+                        images.Remove(img);
+                    }
+                    infraData.infraImages = images;
+                    data.wpmInfrastructure = infraData;
                 }
-                if (page == "privacy")
-                {
-                    response = data.wpmPrivacy;
-                }
-                if (page == "infrastructure")
-                {
-                    response = data.wpmInfrastructure;
-                }
+
+                _collection.ReplaceOne(t => t.wpmId == data.wpmId, data);
             }
-            return response;
+        }
+
+        public Infra getInfra()
+        {
+            
+            var data = _collection.Find(t => true).FirstOrDefault();
+            if (data != null)
+            {
+                return data.wpmInfrastructure;
+            }
+            else
+            {
+                return new Infra();
+            }
+        }
+
+        public Terms getTerms()
+        {
+            
+            var data = _collection.Find(t => true).FirstOrDefault();
+            if (data != null)
+            {
+                return data.wpmTerms;
+            }
+            else
+            {
+                return new Terms();
+            }
+        }
+        public Terms getPrivacy()
+        {
+
+            var data = _collection.Find(t => true).FirstOrDefault();
+            if (data != null)
+            {
+                return data.wpmPrivacy;
+            }
+            else
+            {
+                return new Terms();
+            }
         }
     }
 }

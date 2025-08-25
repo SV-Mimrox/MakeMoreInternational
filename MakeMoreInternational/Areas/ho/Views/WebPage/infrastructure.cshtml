@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Infra
+@{
     ViewData["Title"] = "Infrastructure";
     Layout = "~/Areas/ho/Views/Shared/_Layout.cshtml";
 }
@@ -6,15 +7,44 @@
 <div class="container-fluid p-0">
     <h1 class="h3 mb-3 fw-bold">@ViewData["Title"]</h1>
 
-    <form asp-action="Save"
-          asp-area="ho" asp-controller="WebPage" method="post" class="form-box">
+    <form asp-action="SaveInfra"
+          asp-area="ho" asp-controller="WebPage" enctype="multipart/form-data" method="post" class="form-box">
         @Html.AntiForgeryToken()
 
 
-        <input type="hidden" name="page" value="terms" />
+        <input type="hidden" name="page" value="infrastructure" />
         <div class="mb-3">
-            <label class="form-label">Terms & Condition</label>
-            <textarea name="pageData" id="infrastructure" class="form-control">@Html.Raw(ViewBag.data)</textarea>
+            <label class="form-label">Title</label>
+            <input type="text" name="infraTitle" class="form-control" value="@Model?.infraTitle" id="infraTitle" required />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Description</label>
+            <textarea name="infraDesc" id="infraDesc" class="form-control" required>@Model?.infraDesc</textarea>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Images</label>
+            <input type="file" name="infImages" multiple class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Old Images</label>
+            @if (Model != null)
+            {
+                <table class="table">
+                @foreach (var img in Model.infraImages)
+                {
+                    <tr>
+                        <td>
+                            <img src="~/images/infrastructure/@img" width="100" />
+                        </td>
+                        <td>
+                                <a class="btn btn-sm btn-danger" href="delete-infra-image/@img">Delete</a>
+                        </td>
+                    </tr>
+                }
+                </table>
+            }
         </div>
 
 
@@ -25,9 +55,6 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
-    <script>
-        CKEDITOR.replace('infrastructure');
-    </script>
+    
 }
 

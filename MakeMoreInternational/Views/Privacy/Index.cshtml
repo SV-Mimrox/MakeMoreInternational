@@ -1,0 +1,76 @@
+﻿@model Terms
+@{
+    ViewData["Title"] = "Privacy Policy";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int no = 1;
+}
+
+<section class="breadcrumb-block">
+    <div class="container-fluid">
+        <div class="product-banner row overflow-hidden">
+            <div class="product-title col-md-5 col-12" style="">
+                <div class="category-title">
+                    <h1>Privacy Policy</h1>
+                </div>
+                <div class="category-desc">
+                    <!-- <p>Turn up the heat and ignite your taste budswith the fiery kick of chilli !</p> -->
+                    <ol class="breadcrumb justify-content-center">
+                        <li class="breadcrumb-item"><a href="/" class="text-warning">HOME</a></li>
+                        <li class="breadcrumb-item text-light">Privacy Policy</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="product-category-banner col-md-7 col-12 px-0 position-relative">
+                <span></span>
+                <div class="product-category-img-banner">
+                    <!-- <img src="https://koreagro.com/images/spices-banner.jpg" class="img-fluid"> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="py-5 terms">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 pe-md-0  mb-md-0 mb-3">
+                <nav class="position-sticky" style="top:100px;">
+                    <ol class="nav nav-pills flex-column rounded-0">
+                    @{
+                        no = 1;
+                    }
+                    @foreach (var d in Model.tcDesc)
+                    {
+                       
+                        var id = "condition" + no;
+                        <li>
+                            <a href="#@id">
+                                @d.Key
+                            </a>
+                        </li>
+                        no++;
+                    }
+                </ol>
+                </nav>
+            </div>
+            <div class="col-md-9 ps-md-0">
+                <div data-bs-spy="scroll" data-bs-smooth-scroll="true" class="scrollspy-example-2" tabindex="0">
+                @{
+                    no = 1;
+                }
+                @foreach (var d in Model.tcDesc)
+                {
+                    
+                    var id = "condition" + no;
+                    <div class="card mb-0 p-md-5 p-3 border-0 rounded-0 border-bottom" id="@id">
+                        <h5>@d.Key</h5>
+                            <p class="text-dark-75 mb-0">
+                            @d.Value
+                        </p>
+                    </div>
+                    no++;
+                }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

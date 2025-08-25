@@ -43,20 +43,22 @@
                     <div class="icon flex-shrink-0">
                         <i class="fas fa-map-marker-alt"></i>
                     </div>
-                    <span>@siteinfo.wsmAddress</span>
+                        <span><a class="text-theme" href="@siteinfo.wsmMapAddressLink" target="_blank">@siteinfo.wsmAddress</a></span>
                 </div>
                 <div class="info-item d-flex align-items-center gap-2 mt-3">
                     <div class="icon flex-shrink-0">
                         <i class="fas fa-envelope"></i>
                     </div>
-                    <span>@siteinfo.wsmEmail</span>
+                        <span><a class="text-theme"  href="mailto:@siteinfo.wsmEmail">@siteinfo.wsmEmail</a></span>
                 </div>
-                <div class="info-item d-flex align-items-center gap-2 mt-3">
-                    <div class="icon flex-shrink-0">
-                        <i class="fas fa-phone"></i>
+               
+                    <div class="info-item d-flex align-items-center gap-2 mt-3">
+                        <span class="icon"><i class="fa-solid fa-phone"></i></span>
+                        <span class="d-flex align-items-center">
+                            <a class="text-theme" href="tel:@siteinfo.wsmContact"> @siteinfo.wsmContact</a> <span class="px-2 text-dark small">|</span>
+                            <a class="text-theme" href="https://wa.me/@siteinfo.wsmWhatsapp" target="_blank">@siteinfo.wsmWhatsapp</a>
+                        </span>
                     </div>
-                    <span>@siteinfo.wsmContact</span>
-                </div>
                 @if(!string.IsNullOrEmpty(siteinfo.wsmMapLink))
                     {
                         <iframe src="@siteinfo.wsmMapLink" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>

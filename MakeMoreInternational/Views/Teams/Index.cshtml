@@ -5,6 +5,7 @@
     var members = ViewBag.members as IEnumerable<TeamMemberMaster>;
     var first = members.Where(t => t.ShowOnTopRow == true).ToList();
     var second = members.Where(t => t.ShowOnTopRow == false).ToList();
+    var banner = ViewBag.banner as TeamMemberPageBanner;
 }
 
 <section class="breadcrumb-block">
@@ -80,7 +81,7 @@
         </div>
 
 
-         <img src="https://images.squarespace-cdn.com/content/v1/63e68c33f74b2e1206f3e646/1676230608513-1KJKUSXQB3X1DCW7S209/keenestudio_composite_teams_006.jpg" class="img-fluid w-100 mt-5 rounded" />
+         <img src="~/images/team/@banner.BannerImage" class="img-fluid w-100 mt-5 rounded" />
 
         </div>
     </div>

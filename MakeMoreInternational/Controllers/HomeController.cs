@@ -17,10 +17,11 @@ namespace MakeMoreInternational.Controllers
         private PackagingService _packageService;
         private CountryMasterService _countryService;
         private AboutUsService _aboutService;
+        private ExhibitionService _exService;
 
         public HomeController(WebSettingService service, PageSEOService seoService, LanguageService languageService,
             CategoryService categoryservice, ProductService productService,SliderService sliderService,
-            CertificateService certiService, PackagingService packageService, CountryMasterService countryService, AboutUsService aboutService)
+            CertificateService certiService, PackagingService packageService, CountryMasterService countryService, AboutUsService aboutService, ExhibitionService exService)
             : base(service, categoryservice, seoService, languageService)
         {
 
@@ -32,6 +33,7 @@ namespace MakeMoreInternational.Controllers
             _service = service;
             _countryService = countryService;
             _aboutService = aboutService;
+            _exService = exService;
         }
 
         public IActionResult Index()
@@ -42,7 +44,9 @@ namespace MakeMoreInternational.Controllers
             ViewBag.certificates = _certiService.GetActive();
             ViewBag.packaging = _packageService.GetActive();
             ViewBag.siteSetting = _service.GetAll().FirstOrDefault();
+            ViewBag.exhibitions = _exService.GetAll();
             var data = _aboutService.Get();
+
             if(data!= null)
             {
                 ViewBag.values = data.Values;
@@ -97,6 +101,36 @@ namespace MakeMoreInternational.Controllers
             return PartialView("_ProductMenuPartial", menu);
         }
 
-        
+        public IActionResult ProductMenuMobile()
+        {
+            var categories = _categoryService.GetAll(); // CategoryMaster
+            var products = _productService.GetAll();    // ProductMaster
+
+            var mainCats = categories.Where(c => string.IsNullOrEmpty(c.catParentId)).ToList();
+            var subCats = categories.Where(c => !string.IsNullOrEmpty(c.catParentId)).ToList();
+
+            var menu = mainCats.Select(cat => new ProductMenuVM
+            {
+                CategoryName = cat.catName,
+                SubCategories = subCats
+                    .Where(sub => sub.catParentId == cat.catId)
+                    .Select(sub => new SubCategoryVM
+                    {
+                        SubCategoryName = sub.catName,
+                        Products = products
+                            .Where(p => p.catId == sub.catId)
+                            .Select(p => new ProductVM
+                            {
+                                Name = p.prdName,
+                                Slug = p.prdSlug,
+                                Image = "/images/products/" + p.prdImage
+                            }).ToList()
+                    }).ToList()
+            }).ToList();
+
+            return PartialView("_ProductMenuPartial", menu);
+        }
+
+
     }
 }

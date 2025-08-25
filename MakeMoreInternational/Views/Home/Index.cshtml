@@ -1,10 +1,15 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
     var siteInfo = ViewBag.siteSetting as WebSettingMaster;
+    var exhibitions = ViewBag.exhibitions as IEnumerable<ExhibitionMaster>;
 }
 <style>
     .leaflet-control-attribution{
         display:none;
+    }
+
+    .owl-carousel .owl-nav.disabled {
+        display: block;
     }
 </style>
 <!-- Swiper Slider -->
@@ -16,7 +21,7 @@
             @foreach (var sld in ViewBag.sliders as IEnumerable<SliderMaster>)
             {
                 <div class="swiper-slide">
-                    <img src="~/uploads/slider/@sld.MainImage" alt="">
+                    <img src="~/images/slider/@sld.MainImage" alt="">
                     <div class="text-overlay">
                         <h2 class="display-5 fw-bold mb-md-4 mb-3 text-white-85" id="f-tagline-@i"></h2>
                         <!-- Crafted by <span class="text-theme2">Nature</span> Perfected by Innovation ! -->
@@ -26,7 +31,7 @@
                             {
                                 if (si != null)
                                 {
-                                    <img src="~/uploads/slider/@si" class="animate__animated animate__bounceInUp" alt="">
+                                    <img src="~/images/slider/@si" class="animate__animated animate__bounceInUp" alt="">
                                 }
 
                             }
@@ -66,8 +71,8 @@
             </div>
             <div class="col-md-6">
                 <div class="position-relative">
-                    <img src="~/web/Images/about.png" class="img-fluid rounded-4" alt="">
-                    <img src="~/web/Images/spices/chilli.png" class="bowl-chilli" alt="">
+                    <img src="~/images/section/@siteInfo.wsmhsMainImage" class="img-fluid rounded-4" alt="">
+                    <img src="~/images/section/@siteInfo.wsmhsSubImage" class="bowl-chilli" alt="">
                 </div>
             </div>
         </div>
@@ -332,6 +337,38 @@
         </div>
     </div>
 </div>
+
+
+<!----Exhibition Gallery------>
+@if (exhibitions.Count()>=1)
+{
+    <section class="exhibition-gallery py-5">
+    <div class="title-section mb-md-5 mb-3">
+        <img src="~/web/Images/values1.png" width="65" class="d-block mx-auto" alt="">
+        <h2 class="text-center">
+            Exhibition Gallery
+        </h2>
+        <span class="animate-border ml-auto mr-auto mb-4"></span>
+    </div>
+    <div class="container">
+        <div class="row">
+            @foreach(var exb in ViewBag.exhibitions as IEnumerable<ExhibitionMaster>)
+            {
+
+                    <div class="col-lg-3 col-md-3 col-sm-6">
+                        <a class="d-block" href="~/images/exhibitions/@exb.ebmImage" data-rel="lightcase:my-slideshow">
+                            <img class="img-fluid" src="~/images/exhibitions/@exb.ebmImage"  />
+                        </a>
+                    </div>
+            }
+           
+        </div>
+    </div>
+</section>
+
+}
+
+
 <!-----Blog start------>
 <section class="blogs py-5 d-none">
     <div class="container">
@@ -397,7 +434,7 @@
 
 @if(siteInfo.wsmHomeSec1=="Map")
 {
-    <section class="custom-map py-5" style="-background-color: #c4edc4;">
+    <section class="custom-map py-5" style="background-color: @(exhibitions.Count()>=1 ? "#c4edc4" : "transparent");">
         <div class="container">
             <div id="map"></div>
         </div>

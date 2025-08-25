@@ -40,12 +40,17 @@
                 </div>
 
                 <!-- Contact -->
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-4 mb-3">
                     <label asp-for="wsmContact" class="form-label"></label>
                     <input asp-for="wsmContact" class="form-control" />
                     <span asp-validation-for="wsmContact" class="text-danger"></span>
                 </div>
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="wsmWhatsapp" class="form-label"></label>
+                        <input asp-for="wsmWhatsapp" class="form-control" />
+                        <span asp-validation-for="wsmWhatsapp" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4 mb-3">
                     <label asp-for="wsmEmail" class="form-label"></label>
                     <input asp-for="wsmEmail" class="form-control" />
                     <span asp-validation-for="wsmEmail" class="text-danger"></span>
@@ -75,6 +80,11 @@
                     <input asp-for="wsmMapLink" class="form-control" />
                     <span asp-validation-for="wsmMapLink" class="text-danger"></span>
                 </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="wsmMapAddressLink"></label>
+                        <input asp-for="wsmMapAddressLink" class="form-control" />
+                        <span asp-validation-for="wsmMapAddressLink" class="text-danger"></span>
+                    </div>
 
                     <div class="form-group mb-3">
                         <label>Broucher</label>
@@ -84,6 +94,22 @@
                             <span>
                                 <a target="_blank" href="~/doc/broucher/@Model.wsmBroucher">Broucher</a>
                             </span>
+                        }
+                    </div>
+                    <div class="mb-3 col-md-6">
+                        <label asp-for="wsmhsMainImage" class="form-label"></label>
+                        <input type="file" name="secMainImage" class="form-control" />
+                        @if (!string.IsNullOrEmpty(Model.wsmhsMainImage))
+                        {
+                            <img src="~/images/section/@Model.wsmhsMainImage" alt="Logo" style="height:50px;width:50px;object-fit:contain;" class="mb-2" />
+                        }
+                    </div>
+                    <div class="mb-3 col-md-6">
+                        <label asp-for="wsmhsSubImage" class="form-label"></label>
+                        <input type="file" name="secSubImage" class="form-control" />
+                        @if (!string.IsNullOrEmpty(Model.wsmhsSubImage))
+                        {
+                            <img src="~/images/section/@Model.wsmhsSubImage" alt="Logo" style="height:50px;width:50px;object-fit:contain;" class="mb-2" />
                         }
                     </div>
                     <div class="mb-3">

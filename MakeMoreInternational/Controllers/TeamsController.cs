@@ -14,6 +14,7 @@ namespace MakeMoreInternational.Controllers
         public IActionResult Index()
         {
             ViewBag.members = _service.GetAll();
+            ViewBag.banner = _service.GetBanner();
             return View();
         }
     }

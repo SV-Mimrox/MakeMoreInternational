@@ -7,7 +7,7 @@
 <section class="about">
     <div class="container-fluid">
         <div class="product-banner row overflow-hidden" style="background-image: url(/images/products/@Model.prdBannerImage)">
-            <div class="product-title col-md-5 col-12" style="">
+            <div class="product-title col-md-6 col-12" style="">
                 <div class="category-title">
                     <h1>@Model.prdName</h1>
                     <p>@Model.prdDescription</p>
@@ -21,7 +21,7 @@
                     </ol>
                 </div>
             </div>
-            <div class="product-category-banner col-md-7 col-12 px-0 position-relative">
+            <div class="product-category-banner col-md-6 col-12 px-0 position-relative">
                 <span></span>
                 <div class="product-category-img-banner">
                     <!-- <img src="https://koreagro.com/images/spices-banner.jpg" class="img-fluid"> -->
@@ -63,7 +63,7 @@
                         @foreach(var pd in Model.ProductDetails)
                         {
                             <li>
-                                  <i class="fa-solid fa-chevron-right text-theme small"></i> <b style="font-weight:600;">@pd.Key : </b> @pd.Value
+                                   <b style="font-weight:600;">@pd.Key : </b> @pd.Value
                             </li>
                         }
                        
@@ -74,7 +74,7 @@
                         @foreach(var v in Model.Varieties)
                         {
                             <li>
-                                    <i class="fa-solid fa-chevron-right text-theme small"></i> <b style="font-weight:600;">@v.Key : </b> @v.Value
+                                    <b style="font-weight:600;">@v.Key : </b> @v.Value
                                     @* <i class="fa-regular fa-circle-dot text-theme"></i>  *@
                             </li>
                         }
@@ -226,7 +226,7 @@
                                 <div class="card-title">
                                     @rp.prdName
                                 </div>
-                                <a href="/product/@rp.prdSlug" class="stretched-link"></a>
+                                <a href="/products/@rp.prdSlug" class="stretched-link"></a>
                             </div>
                         </div>
                     }

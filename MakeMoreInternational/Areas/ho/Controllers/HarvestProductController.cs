@@ -26,7 +26,9 @@ namespace MakeMoreInternational.Areas.ho.Controllers
         {
             if (!IsAuth()) return RedirectToAction("Index", "Login", new { area = "ho" });
             ViewData["CatDict"] = _catSvc.GetAll().ToDictionary(c => c.hcatId, c => c.hcatName);
-            return View(_svc.GetAll().OrderBy(p => p.seqNo).ToList());
+            var data = _svc.GetAll().OrderBy(p => p.seqNo).OrderBy(t => t.hcatId).ToList();
+
+            return View(data);
         }
 
         /* ---------- Create ---------- */

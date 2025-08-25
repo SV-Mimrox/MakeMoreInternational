@@ -3,6 +3,7 @@ using MakeMoreInternational.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MongoDB.Bson;
+using System.Runtime.ConstrainedExecution;
 
 namespace MakeMoreInternational.Areas.ho.Controllers
 {
@@ -11,9 +12,11 @@ namespace MakeMoreInternational.Areas.ho.Controllers
     public class PageSEOController : Controller
     {
         private readonly PageSEOService _seoService;
-        public PageSEOController(PageSEOService service)
+        private readonly IWebHostEnvironment _env;
+        public PageSEOController(PageSEOService service, IWebHostEnvironment env)
         {
-            _seoService = service;   
+            _seoService = service;
+            _env = env;
         }
         private List<SelectListItem> GetPageOptions()
         {
@@ -27,7 +30,9 @@ namespace MakeMoreInternational.Areas.ho.Controllers
             new("Contact", "Contact"),
             new("Product", "Info"),
             new("Blog", "Blogs"),
-            
+            new("Terms", "Terms"),
+            new("Privacy", "Privacy"),
+
         };
         }
 
@@ -46,10 +51,25 @@ namespace MakeMoreInternational.Areas.ho.Controllers
 
         [HttpPost("create")]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(PageSeo model)
+        public IActionResult Create(PageSeo model, IFormFile bannerImage)
         {
             if (ModelState.IsValid)
             {
+                if (bannerImage != null)
+                {
+                    string path = Path.Combine(_env.WebRootPath, "images/pages");
+                    if (!Directory.Exists(path))
+                        Directory.CreateDirectory(path);
+
+                    string fileName = Guid.NewGuid() + Path.GetExtension(bannerImage.FileName);
+                    string fullPath = Path.Combine(path, fileName);
+                    using (var fs = new FileStream(fullPath, FileMode.Create))
+                    {
+                        bannerImage.CopyTo(fs);
+                    }
+
+                    model.psBanner = fileName;
+                }
                 _seoService.Create(model);
                 return RedirectToAction("Index");
             }
@@ -69,10 +89,30 @@ namespace MakeMoreInternational.Areas.ho.Controllers
 
         [HttpPost("edit/{id}")]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(string id, PageSeo model)
+        public IActionResult Edit(string id, PageSeo model, IFormFile bannerImage)
         {
             if (ModelState.IsValid)
             {
+                var oldData = _seoService.GetById(id);
+                if (bannerImage != null)
+                {
+                    string path = Path.Combine(_env.WebRootPath, "images/pages");
+                    if (!Directory.Exists(path))
+                        Directory.CreateDirectory(path);
+
+                    string fileName = Guid.NewGuid() + Path.GetExtension(bannerImage.FileName);
+                    string fullPath = Path.Combine(path, fileName);
+                    using (var fs = new FileStream(fullPath, FileMode.Create))
+                    {
+                        bannerImage.CopyTo(fs);
+                    }
+
+                    model.psBanner = fileName;
+                }
+                else
+                {
+                    model.psBanner = oldData.psBanner;
+                }
                 model.psId = id;
                 _seoService.Update(model);
                 return RedirectToAction("Index");
@@ -87,16 +127,13 @@ namespace MakeMoreInternational.Areas.ho.Controllers
         public IActionResult Delete(string id)
         {
             var model = _seoService.GetById(id);
-            if (model == null) return NotFound();
-            return View(model);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(string id)
-        {
-            _seoService.Delete(id);
+            if(model != null)
+            {
+                _seoService.Delete(id);
+            }
             return RedirectToAction("Index");
         }
+
+      
     }
 }

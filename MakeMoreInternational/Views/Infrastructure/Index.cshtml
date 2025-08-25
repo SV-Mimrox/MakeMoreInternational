@@ -1,0 +1,54 @@
+﻿@model Infra
+@{
+    ViewData["Title"] = "Infrastructure";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int no = 1;
+}
+
+<section class="breadcrumb-block">
+    <div class="container-fluid">
+        <div class="product-banner row overflow-hidden">
+            <div class="product-title col-md-5 col-12" style="">
+                <div class="category-title">
+                    <h1>Infrastructure</h1>
+                </div>
+                <div class="category-desc">
+                    <!-- <p>Turn up the heat and ignite your taste budswith the fiery kick of chilli !</p> -->
+                    <ol class="breadcrumb justify-content-center">
+                        <li class="breadcrumb-item"><a href="/" class="text-warning">HOME</a></li>
+                        <li class="breadcrumb-item text-light">Infrastructure</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="product-category-banner col-md-7 col-12 px-0 position-relative">
+                <span></span>
+                <div class="product-category-img-banner">
+                    <!-- <img src="https://koreagro.com/images/spices-banner.jpg" class="img-fluid"> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="py-5 infrastructure">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>@Model.infraTitle</h3>
+                <p class="text-secondary">
+                    @Model.infraDesc
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            @foreach(var img in Model.infraImages)
+            {
+                <div class="col-md-4">
+                    <div class="overflow-hidden infra-box">
+                        <img src="~/images/infrastructure/@img" class="img-fluid" />
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+</section>

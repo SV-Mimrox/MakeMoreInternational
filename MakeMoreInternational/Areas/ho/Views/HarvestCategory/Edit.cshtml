@@ -12,6 +12,12 @@
           asp-area="ho" asp-controller="HarvestCategory" method="post" class="form-box">
         @Html.AntiForgeryToken()
 
+         <div class="mb-3">
+            <label asp-for="hcatSeq" class="form-label"></label>
+            <input asp-for="hcatSeq" class="form-control" />
+            <span asp-validation-for="hcatSeq" class="text-danger"></span>
+        </div>
+
         <div class="mb-3">
             <label asp-for="hcatName" class="form-label"></label>
             <input asp-for="hcatName" class="form-control" />

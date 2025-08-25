@@ -13,7 +13,9 @@ namespace MakeMoreInternational.Models
         [Required]
         [Display(Name = "Page")]
         public string psName { get; set; }
-        
+        [Display(Name = "Page Banner")]
+        public string? psBanner { get; set; }
+
         [Display(Name = "Meta Title")]
         public string? psMetaTitle { get; set; }
         

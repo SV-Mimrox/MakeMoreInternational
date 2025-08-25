@@ -1,0 +1,14 @@
+﻿@model List<MakeMoreInternational.Models.custom.ProductMenuVM>
+<li class="nav-item">
+    <a href="#prdList" data-bs-toggle="collapse" class="nav-link">Products <i class="fa-solid fa-chevron-right"></i></a>
+    <ul class="collapse text-white" id="prdList">
+    @foreach (var cat in Model)
+    {
+            <li class="nav-item"><a href="/category/@cat.CategorySlug" class="nav-link d-block">@cat.CategoryName</a></li>
+    }
+    </ul>
+    @* <ul class="collapse text-white" id="prdList">
+    <li class="nav-item"><a href="/harvest-chart/spices" class="nav-link d-block">Spices</a></li>
+    <li class="nav-item"><a href="/harvest-chart/vegetable" class="nav-link d-block">Vegetables</a></li>
+    </ul> *@
+</li>
