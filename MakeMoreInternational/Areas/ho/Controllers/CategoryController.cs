@@ -12,7 +12,8 @@ namespace MakeMoreInternational.Areas.ho.Controllers
 {
     [Area("ho")]
     [Route("ho/category")]
-    public class CategoryController : Controller
+	[AuthorizeByCookie]
+	public class CategoryController : Controller
     {
         private readonly CategoryService _service;
         private readonly string _imageFolder =

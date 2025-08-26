@@ -6,7 +6,8 @@ namespace MakeMoreInternational.Areas.ho.Controllers
 {
     [Area("ho")]
     [Route("ho/language")]
-    public class LanguageController : Controller
+	[AuthorizeByCookie]
+	public class LanguageController : Controller
     {
         private readonly LanguageService _service;
 

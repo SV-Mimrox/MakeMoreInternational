@@ -9,7 +9,8 @@ namespace MakeMoreInternational.Controllers
 {
     [Area("ho")]
     [Route("ho/product")]
-    public class ProductController : Controller
+	[AuthorizeByCookie]
+	public class ProductController : Controller
     {
         private readonly ProductService _productService;
         private readonly CategoryService _categoryService;

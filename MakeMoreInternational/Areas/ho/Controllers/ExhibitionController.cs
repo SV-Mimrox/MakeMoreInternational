@@ -6,7 +6,8 @@ namespace MakeMoreInternational.Areas.ho.Controllers
 {
     [Area("ho")]
     [Route("ho/exhibition")]
-    public class ExhibitionController : Controller
+	[AuthorizeByCookie]
+	public class ExhibitionController : Controller
     {
         private readonly ExhibitionService _service;
 

@@ -9,7 +9,8 @@ namespace MakeMoreInternational.Areas.ho.Controllers
 {
     [Area("ho")]
     [Route("ho/page-seo")]
-    public class PageSEOController : Controller
+	[AuthorizeByCookie]
+	public class PageSEOController : Controller
     {
         private readonly PageSEOService _seoService;
         private readonly IWebHostEnvironment _env;

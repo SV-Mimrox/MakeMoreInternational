@@ -8,7 +8,8 @@ namespace MakeMoreInternational.Areas.ho.Controllers
 {
     [Area("ho")]
     [Route("ho/harvest-season")]
-    public class HarvestSeasonController : Controller
+	[AuthorizeByCookie]
+	public class HarvestSeasonController : Controller
     {
         private readonly HarvestSeasonService _seasonSvc;
         private readonly HarvestProductService _productSvc;

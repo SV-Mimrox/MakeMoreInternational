@@ -6,7 +6,8 @@ namespace MakeMoreInternational.Areas.ho.Controllers
 {
     [Area("ho")]
     [Route("ho/webpage")]
-    public class WebPageController : Controller
+	[AuthorizeByCookie]
+	public class WebPageController : Controller
     {
         private readonly WebPageService _service;
         private readonly IWebHostEnvironment _env;

@@ -5,10 +5,10 @@ using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.WebHost.ConfigureKestrel(serverOptions =>
-{
-    serverOptions.ListenLocalhost(5101); // Use your desired port
-});
+//builder.WebHost.ConfigureKestrel(serverOptions =>
+//{
+//    serverOptions.ListenLocalhost(5101); // Use your desired port
+//});
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

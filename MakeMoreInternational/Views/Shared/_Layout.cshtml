@@ -51,6 +51,8 @@
     <meta property="og:image" content="@(ViewBag.metaImage != null ? "~/images/blog/"+ViewBag.metaImage :  "~/images/logo/"+siteInfo.wsmLogo)" />
     <meta property="og:url" content="https://makemoreinternational.com/" />
     <meta property="og:type" content="website" />
+    <link rel="icon" type="image/png" sizes="32x32" href="~/images/logo/fav_3232.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/images/logo/fav_1616.png">
     <link rel="stylesheet" href="~/web/css/web.css">
     <link href="~/web/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="~/web/css/all.min.css">
@@ -382,26 +384,7 @@
     <!-----Footer----->
     <footer class="footer">
         <div class="container">
-            <!-- <div class="row border-bottom mb-5 pb-4 align-items-center">
-                <div class="col-md-6 mb-md-0 mb-4">
-                    
-                </div>
-                <div class="col-md-6 mb-md-0 mb-4 text-md-end">
-                    <ul class="ftco-footer-social p-0 mb-0 nav gap-1 justify-content-end">
-                        <li class="ftco-animate nav-item p-1"><a href="#" data-toggle="tooltip" data-placement="top"
-                                title="" data-original-title="Twitter"><span class="ion-logo-twitter"><i
-                                        class="fa-brands fa-twitter " style="font-size: 18px;"></i></span></a></li>
-                        <li class="ftco-animate nav-item p-1"><a href="#" class="" data-toggle="tooltip"
-                                data-placement="top" title="" data-original-title="Facebook"><span
-                                    class="ion-logo-facebook"><i class="fa-brands fa-facebook-f "
-                                        style="font-size: 18px;"></i></span></a></li>
-                        <li class="ftco-animate nav-item p-1"><a href="#" class="" data-toggle="tooltip"
-                                data-placement="top" title="" data-original-title="Instagram"><span
-                                    class="ion-logo-instagram"><i class="fa-brands fa-instagram "
-                                        style="font-size: 18px;"></i></span></a></li>
-                    </ul>
-                </div>
-            </div> -->
+           
 
             <div class="row">
                 <div class="col-md-6 col-lg-4 mb-md-0 mb-a">
@@ -497,15 +480,7 @@
                             </ul>
                         </div>
 
-                        <!-- <div class="row no-gutters">
-                            <p>MakeMore is an international agri-export platform committed to delivering
-                                high-quality
-                                agricultural products from India to markets around the world. We specialize in
-                                sourcing,
-                                packaging, and exporting a wide range of farm-fresh produce, grains, spices, and
-                                organic
-                                goods—ensuring compliance with global quality and safety standards.</p>
-                        </div> -->
+                       
                     </div>
                 </div>
             </div>
@@ -738,7 +713,6 @@
             $.validator.unobtrusive.parse("#inqForm");
 
             $("#btnInqSubmit").click(function () {
-                alert("test");
                 $("#responseMsg1").text("");
                 var form = $("#inqForm");
 

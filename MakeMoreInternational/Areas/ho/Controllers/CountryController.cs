@@ -6,7 +6,8 @@ namespace MakeMoreInternational.Areas.ho.Controllers
 {
     [Area("ho")]
     [Route("ho/country")]
-    public class CountryController : Controller
+	[AuthorizeByCookie]
+	public class CountryController : Controller
     {
         private readonly CountryMasterService _service;
         private readonly IWebHostEnvironment _env;

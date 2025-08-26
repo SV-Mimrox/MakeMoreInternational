@@ -6,7 +6,8 @@ namespace MakeMoreInternational.Areas.ho.Controllers
 {
     [Area("ho")]
     [Route("ho/certificate")]
-    public class CertificateController : Controller
+	[AuthorizeByCookie]
+	public class CertificateController : Controller
     {
         private readonly CertificateService _service;
         private readonly IWebHostEnvironment _env;

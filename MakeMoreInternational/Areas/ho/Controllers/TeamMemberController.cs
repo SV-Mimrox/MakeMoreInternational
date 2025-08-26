@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 [Area("ho")]
 [Route("ho/teams")]
+[AuthorizeByCookie]
 public class TeamMemberController : Controller
 {
     private readonly TeamMemberService _service;

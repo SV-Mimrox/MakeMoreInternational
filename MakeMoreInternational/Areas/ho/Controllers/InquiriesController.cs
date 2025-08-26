@@ -5,7 +5,8 @@ namespace MakeMoreInternational.Areas.ho.Controllers
 {
     [Area("ho")]
     [Route("ho/inquiry")]
-    public class InquiriesController : Controller
+	[AuthorizeByCookie]
+	public class InquiriesController : Controller
     {
         private readonly InquiryService _service;
         public InquiriesController(InquiryService service)

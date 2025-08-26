@@ -6,7 +6,8 @@ namespace MakeMoreInternational.Areas.ho.Controllers
 {
     [Area("ho")]
     [Route("ho/slider")]
-    public class SliderController : Controller
+	[AuthorizeByCookie]
+	public class SliderController : Controller
     {
         private readonly SliderService _sliderService;
         private readonly IWebHostEnvironment _env;

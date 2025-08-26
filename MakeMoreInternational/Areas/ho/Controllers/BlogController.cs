@@ -11,7 +11,8 @@ namespace MakeMoreInternational.Areas.ho.Controllers
 {
     [Area("ho")]
     [Route("ho/blog")]
-    public class BlogController : Controller
+	[AuthorizeByCookie]
+	public class BlogController : Controller
     {
         private readonly BlogService _blogService;
         private readonly IWebHostEnvironment _env;

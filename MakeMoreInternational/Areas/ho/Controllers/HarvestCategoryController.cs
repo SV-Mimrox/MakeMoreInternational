@@ -6,7 +6,8 @@ namespace MakeMoreInternational.Areas.ho.Controllers
 {
     [Area("ho")]
     [Route("ho/harvest-category")]
-    public class HarvestCategoryController : Controller
+	[AuthorizeByCookie]
+	public class HarvestCategoryController : Controller
     {
         private readonly HarvestCategoryService _svc;
 

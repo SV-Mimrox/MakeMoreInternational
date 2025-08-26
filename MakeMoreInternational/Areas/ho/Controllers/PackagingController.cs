@@ -6,6 +6,7 @@ namespace MakeMoreInternational.Areas.ho.Controllers
 {
 	[Area("ho")]
 	[Route("ho/packaging")]
+	[AuthorizeByCookie]
 	public class PackagingController : Controller
 	{
 		private readonly PackagingService _service;

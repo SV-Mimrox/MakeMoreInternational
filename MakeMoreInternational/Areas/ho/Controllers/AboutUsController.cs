@@ -4,6 +4,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 [Area("ho")]
 [Route("ho/aboutus")]
+[AuthorizeByCookie]
 public class AboutUsController : Controller
 {
 	private readonly AboutUsService _service;

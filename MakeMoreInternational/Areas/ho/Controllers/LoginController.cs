@@ -16,13 +16,6 @@ namespace MakeMoreInternational.Areas.ho.Controllers
         }
         public IActionResult Index()
         {
-			//var data = new AdminMaster();
-			//data.admEmail = "admin@gmail.com";
-			//data.admContact = "9999999990";
-			//data.admStatus = true;
-			//data.admName = "Admin";
-			//data.admPassword = "Admin@123";
-			//_adminService.Register(data);
             return View();
         }
 
